@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float baseSpeed = 40f;
+    [SerializeField] private float baseSpeed = 100f;
     [SerializeField] private float speedMultiplier = 10f;
-    [SerializeField] private float baseJumpForce = 400f;
+    [SerializeField] private float baseJumpSpeed = 20f;
+    [SerializeField] private float maxJumpTime = 0.3f;
     [SerializeField] private float movementSmoothTime = 0.1f;
     [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private Transform groundCheckPosition;
@@ -15,7 +16,8 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 velocity = Vector2.zero;
     private float horizontalInput = 0f;
-    private bool isJumping = false;
+    private bool jumpKeyHeld = false;
+    private float jumpTimeCounter;
     private bool isGrounded = false;
 
     const float groundCheckDistance = .1f;
@@ -34,7 +36,11 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            isJumping = true;
+            jumpTimeCounter = maxJumpTime;
+            jumpKeyHeld = true;
+        } else if (Input.GetButtonUp("Jump"))
+        {
+            jumpKeyHeld = false;
         }
     }
 
@@ -42,12 +48,11 @@ public class PlayerController : MonoBehaviour
     {
         Move(horizontalInput * Time.fixedDeltaTime);
 
-        if (isJumping)
+        if (jumpKeyHeld && jumpTimeCounter > 0)
         {
-            rb.AddForce(baseJumpForce * Vector2.up);
-            isJumping = false;
+            rb.velocity = new Vector2(rb.velocity.x, baseJumpSpeed);
+            jumpTimeCounter -= Time.fixedDeltaTime;
         }
-        
     }
 
     private void Move(float horizontalMovement)
