@@ -6,14 +6,19 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float baseSpeed = 40f;
     [SerializeField] private float speedMultiplier = 10f;
-    [SerializeField] private float baseJumpForce = 100f;
+    [SerializeField] private float baseJumpForce = 400f;
     [SerializeField] private float movementSmoothTime = 0.1f;
+    [SerializeField] private LayerMask whatIsGround;
+    [SerializeField] private Transform groundCheckPosition;
 
     private Rigidbody2D rb;
 
-    private float horizontalInput = 0f;
-    private float jumpInput = 0f;
     private Vector2 velocity = Vector2.zero;
+    private float horizontalInput = 0f;
+    private bool isJumping = false;
+    private bool isGrounded = false;
+
+    const float groundCheckDistance = .1f;
 
     // Start is called before the first frame update
     void Start()
@@ -25,13 +30,24 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
-        jumpInput = Input.GetAxisRaw("Jump");
+        isGrounded = Physics2D.Raycast(groundCheckPosition.position, Vector2.down, groundCheckDistance, whatIsGround);
+
+        if (Input.GetButtonDown("Jump") && isGrounded)
+        {
+            isJumping = true;
+        }
     }
 
     private void FixedUpdate()
     {
         Move(horizontalInput * Time.fixedDeltaTime);
-        rb.AddForce(jumpInput * baseJumpForce * Vector2.up);
+
+        if (isJumping)
+        {
+            rb.AddForce(baseJumpForce * Vector2.up);
+            isJumping = false;
+        }
+        
     }
 
     private void Move(float horizontalMovement)
