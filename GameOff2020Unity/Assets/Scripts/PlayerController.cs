@@ -16,7 +16,6 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 velocity = Vector2.zero;
     private float horizontalInput = 0f;
-    private bool isJumping = false;
     private bool jumpKeyHeld = false;
     private float jumpTimeCounter;
     private bool isGrounded = false;
@@ -37,7 +36,6 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            isJumping = true;
             jumpTimeCounter = maxJumpTime;
             jumpKeyHeld = true;
         } else if (Input.GetButtonUp("Jump"))
@@ -50,17 +48,10 @@ public class PlayerController : MonoBehaviour
     {
         Move(horizontalInput * Time.fixedDeltaTime);
 
-        if (isJumping)
+        if (jumpKeyHeld && jumpTimeCounter > 0)
         {
-            if (jumpKeyHeld && jumpTimeCounter > 0)
-            {
-                rb.velocity = new Vector2(rb.velocity.x, baseJumpSpeed);
-                jumpTimeCounter -= Time.fixedDeltaTime;
-            } else
-            {
-                isJumping = false;
-            }
-            
+            rb.velocity = new Vector2(rb.velocity.x, baseJumpSpeed);
+            jumpTimeCounter -= Time.fixedDeltaTime;
         }
     }
 
