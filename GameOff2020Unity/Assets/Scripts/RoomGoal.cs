@@ -13,6 +13,7 @@ public class RoomGoal : MonoBehaviour
         if (collision.gameObject == player)
         {
             onExit.Invoke();
+            gameObject.SetActive(false);
         }
     }
 }
