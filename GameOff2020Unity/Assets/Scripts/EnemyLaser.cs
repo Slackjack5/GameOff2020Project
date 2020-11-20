@@ -31,7 +31,6 @@ public class EnemyLaser : MonoBehaviour
 
         lineRenderer.SetPosition(0, transform.position);
         lineRenderer.SetPosition(1, laserHitPoint);
-        Debug.Log(laserHitPoint);
     }
 
     private void FixedUpdate()
