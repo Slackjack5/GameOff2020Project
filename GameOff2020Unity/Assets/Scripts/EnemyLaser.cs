@@ -4,37 +4,42 @@ using UnityEngine;
 
 public class EnemyLaser : MonoBehaviour
 {
-    private float shootSpeed;
-    private bool hit = false;
+    private LineRenderer lineRenderer;
+    private Vector2 laserHitPoint;
 
-    public void SetShootSpeed(float shootSpeed)
+    private float shootTime;
+    private float currentShootTime;
+
+    public void SetShootTime(float shootTime)
     {
-        this.shootSpeed = shootSpeed;
+        this.shootTime = shootTime;
+    }
+
+    private void Start()
+    {
+        currentShootTime = shootTime;
+        lineRenderer = GetComponent<LineRenderer>();
+
+        RaycastHit2D[] results = Physics2D.RaycastAll(transform.position, transform.right);
+        for (int i = 0; i < results.Length; i++)
+        {
+            if (results[i].collider.gameObject != gameObject)
+            {
+                laserHitPoint = results[i].point;
+            }
+        }
+
+        lineRenderer.SetPosition(0, transform.position);
+        lineRenderer.SetPosition(1, laserHitPoint);
+        Debug.Log(laserHitPoint);
     }
 
     private void FixedUpdate()
     {
-        Vector3 moveDistance = transform.right * shootSpeed * Time.fixedDeltaTime;
-
-        if (hit)
+        currentShootTime -= Time.fixedDeltaTime;
+        if (currentShootTime <= 0)
         {
-            // Shrink the laser as it gets absorbed into the thing it collided with
-            transform.localScale = new Vector2(transform.localScale.x - shootSpeed * Time.fixedDeltaTime, transform.localScale.y);
-            transform.position += moveDistance / 2;
-
-            if (transform.localScale.x <= 0)
-            {
-                Destroy(gameObject);
-            }
+            Destroy(gameObject);
         }
-        else
-        {
-            transform.position += moveDistance;
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        hit = true;
     }
 }

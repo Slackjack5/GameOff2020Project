@@ -5,9 +5,11 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private EnemyLaser laser;
-    [SerializeField] private float shootSpeed = 24f;
+    [SerializeField] private GameObject chargeCircle;
+    [SerializeField] private float chargeTime = 0.7f;
+    [SerializeField] private float shootTime = 0.5f;
     [SerializeField] private float shootOffset = 0.5f;                      // Specifies how far from the enemy the projectile spawns
-    [SerializeField] private float cooldown = 1.2f;                         // Specifies how long the enemy waits before shooting another projectile
+    [SerializeField] private float cooldown = 0.7f;                         // Specifies how long the enemy waits before shooting another projectile
     [SerializeField] private LayerMask playerLayerMask;
     [SerializeField] private Transform playerTransform;
     [SerializeField] private float detectionRadius = 12.0f;                 // Radius of the circle to detect if the player is within range
@@ -19,6 +21,11 @@ public class Enemy : MonoBehaviour
     private bool playerPreviouslyWithinRange = false;
     private float cooldownTime;
     private float rotationTime;
+    private GameObject newChargeCircle;
+    private float currentChargeTime;
+    private bool charging;
+    private float currentShootTime;
+    private bool shooting;
 
     // Start is called before the first frame update
     void Start()
@@ -37,21 +44,47 @@ public class Enemy : MonoBehaviour
             cooldownTime = 0;
         }
 
+        // Track shoot time
+        if (shooting)
+        {
+            currentShootTime -= Time.fixedDeltaTime;
+            if (currentShootTime <= 0)
+            {
+                shooting = false;
+            }
+        }
+
         // Check if player is within range
         playerWithinRange = Physics2D.OverlapCircle(transform.position, detectionRadius, playerLayerMask);
         if (playerWithinRange)
         {
-            FacePlayer();
+            // While the enemy is shooting the laser, don't rotate the enemy
+            if (!shooting)
+            {
+                FacePlayer();
+            }
+
+            // Give time for the enemy to face the player before shooting
             if (!playerPreviouslyWithinRange)
             {
-                // Give time for the enemy to face the player before shooting
                 cooldownTime += rotationSpeed;
                 playerPreviouslyWithinRange = true;
             }
 
             if (cooldownTime <= 0)
             {
-                Shoot();
+                if (!charging)
+                {
+                    ChargeLaser();
+                }
+                else
+                {
+                    currentChargeTime -= Time.fixedDeltaTime;
+                    if (currentChargeTime <= 0)
+                    {
+                        Shoot();
+                    }
+                }
             }
         }
         else
@@ -73,13 +106,25 @@ public class Enemy : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0.0f, 0.0f, rotationZ), rotationTime + rotationSpeed);
     }
 
+    private void ChargeLaser()
+    {
+        newChargeCircle = Instantiate(chargeCircle, transform.position, Quaternion.identity, transform);
+        currentChargeTime = chargeTime;
+        charging = true;
+    }
+
     private void Shoot()
     {
         // Spawn a projectile at a position near the enemy based on the shootOffset
         Vector3 spawnPosition = transform.position + transform.rotation * Vector3.right * shootOffset;
         EnemyLaser shotLaser = Instantiate(laser, spawnPosition, transform.rotation);
-        shotLaser.SetShootSpeed(shootSpeed);
+        shotLaser.SetShootTime(shootTime);
 
+        currentShootTime = shootTime;
+        shooting = true;
+
+        Destroy(newChargeCircle);
+        charging = false;
         cooldownTime = cooldown;
     }
 }
