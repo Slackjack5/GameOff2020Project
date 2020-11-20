@@ -44,6 +44,16 @@ public class Enemy : MonoBehaviour
             cooldownTime = 0;
         }
 
+        // Track charge time
+        if (charging)
+        {
+            currentChargeTime -= Time.fixedDeltaTime;
+            if (currentChargeTime <= 0)
+            {
+                Shoot();
+            }
+        }
+
         // Track shoot time
         if (shooting)
         {
@@ -76,14 +86,6 @@ public class Enemy : MonoBehaviour
                 if (!charging)
                 {
                     ChargeLaser();
-                }
-                else
-                {
-                    currentChargeTime -= Time.fixedDeltaTime;
-                    if (currentChargeTime <= 0)
-                    {
-                        Shoot();
-                    }
                 }
             }
         }
