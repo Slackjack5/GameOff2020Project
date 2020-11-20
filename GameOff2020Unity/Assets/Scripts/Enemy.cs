@@ -9,6 +9,8 @@ public class Enemy : MonoBehaviour
     [Range(-180f, 180f)] [SerializeField] private float shootAngle = -90f;  // Angle relative to the positive x-axis
     [SerializeField] private float shootOffset = 0.5f;                      // Specifies how far from the enemy the projectile spawns
     [SerializeField] private float cooldown = 1.2f;                         // Specifies how long the enemy waits before shooting another projectile
+    [SerializeField] private float hoverDistance = 0.2f;                    // Specifies how far up or down from the center to hover
+    [SerializeField] private float hoverSpeed = 3.5f;                       // Specifies how fast to move up and down
 
     private float cooldownTime;
 
@@ -20,6 +22,7 @@ public class Enemy : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // Track cooldown
         cooldownTime -= Time.fixedDeltaTime;
 
         if (cooldownTime <= 0)
@@ -27,6 +30,10 @@ public class Enemy : MonoBehaviour
             Shoot();
             cooldownTime = cooldown;
         }
+
+        // Hover
+        float newPositionY = Mathf.Sin(Time.timeSinceLevelLoad * hoverSpeed) * hoverDistance;
+        transform.position = new Vector2(transform.position.x, newPositionY);
     }
 
     private void Shoot()

@@ -1080,6 +1080,8 @@ MonoBehaviour:
   shootAngle: -90
   shootOffset: 0.5
   cooldown: 1.2
+  hoverDistance: 0.2
+  hoverSpeed: 3.5
 --- !u!1 &1466514213
 GameObject:
   m_ObjectHideFlags: 0
