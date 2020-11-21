@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject chargeCircle;
     [SerializeField] private float chargeTime = 0.7f;
     [SerializeField] private float shootTime = 0.5f;
-    [SerializeField] private float shootOffset = 0.5f;                      // Specifies how far from the enemy the projectile spawns
+    [SerializeField] private float shootOffset = 0.8f;                      // Specifies how far from the enemy the projectile spawns
     [SerializeField] private float cooldown = 0.7f;                         // Specifies how long the enemy waits before shooting another projectile
     [SerializeField] private LayerMask playerLayerMask;
     [SerializeField] private Transform playerTransform;
@@ -17,7 +17,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float hoverDistance = 0.2f;                    // Specifies how far up or down from the center to hover
     [SerializeField] private float hoverSpeed = 3.5f;                       // Specifies how fast to move up and down
 
-    private bool playerWithinRange = false;
     private bool playerPreviouslyWithinRange = false;
     private float cooldownTime;
     private float rotationTime;
@@ -65,7 +64,7 @@ public class Enemy : MonoBehaviour
         }
 
         // Check if player is within range
-        playerWithinRange = Physics2D.OverlapCircle(transform.position, detectionRadius, playerLayerMask);
+        bool playerWithinRange = Physics2D.OverlapCircle(transform.position, detectionRadius, playerLayerMask);
         if (playerWithinRange)
         {
             // While the enemy is shooting the laser, don't rotate the enemy
