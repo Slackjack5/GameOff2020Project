@@ -17,7 +17,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float hoverDistance = 0.2f;                    // Specifies how far up or down from the center to hover
     [SerializeField] private float hoverSpeed = 3.5f;                       // Specifies how fast to move up and down
 
-    private bool playerPreviouslyWithinRange = false;
     private float cooldownTime;
     private float rotationTime;
     private GameObject newChargeCircle;
@@ -73,13 +72,6 @@ public class Enemy : MonoBehaviour
                 FacePlayer();
             }
 
-            // Give time for the enemy to face the player before shooting
-            if (!playerPreviouslyWithinRange)
-            {
-                cooldownTime += rotationSpeed;
-                playerPreviouslyWithinRange = true;
-            }
-
             if (cooldownTime <= 0)
             {
                 if (!charging)
@@ -87,10 +79,6 @@ public class Enemy : MonoBehaviour
                     ChargeLaser();
                 }
             }
-        }
-        else
-        {
-            playerPreviouslyWithinRange = false;
         }
     }
 
