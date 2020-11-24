@@ -12,7 +12,9 @@ public class Style : MonoBehaviour
 
     //Private
     private int decayNumber = 0;
+    private int decayNumber2 = 0;
     private int tier = 1;
+    private bool timerActive = true;
     public TextMeshProUGUI textMesh;
 
     //Sets the Maximum Value of the Slider
@@ -26,24 +28,39 @@ public class Style : MonoBehaviour
     {
         slider.value = style;
     }
+
+    public void TimerRestart()
+    {
+        decayNumber = 0;
+        decayNumber2 = 0;
+        timerActive = true;
+    }
     // Start is called before the first frame update
     void Start()
     {
         //Set our maximum Value Slider then use Style Total as our current amount of style
-        styleTotal = 100;
-        SetMaxHealth(styleTotal);
         styleTotal = 10;
     }
     private void FixedUpdate()
     {
-        //If we style, slowly drain it
-        if (styleTotal > 0)
+        //If we have style and the player hasn't killed anything in a while, start a countdown
+        if (styleTotal > 0 && timerActive)
         {
+            SetStyle(styleTotal);
+            //Count
             if (decayNumber == styleDecay)
             {
                 decayNumber = 0;
+                decayNumber2 += 1;
+                
+            }
+            //If decay 2 reaches style decay then reset style to rank D
+            if (decayNumber2==styleDecay)
+            {
+                styleTotal = 0;
                 SetStyle(styleTotal);
-                styleTotal -= 1;
+                decayNumber = 0;
+                decayNumber2 = 0;
             }
             decayNumber++;
             Debug.Log(tier);
@@ -69,6 +86,7 @@ public class Style : MonoBehaviour
         if (Input.GetKeyDown("space") && tier<=5)
         {
             styleTotal += 10;
+            TimerRestart();
         }
         //Set Text for Rank
         if (tier==1)

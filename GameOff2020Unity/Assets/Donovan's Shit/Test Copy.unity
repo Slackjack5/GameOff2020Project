@@ -2587,6 +2587,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 9051668427030811928, guid: 802225231fc3671489aa42520e5642b2,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -42.399994
+      objectReference: {fileID: 0}
     - target: {fileID: 9051668427965537931, guid: 802225231fc3671489aa42520e5642b2,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -2702,5 +2707,15 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9051668428060295151, guid: 802225231fc3671489aa42520e5642b2,
+        type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9051668428060295151, guid: 802225231fc3671489aa42520e5642b2,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 690077281}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 802225231fc3671489aa42520e5642b2, type: 3}
