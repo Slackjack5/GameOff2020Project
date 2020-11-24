@@ -63,7 +63,6 @@ public class Style : MonoBehaviour
                 decayNumber2 = 0;
             }
             decayNumber++;
-            Debug.Log(tier);
         }
     }
     private void Update()
