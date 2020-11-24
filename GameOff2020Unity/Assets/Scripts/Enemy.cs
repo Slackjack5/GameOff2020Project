@@ -100,6 +100,8 @@ public class Enemy : MonoBehaviour
         newChargeCircle = Instantiate(chargeCircle, transform.position, Quaternion.identity, transform);
         currentChargeTime = chargeTime;
         charging = true;
+        //Play Charging Sound
+        FindObjectOfType<AudioManager>().PlaySound("LaserCharge", Random.Range(.95f, 1f));
     }
 
     private void Shoot()
@@ -115,5 +117,9 @@ public class Enemy : MonoBehaviour
         Destroy(newChargeCircle);
         charging = false;
         cooldownTime = cooldown;
+
+        //Play Shoot Sound
+        FindObjectOfType<AudioManager>().PlaySound("LaserShoot", Random.Range(.95f, 1f));
+        FindObjectOfType<AudioManager>().Stop("LaserCharge");
     }
 }
