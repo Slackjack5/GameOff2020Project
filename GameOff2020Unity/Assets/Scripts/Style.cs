@@ -9,13 +9,16 @@ public class Style : MonoBehaviour
     public int styleTotal = 0;
     public Slider slider;
     public int styleDecay = 10;
+    public TextMeshProUGUI textMesh;
 
     //Private
+    public int timerinitiator = 0;
     private int decayNumber = 0;
     private int decayNumber2 = 0;
     private int tier = 1;
-    private bool timerActive = true;
-    public TextMeshProUGUI textMesh;
+    private bool timerActive = false;
+    private bool tickAlternate = false;
+    
 
     //Sets the Maximum Value of the Slider
     public void SetMaxHealth(int health)
@@ -33,7 +36,7 @@ public class Style : MonoBehaviour
     {
         decayNumber = 0;
         decayNumber2 = 0;
-        timerActive = true;
+        timerinitiator = 0; 
     }
     // Start is called before the first frame update
     void Start()
@@ -44,25 +47,68 @@ public class Style : MonoBehaviour
     private void FixedUpdate()
     {
         //If we have style and the player hasn't killed anything in a while, start a countdown
-        if (styleTotal > 0 && timerActive)
+        if (styleTotal > 0)
         {
             SetStyle(styleTotal);
-            //Count
-            if (decayNumber == styleDecay)
+            if (timerinitiator == styleDecay*5)
             {
-                decayNumber = 0;
-                decayNumber2 += 1;
-                
+                TimerRestart();
+                timerActive = true;
             }
-            //If decay 2 reaches style decay then reset style to rank D
-            if (decayNumber2==styleDecay)
+            if (timerActive == true)
             {
-                styleTotal = 0;
-                SetStyle(styleTotal);
-                decayNumber = 0;
-                decayNumber2 = 0;
+                //Count
+                if (decayNumber == styleDecay)
+                {
+                    decayNumber = 0;
+                    decayNumber2 += 1;
+                    //Play Sound
+                    if (tickAlternate == false)
+                    {
+                        FindObjectOfType<AudioManager>().PlaySound("TimerTick", Random.Range(.95f, 1f));
+                        tickAlternate = true;
+                    }
+                    else
+                    {
+                        FindObjectOfType<AudioManager>().PlaySound("TimerTock", Random.Range(.95f, 1f));
+                        tickAlternate = false;
+                    }
+                }
+                //Double Time Tick
+                if ((decayNumber == styleDecay / 2) && decayNumber2 >= styleDecay / 2)
+                {
+                    //Play Sound
+                    if (tickAlternate == false)
+                    {
+                        FindObjectOfType<AudioManager>().PlaySound("TimerTick", Random.Range(.95f, 1f));
+                        tickAlternate = true;
+                    }
+                    else
+                    {
+                        FindObjectOfType<AudioManager>().PlaySound("TimerTock", Random.Range(.95f, 1f));
+                        tickAlternate = false;
+                    }
+                }
+
+                //If decay 2 reaches style decay then reset style to rank D
+                if (decayNumber2 == styleDecay)
+                {
+                    styleTotal = 0;
+                    SetStyle(styleTotal);
+                    decayNumber = 0;
+                    decayNumber2 = 0;
+                    timerinitiator = 0;
+
+                    FindObjectOfType<AudioManager>().PlaySound("TimerLost", 1f);
+                }
             }
-            decayNumber++;
+            //If timer hasn't started, count towards starting it
+           if (timerActive)
+            {
+                decayNumber++;
+            }
+            else
+            timerinitiator++;
         }
     }
     private void Update()
@@ -72,6 +118,24 @@ public class Style : MonoBehaviour
         {
             tier += 1;
             styleTotal = 10;
+            if (tier==2)
+            {
+                FindObjectOfType<AudioManager>().PlaySound("TimerRankUp", 1f);
+            }
+            else if (tier == 3)
+            {
+                FindObjectOfType<AudioManager>().PlaySound("TimerRankUp", 1.05f);
+            }
+            else if (tier == 4)
+            {
+                FindObjectOfType<AudioManager>().PlaySound("TimerRankUp", 1.1f);
+            }
+            else if (tier == 5)
+            {
+                FindObjectOfType<AudioManager>().PlaySound("TimerRankUp", 1.15f);
+            }
+
+
         }
         else if (styleTotal<=0 && tier>1)
         {
