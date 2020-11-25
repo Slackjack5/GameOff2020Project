@@ -2971,18 +2971,15 @@ MonoBehaviour:
   defaultMovementSmoothTime: 0.1
   slideTime: 0.4
   airmovementSmoothTime: 0.1
-  defaultSlideTime: 0.8
   slideForce: 1500
+  slideCooldown: 3
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
   groundCheckPosition: {fileID: 1638605334}
-  StyleTier: {fileID: 67323236}
-  slideSpeed: 20
+  styleTier: {fileID: 67323236}
   respawnTime: 1.5
-  whatIsDeath:
-    serializedVersion: 2
-    m_Bits: 1024
+  slideSpeed: 20
 --- !u!50 &2055480291
 Rigidbody2D:
   serializedVersion: 4

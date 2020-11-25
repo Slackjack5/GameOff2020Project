@@ -28,10 +28,10 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded = false;
     private float currentMovementSmoothTime = 0.1f;
     private Vector2 respawnPosition;
-    
+
     //Evasion Variables
     private bool evading = false;
-    public float slideSpeed =  2000f;
+    public float slideSpeed = 2000f;
     private float currentSlideSpeed = 0f;
     private float storedDirection = 0;
     private bool dashed = false;
@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Evading
-        if (Input.GetMouseButtonDown(1) && horizontalInput!=0 && !dashed && !cooldown)
+        if (Input.GetMouseButtonDown(1) && horizontalInput != 0 && !dashed && !cooldown)
         {
             evading = true;
             storedDirection = horizontalInput;
@@ -78,11 +78,11 @@ public class PlayerController : MonoBehaviour
 
         //Change speed on Skill Tier
         Style styleScript = styleTier.GetComponent<Style>();
-        if (styleScript.tier==1)
+        if (styleScript.tier == 1)
         {
             baseSpeed = 100f;
         }
-        else if(styleScript.tier == 2)
+        else if (styleScript.tier == 2)
         {
             baseSpeed = 125f;
         }
@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour
                 Move(horizontalInput * Time.fixedDeltaTime);
             }
             else
-            { 
+            {
                 SlideMove(storedDirection);
                 StartCoroutine(StopSlide());
             }
@@ -134,9 +134,9 @@ public class PlayerController : MonoBehaviour
 
     private void Move(float horizontalMovement)
     {
-            float targetVelocityX = baseSpeed * speedMultiplier * horizontalMovement;
-            Vector2 targetVelocity = new Vector2(targetVelocityX, rb.velocity.y);
-            rb.velocity = Vector2.SmoothDamp(rb.velocity, targetVelocity, ref velocity, currentMovementSmoothTime); 
+        float targetVelocityX = baseSpeed * speedMultiplier * horizontalMovement;
+        Vector2 targetVelocity = new Vector2(targetVelocityX, rb.velocity.y);
+        rb.velocity = Vector2.SmoothDamp(rb.velocity, targetVelocity, ref velocity, currentMovementSmoothTime);
     }
 
     private void SlideMove(float horizontalMovement)
