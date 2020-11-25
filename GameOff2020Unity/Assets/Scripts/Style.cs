@@ -42,7 +42,7 @@ public class Style : MonoBehaviour
     void Start()
     {
         //Set our maximum Value Slider then use Style Total as our current amount of style
-        styleTotal = 10;
+        styleTotal = 0;
     }
     private void FixedUpdate()
     {
@@ -93,17 +93,12 @@ public class Style : MonoBehaviour
                 //If decay 2 reaches style decay then reset style to rank D
                 if (decayNumber2 == styleDecay)
                 {
-                    styleTotal = 0;
-                    SetStyle(styleTotal);
-                    decayNumber = 0;
-                    decayNumber2 = 0;
-                    timerinitiator = 0;
-
+                    ResetStyle();
                     FindObjectOfType<AudioManager>().PlaySound("TimerLost", 1f);
                 }
             }
             //If timer hasn't started, count towards starting it
-           if (timerActive)
+            if (timerActive)
             {
                 decayNumber++;
             }
@@ -173,5 +168,19 @@ public class Style : MonoBehaviour
             textMesh.text = "S-Rank";
         }
 
+        if (GameManager.playerIsDead)
+        {
+            ResetStyle();
+        }
+    }
+
+    private void ResetStyle()
+    {
+        styleTotal = 0;
+        decayNumber = 0;
+        decayNumber2 = 0;
+        timerinitiator = 0;
+
+        SetStyle(styleTotal);
     }
 }
