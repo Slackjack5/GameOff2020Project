@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float movementSmoothTime = 0.1f;
     [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private Transform groundCheckPosition;
+    [SerializeField] private float respawnTime = 1.5f;
 
     private Rigidbody2D rb;
 
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour
     private bool jumpKeyHeld = false;
     private float jumpTimeCounter;
     private bool isGrounded = false;
+    private Vector2 respawnPosition;
 
     const float groundCheckDistance = .1f;
 
@@ -26,6 +28,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        respawnPosition = transform.position;
     }
 
     // Update is called once per frame
@@ -34,24 +37,39 @@ public class PlayerController : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         isGrounded = Physics2D.Raycast(groundCheckPosition.position, Vector2.down, groundCheckDistance, whatIsGround);
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (!GameManager.playerIsDead)
         {
-            jumpTimeCounter = maxJumpTime;
-            jumpKeyHeld = true;
-        } else if (Input.GetButtonUp("Jump"))
-        {
-            jumpKeyHeld = false;
+            if (Input.GetButtonDown("Jump") && isGrounded)
+            {
+                jumpTimeCounter = maxJumpTime;
+                jumpKeyHeld = true;
+            }
+            else if (Input.GetButtonUp("Jump"))
+            {
+                jumpKeyHeld = false;
+            }
         }
     }
 
     private void FixedUpdate()
     {
-        Move(horizontalInput * Time.fixedDeltaTime);
-
-        if (jumpKeyHeld && jumpTimeCounter > 0)
+        if (!GameManager.playerIsDead)
         {
-            rb.velocity = new Vector2(rb.velocity.x, baseJumpSpeed);
-            jumpTimeCounter -= Time.fixedDeltaTime;
+            Move(horizontalInput * Time.fixedDeltaTime);
+
+            if (jumpKeyHeld && jumpTimeCounter > 0)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, baseJumpSpeed);
+                jumpTimeCounter -= Time.fixedDeltaTime;
+            }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Death"))
+        {
+            StartCoroutine(Die());
         }
     }
 
@@ -60,5 +78,25 @@ public class PlayerController : MonoBehaviour
         float targetVelocityX = baseSpeed * speedMultiplier * horizontalMovement;
         Vector2 targetVelocity = new Vector2(targetVelocityX, rb.velocity.y);
         rb.velocity = Vector2.SmoothDamp(rb.velocity, targetVelocity, ref velocity, movementSmoothTime);
+    }
+
+    private IEnumerator Die()
+    {
+        if (!GameManager.playerIsDead)
+        {
+            // Drop to the ground
+            rb.velocity = new Vector2(0, rb.velocity.y);
+
+            GameManager.playerIsDead = true;
+            yield return new WaitForSeconds(respawnTime);
+
+            Respawn();
+        }
+    }
+
+    private void Respawn()
+    {
+        GameManager.playerIsDead = false;
+        transform.position = respawnPosition;
     }
 }
