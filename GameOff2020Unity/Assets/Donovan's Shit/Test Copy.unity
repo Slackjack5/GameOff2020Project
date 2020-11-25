@@ -287,6 +287,7 @@ MonoBehaviour:
   slider: {fileID: 67323239}
   styleDecay: 20
   textMesh: {fileID: 1442093362}
+  tier: 1
   timerinitiator: 0
 --- !u!114 &67323239
 MonoBehaviour:
@@ -939,6 +940,7 @@ GameObject:
   - component: {fileID: 690077280}
   - component: {fileID: 690077283}
   - component: {fileID: 690077284}
+  - component: {fileID: 690077285}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1066,6 +1068,19 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &690077285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 690077279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ada419b691a46384d85e930cb567cdf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crosshairs: {fileID: 478297414}
 --- !u!1 &702208485
 GameObject:
   m_ObjectHideFlags: 0
@@ -2875,6 +2890,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   groundCheckPosition: {fileID: 1638605334}
+  StyleTier: {fileID: 67323236}
 --- !u!50 &2055480291
 Rigidbody2D:
   serializedVersion: 4

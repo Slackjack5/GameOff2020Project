@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float movementSmoothTime = 0.1f;
     [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private Transform groundCheckPosition;
+    public GameObject StyleTier;
 
     private Rigidbody2D rb;
 
@@ -41,6 +42,24 @@ public class PlayerController : MonoBehaviour
         } else if (Input.GetButtonUp("Jump"))
         {
             jumpKeyHeld = false;
+        }
+        //Change speed on Skill Tier
+        Style styleScript = StyleTier.GetComponent<Style>();
+        if (styleScript.tier==1)
+        {
+            baseSpeed = 100f;
+        }
+        else if(StyleTier.GetComponent<Style>().tier == 2)
+        {
+            baseSpeed = 125f;
+        }
+        else if (StyleTier.GetComponent<Style>().tier == 3)
+        {
+            baseSpeed = 150f;
+        }
+        else if (StyleTier.GetComponent<Style>().tier == 4)
+        {
+            baseSpeed = 175f; ;
         }
     }
 
