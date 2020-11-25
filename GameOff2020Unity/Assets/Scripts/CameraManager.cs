@@ -10,14 +10,20 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private float cameraMoveSpeed = 0.25f;
     [SerializeField] private List<Transform> roomTransforms;
 
+    private Camera camera;
     private CinemachineTrackedDolly dolly;
     private float initialPositionZ;
 
     private bool isExiting = false;
     private int targetRoomIndex = 0;
 
+    const float aspect = 16f / 9f;
+
     private void Awake()
     {
+        camera = Camera.main;
+        camera.aspect = aspect;
+
         dolly = dollyVcam.GetCinemachineComponent<CinemachineTrackedDolly>();
         initialPositionZ = dollyVcam.transform.position.z;
         SetWaypoints();
