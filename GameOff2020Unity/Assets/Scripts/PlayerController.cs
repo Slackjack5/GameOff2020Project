@@ -32,7 +32,6 @@ public class PlayerController : MonoBehaviour
     //Evasion Variables
     private bool evading = false;
     public float slideSpeed = 2000f;
-    private float currentSlideSpeed = 0f;
     private float storedDirection = 0;
     private bool dashed = false;
     private bool cooldown = false;
