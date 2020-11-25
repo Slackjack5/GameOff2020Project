@@ -18,7 +18,6 @@ public class Style : MonoBehaviour
     private int decayNumber2 = 0;
     private bool timerActive = false;
     private bool tickAlternate = false;
-    
 
     //Sets the Maximum Value of the Slider
     public void SetMaxHealth(int health)
@@ -26,6 +25,7 @@ public class Style : MonoBehaviour
         slider.maxValue = health;
         slider.value = health;
     }
+
     //Sets the Current Value of our Slider
     public void SetStyle(int style)
     {
@@ -36,25 +36,29 @@ public class Style : MonoBehaviour
     {
         decayNumber = 0;
         decayNumber2 = 0;
-        timerinitiator = 0; 
+        timerinitiator = 0;
     }
+
     // Start is called before the first frame update
     void Start()
     {
         //Set our maximum Value Slider then use Style Total as our current amount of style
-        styleTotal = 10;
+        styleTotal = 0;
     }
+
     private void FixedUpdate()
     {
         //If we have style and the player hasn't killed anything in a while, start a countdown
         if (styleTotal > 0)
         {
             SetStyle(styleTotal);
-            if (timerinitiator == styleDecay*5)
+
+            if (timerinitiator == styleDecay * 5)
             {
                 TimerRestart();
                 timerActive = true;
             }
+
             if (timerActive == true)
             {
                 //Count
@@ -62,6 +66,7 @@ public class Style : MonoBehaviour
                 {
                     decayNumber = 0;
                     decayNumber2 += 1;
+
                     //Play Sound
                     if (tickAlternate == false)
                     {
@@ -74,6 +79,7 @@ public class Style : MonoBehaviour
                         tickAlternate = false;
                     }
                 }
+
                 //Double Time Tick
                 if ((decayNumber == styleDecay / 2) && decayNumber2 >= styleDecay / 2)
                 {
@@ -93,32 +99,32 @@ public class Style : MonoBehaviour
                 //If decay 2 reaches style decay then reset style to rank D
                 if (decayNumber2 == styleDecay)
                 {
-                    styleTotal = 0;
-                    SetStyle(styleTotal);
-                    decayNumber = 0;
-                    decayNumber2 = 0;
-                    timerinitiator = 0;
-
+                    ResetStyle();
                     FindObjectOfType<AudioManager>().PlaySound("TimerLost", 1f);
                 }
             }
+
             //If timer hasn't started, count towards starting it
-           if (timerActive)
+            if (timerActive)
             {
                 decayNumber++;
             }
             else
-            timerinitiator++;
+            {
+                timerinitiator++;
+            }
         }
     }
+
     private void Update()
     {
         //If we reach 100 Style, take us to the next tier
-        if (styleTotal >= 100 && tier<5)
+        if (styleTotal >= 100 && tier < 5)
         {
             tier += 1;
             styleTotal = 10;
-            if (tier==2)
+
+            if (tier == 2)
             {
                 FindObjectOfType<AudioManager>().PlaySound("TimerRankUp", 1f);
             }
@@ -134,25 +140,24 @@ public class Style : MonoBehaviour
             {
                 FindObjectOfType<AudioManager>().PlaySound("TimerRankUp", 1.15f);
             }
-
-
         }
-        else if (styleTotal<=0 && tier>1)
+        else if (styleTotal <= 0 && tier > 1)
         {
             tier = 1;
         }
-        else if (styleTotal > 100 && tier==5)
+        else if (styleTotal > 100 && tier == 5)
         {
             styleTotal = 100;
         }
 
-        if (Input.GetKeyDown("space") && tier<=5)
+        if (Input.GetKeyDown("space") && tier <= 5)
         {
             styleTotal += 10;
             TimerRestart();
         }
+
         //Set Text for Rank
-        if (tier==1)
+        if (tier == 1)
         {
             textMesh.text = "D-Rank";
         }
@@ -173,5 +178,19 @@ public class Style : MonoBehaviour
             textMesh.text = "S-Rank";
         }
 
+        if (GameManager.playerIsDead)
+        {
+            ResetStyle();
+        }
+    }
+
+    private void ResetStyle()
+    {
+        styleTotal = 0;
+        decayNumber = 0;
+        decayNumber2 = 0;
+        timerinitiator = 0;
+
+        SetStyle(styleTotal);
     }
 }

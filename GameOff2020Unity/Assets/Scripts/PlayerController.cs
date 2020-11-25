@@ -16,7 +16,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float slideCooldown = 3;
     [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private Transform groundCheckPosition;
-    public GameObject StyleTier;
+    [SerializeField] private GameObject styleTier;
+    [SerializeField] private float respawnTime = 1.5f;
 
     private Rigidbody2D rb;
 
@@ -26,6 +27,8 @@ public class PlayerController : MonoBehaviour
     private float jumpTimeCounter;
     private bool isGrounded = false;
     private float currentMovementSmoothTime = 0.1f;
+    private Vector2 respawnPosition;
+    
     //Evasion Variables
     private bool evading = false;
     public float slideSpeed =  2000f;
@@ -40,6 +43,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        respawnPosition = transform.position;
     }
 
     // Update is called once per frame
@@ -48,13 +52,17 @@ public class PlayerController : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         isGrounded = Physics2D.Raycast(groundCheckPosition.position, Vector2.down, groundCheckDistance, whatIsGround);
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (!GameManager.playerIsDead)
         {
-            jumpTimeCounter = maxJumpTime;
-            jumpKeyHeld = true;
-        } else if (Input.GetButtonUp("Jump"))
-        {
-            jumpKeyHeld = false;
+            if (Input.GetButtonDown("Jump") && isGrounded)
+            {
+                jumpTimeCounter = maxJumpTime;
+                jumpKeyHeld = true;
+            }
+            else if (Input.GetButtonUp("Jump"))
+            {
+                jumpKeyHeld = false;
+            }
         }
 
         //Evading
@@ -69,20 +77,20 @@ public class PlayerController : MonoBehaviour
         }
 
         //Change speed on Skill Tier
-        Style styleScript = StyleTier.GetComponent<Style>();
+        Style styleScript = styleTier.GetComponent<Style>();
         if (styleScript.tier==1)
         {
             baseSpeed = 100f;
         }
-        else if(StyleTier.GetComponent<Style>().tier == 2)
+        else if(styleScript.tier == 2)
         {
             baseSpeed = 125f;
         }
-        else if (StyleTier.GetComponent<Style>().tier == 3)
+        else if (styleScript.tier == 3)
         {
             baseSpeed = 150f;
         }
-        else if (StyleTier.GetComponent<Style>().tier == 4)
+        else if (styleScript.tier == 4)
         {
             baseSpeed = 175f;
         }
@@ -90,26 +98,37 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (dashed && !cooldown)
+        if (!GameManager.playerIsDead)
         {
-            rb.velocity = new Vector2(rb.velocity.x, 0);
-        }
+            if (dashed && !cooldown)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, 0);
+            }
 
-        //If Player Is sliding
-        if (!evading)
-        {
-            Move(horizontalInput * Time.fixedDeltaTime);
-        }
-        else
-        { 
-            SlideMove(storedDirection);
-            StartCoroutine(StopSlide());
-        }
+            //If Player Is sliding
+            if (!evading)
+            {
+                Move(horizontalInput * Time.fixedDeltaTime);
+            }
+            else
+            { 
+                SlideMove(storedDirection);
+                StartCoroutine(StopSlide());
+            }
 
-        if (jumpKeyHeld && jumpTimeCounter > 0)
+            if (jumpKeyHeld && jumpTimeCounter > 0)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, baseJumpSpeed);
+                jumpTimeCounter -= Time.fixedDeltaTime;
+            }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Death"))
         {
-            rb.velocity = new Vector2(rb.velocity.x, baseJumpSpeed);
-            jumpTimeCounter -= Time.fixedDeltaTime;
+            StartCoroutine(Die());
         }
     }
 
@@ -157,4 +176,23 @@ public class PlayerController : MonoBehaviour
         cooldown = false;
     }
 
+    private IEnumerator Die()
+    {
+        if (!GameManager.playerIsDead)
+        {
+            // Drop to the ground
+            rb.velocity = new Vector2(0, rb.velocity.y);
+
+            GameManager.playerIsDead = true;
+            yield return new WaitForSeconds(respawnTime);
+
+            Respawn();
+        }
+    }
+
+    private void Respawn()
+    {
+        GameManager.playerIsDead = false;
+        transform.position = respawnPosition;
+    }
 }

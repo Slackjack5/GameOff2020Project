@@ -2979,6 +2979,10 @@ MonoBehaviour:
   groundCheckPosition: {fileID: 1638605334}
   StyleTier: {fileID: 67323236}
   slideSpeed: 20
+  respawnTime: 1.5
+  whatIsDeath:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!50 &2055480291
 Rigidbody2D:
   serializedVersion: 4
