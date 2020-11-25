@@ -2967,12 +2967,18 @@ MonoBehaviour:
   speedMultiplier: 10
   baseJumpSpeed: 20
   maxJumpTime: 0.3
-  movementSmoothTime: 0.1
+  slideMovementSmoothTime: 0.4
+  defaultMovementSmoothTime: 0.1
+  slideTime: 0.4
+  airmovementSmoothTime: 0.1
+  defaultSlideTime: 0.8
+  slideForce: 1500
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
   groundCheckPosition: {fileID: 1638605334}
   StyleTier: {fileID: 67323236}
+  slideSpeed: 20
 --- !u!50 &2055480291
 Rigidbody2D:
   serializedVersion: 4
