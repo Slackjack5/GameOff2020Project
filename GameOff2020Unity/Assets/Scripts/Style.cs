@@ -10,12 +10,12 @@ public class Style : MonoBehaviour
     public Slider slider;
     public int styleDecay = 10;
     public TextMeshProUGUI textMesh;
+    public int tier = 1;
 
     //Private
     public int timerinitiator = 0;
     private int decayNumber = 0;
     private int decayNumber2 = 0;
-    private int tier = 1;
     private bool timerActive = false;
     private bool tickAlternate = false;
 

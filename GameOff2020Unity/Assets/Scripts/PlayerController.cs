@@ -8,9 +8,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speedMultiplier = 10f;
     [SerializeField] private float baseJumpSpeed = 20f;
     [SerializeField] private float maxJumpTime = 0.3f;
-    [SerializeField] private float movementSmoothTime = 0.1f;
+    [SerializeField] private float slideMovementSmoothTime = 0.3f;
+    [SerializeField] private float defaultMovementSmoothTime = 0.4f;
+    [SerializeField] private float slideTime = 0.8f;
+    [SerializeField] private float airmovementSmoothTime = 0.2f;
+    [SerializeField] private float slideForce = 1500;
+    [SerializeField] private float slideCooldown = 3;
     [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private Transform groundCheckPosition;
+    [SerializeField] private GameObject styleTier;
     [SerializeField] private float respawnTime = 1.5f;
 
     private Rigidbody2D rb;
@@ -20,7 +26,16 @@ public class PlayerController : MonoBehaviour
     private bool jumpKeyHeld = false;
     private float jumpTimeCounter;
     private bool isGrounded = false;
+    private float currentMovementSmoothTime = 0.1f;
     private Vector2 respawnPosition;
+
+    //Evasion Variables
+    private bool evading = false;
+    public float slideSpeed = 2000f;
+    private float currentSlideSpeed = 0f;
+    private float storedDirection = 0;
+    private bool dashed = false;
+    private bool cooldown = false;
 
     const float groundCheckDistance = .1f;
 
@@ -49,13 +64,57 @@ public class PlayerController : MonoBehaviour
                 jumpKeyHeld = false;
             }
         }
+
+        //Evading
+        if (Input.GetMouseButtonDown(1) && horizontalInput != 0 && !dashed && !cooldown)
+        {
+            evading = true;
+            storedDirection = horizontalInput;
+            if (!isGrounded)
+            {
+                slideMovementSmoothTime = airmovementSmoothTime;
+            }
+        }
+
+        //Change speed on Skill Tier
+        Style styleScript = styleTier.GetComponent<Style>();
+        if (styleScript.tier == 1)
+        {
+            baseSpeed = 100f;
+        }
+        else if (styleScript.tier == 2)
+        {
+            baseSpeed = 125f;
+        }
+        else if (styleScript.tier == 3)
+        {
+            baseSpeed = 150f;
+        }
+        else if (styleScript.tier == 4)
+        {
+            baseSpeed = 175f;
+        }
     }
 
     private void FixedUpdate()
     {
         if (!GameManager.playerIsDead)
         {
-            Move(horizontalInput * Time.fixedDeltaTime);
+            if (dashed && !cooldown)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, 0);
+            }
+
+            //If Player Is sliding
+            if (!evading)
+            {
+                Move(horizontalInput * Time.fixedDeltaTime);
+            }
+            else
+            {
+                SlideMove(storedDirection);
+                StartCoroutine(StopSlide());
+            }
 
             if (jumpKeyHeld && jumpTimeCounter > 0)
             {
@@ -77,7 +136,44 @@ public class PlayerController : MonoBehaviour
     {
         float targetVelocityX = baseSpeed * speedMultiplier * horizontalMovement;
         Vector2 targetVelocity = new Vector2(targetVelocityX, rb.velocity.y);
-        rb.velocity = Vector2.SmoothDamp(rb.velocity, targetVelocity, ref velocity, movementSmoothTime);
+        rb.velocity = Vector2.SmoothDamp(rb.velocity, targetVelocity, ref velocity, currentMovementSmoothTime);
+    }
+
+    private void SlideMove(float horizontalMovement)
+    {
+        if (!cooldown)
+        {
+            currentMovementSmoothTime = slideMovementSmoothTime;
+            if (!dashed)
+            {
+                if (horizontalMovement == 1)
+                {
+                    rb.AddForce(Vector2.right * slideForce);
+                }
+                else
+                {
+                    rb.AddForce(Vector2.left * slideForce);
+                }
+                dashed = true;
+                evading = false;
+            }
+        }
+    }
+
+    IEnumerator StopSlide()
+    {
+        yield return new WaitForSeconds(slideTime);
+        currentMovementSmoothTime = defaultMovementSmoothTime;
+        slideMovementSmoothTime = .4f;
+        cooldown = true;
+        dashed = false;
+        StartCoroutine(SlideCooldown());
+    }
+
+    IEnumerator SlideCooldown()
+    {
+        yield return new WaitForSeconds(slideCooldown);
+        cooldown = false;
     }
 
     private IEnumerator Die()
