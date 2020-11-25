@@ -8,9 +8,6 @@ public class AudioManager : MonoBehaviour
 
     public Sound[] sounds;
 
-    private bool fadeOut = false;
-    private float sVolume = 0;
-
     public static AudioManager instance;
     // Start is called before the first frame update
     void Awake()
