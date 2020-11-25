@@ -72,12 +72,9 @@ public class Enemy : MonoBehaviour
                 FacePlayer();
             }
 
-            if (cooldownTime <= 0)
+            if (cooldownTime <= 0 && !charging && !GameManager.playerIsDead)
             {
-                if (!charging)
-                {
-                    ChargeLaser();
-                }
+                ChargeLaser();
             }
         }
     }

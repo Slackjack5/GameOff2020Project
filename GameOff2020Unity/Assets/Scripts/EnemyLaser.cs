@@ -5,7 +5,8 @@ using UnityEngine;
 public class EnemyLaser : MonoBehaviour
 {
     private LineRenderer lineRenderer;
-    private Vector2 laserHitPoint;
+    private CapsuleCollider2D capsuleCollider;
+    private Vector3 laserHitPoint;
     private float shootTime;
     private float currentShootTime;
 
@@ -31,12 +32,21 @@ public class EnemyLaser : MonoBehaviour
 
         lineRenderer.SetPosition(0, transform.position);
         lineRenderer.SetPosition(1, laserHitPoint);
+
+        // Create a CapsuleCollider that covers the shape of the laser
+        capsuleCollider = gameObject.AddComponent<CapsuleCollider2D>();
+        capsuleCollider.transform.position = transform.position + (laserHitPoint - transform.position) / 2;
+        capsuleCollider.direction = CapsuleDirection2D.Horizontal;
+        capsuleCollider.isTrigger = true;
+        capsuleCollider.size = new Vector2((laserHitPoint - transform.position).magnitude * 2, 1);
+        capsuleCollider.offset = Vector2.zero;
     }
 
     private void FixedUpdate()
     {
         // Make the laser thinner over time
         lineRenderer.startWidth -= (1 / shootTime) * Time.fixedDeltaTime;
+        capsuleCollider.size = new Vector2(capsuleCollider.size.x, lineRenderer.startWidth);
 
         currentShootTime -= Time.fixedDeltaTime;
         if (currentShootTime <= 0)
