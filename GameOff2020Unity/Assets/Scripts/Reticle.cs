@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class Reticle : MonoBehaviour
 {
-    public GameObject crosshairs;
-    private Vector3 target;
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private Texture2D crosshair;
+
+    private Vector2 hotspot;
+
+    private void Start()
     {
-        Cursor.visible = false;
+        hotspot = new Vector2(crosshair.width / 2, crosshair.height / 2);
+        Cursor.SetCursor(crosshair, hotspot, CursorMode.Auto);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnMouseEnter()
     {
-        target = transform.GetComponent<Camera>().ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y,transform.position.z));
-        crosshairs.transform.position = new Vector2(-target.x, -target.y);
+        Cursor.SetCursor(crosshair, hotspot, CursorMode.Auto);
     }
 }
