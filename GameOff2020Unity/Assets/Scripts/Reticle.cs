@@ -13,9 +13,4 @@ public class Reticle : MonoBehaviour
         hotspot = new Vector2(crosshair.width / 2, crosshair.height / 2);
         Cursor.SetCursor(crosshair, hotspot, CursorMode.Auto);
     }
-
-    private void OnMouseEnter()
-    {
-        Cursor.SetCursor(crosshair, hotspot, CursorMode.Auto);
-    }
 }
