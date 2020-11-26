@@ -2958,8 +2958,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b686c0d1391ef8246a6a51dbe94c58e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootSpeed: 0.3
-  shootOffset: 0.8
+  shootSpeed: 25
+  shootOffset: 1
   moonball: {fileID: -8825979064138598642, guid: 411dc9046cde8cf48bdb30d3530878d3,
     type: 3}
 --- !u!1 &2072144497

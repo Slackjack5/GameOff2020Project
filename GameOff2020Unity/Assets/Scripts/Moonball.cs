@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class Moonball : MonoBehaviour
 {
+    public float shootSpeed { get; set; }
+
+    private Rigidbody2D rb;
+
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        rb = GetComponent<Rigidbody2D>();
+        rb.velocity = transform.right * shootSpeed;
     }
 }
