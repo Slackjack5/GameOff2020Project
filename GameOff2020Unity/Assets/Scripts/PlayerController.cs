@@ -62,16 +62,16 @@ public class PlayerController : MonoBehaviour
             {
                 jumpKeyHeld = false;
             }
-        }
 
-        //Evading
-        if (Input.GetMouseButtonDown(1) && horizontalInput != 0 && !dashed && !cooldown)
-        {
-            evading = true;
-            storedDirection = horizontalInput;
-            if (!isGrounded)
+            //Evading
+            if (Input.GetMouseButtonDown(1) && horizontalInput != 0 && !dashed && !cooldown)
             {
-                slideMovementSmoothTime = airmovementSmoothTime;
+                evading = true;
+                storedDirection = horizontalInput;
+                if (!isGrounded)
+                {
+                    slideMovementSmoothTime = airmovementSmoothTime;
+                }
             }
         }
 
