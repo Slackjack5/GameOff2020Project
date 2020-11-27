@@ -73,8 +73,9 @@ public class Timer : MonoBehaviour
 
     private void DisplayCountdownTime(int time)
     {
+        // Have the countdown get smaller and more transparent over time
         float interpolationValue = Mathf.InverseLerp(0, countdownSecond, currentCountdownTime);
-
+        
         countdownText.fontSize = Mathf.Lerp(minFontSize, maxFontSize, interpolationValue);
 
         Color color = countdownText.color;
