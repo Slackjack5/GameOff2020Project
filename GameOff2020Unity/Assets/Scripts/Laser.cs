@@ -2,18 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyLaser : MonoBehaviour
+public class Laser : MonoBehaviour
 {
+    public float shootTime { get; set; }
+
     private LineRenderer lineRenderer;
     private CapsuleCollider2D capsuleCollider;
     private Vector3 laserHitPoint;
-    private float shootTime;
     private float currentShootTime;
-
-    public void SetShootTime(float shootTime)
-    {
-        this.shootTime = shootTime;
-    }
 
     private void Start()
     {

@@ -2990,6 +2990,12 @@ MonoBehaviour:
   shootOffset: 1
   moonball: {fileID: -8825979064138598642, guid: 411dc9046cde8cf48bdb30d3530878d3,
     type: 3}
+  chargeCircle: {fileID: 2365284558089738764, guid: 29455cdd5555dc54f9e15f0ce3c7b8f5,
+    type: 3}
+  laser: {fileID: 7542374826020612189, guid: 6421aaf9fc4aa4b41b61c0c696c64a68, type: 3}
+  chargeTime: 0.7
+  shootTime: 0.5
+  laserCooldown: 0.7
 --- !u!1 &2072144497
 GameObject:
   m_ObjectHideFlags: 0

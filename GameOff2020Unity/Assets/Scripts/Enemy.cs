@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private EnemyLaser laser;
+    [SerializeField] private Laser laser;
     [SerializeField] private GameObject chargeCircle;
     [SerializeField] private float chargeTime = 0.7f;
     [SerializeField] private float shootTime = 0.5f;
@@ -110,8 +110,8 @@ public class Enemy : MonoBehaviour
     {
         // Spawn a projectile at a position near the enemy based on the shootOffset
         Vector3 spawnPosition = transform.position + transform.rotation * Vector3.right * shootOffset;
-        EnemyLaser shotLaser = Instantiate(laser, spawnPosition, transform.rotation);
-        shotLaser.SetShootTime(shootTime);
+        Laser shotLaser = Instantiate(laser, spawnPosition, transform.rotation);
+        shotLaser.shootTime = shootTime;
 
         currentShootTime = shootTime;
         shooting = true;
