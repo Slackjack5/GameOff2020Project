@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7542374826020612187}
   - component: {fileID: 7542374826020612186}
-  - component: {fileID: 7542374826020612189}
+  - component: {fileID: 3869782584838812734}
   m_Layer: 0
   m_Name: Player Laser
   m_TagString: Weapon
@@ -75,6 +75,7 @@ LineRenderer:
   m_Positions:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -130,7 +131,7 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!114 &7542374826020612189
+--- !u!114 &3869782584838812734
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -139,6 +140,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 7542374826020612188}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 577110aaa91019f468f2e4e68c5759aa, type: 3}
+  m_Script: {fileID: 11500000, guid: 3820647afd89fb044875a83eb6f4e1fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
