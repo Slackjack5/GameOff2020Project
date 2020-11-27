@@ -5,39 +5,98 @@ using UnityEngine.UI;
 using TMPro;
 public class Timer : MonoBehaviour
 {
+    [SerializeField, Range(0f, 1f)] private float countdownSecond = 1.0f;  // Specifies how long it takes to decrement the countdown by 1
+    [SerializeField] private TextMeshProUGUI countdownText;
+    [SerializeField] private float maxFontSize = 60f;
+    [SerializeField] private float minFontSize = 24f;
     
-    public float timeRemaining = 0;
-    public bool timerIsRunning = false;
+    private TextMeshProUGUI timerText;
 
-    public TextMeshProUGUI timeText;
+    private float timeElapsed = 0;
+    private bool timerIsRunning = false;
+    private bool countingDown = true;
+    private int countdownTime = 3;       // What is displayed
+    private float currentCountdownTime;  // Represents how long before countdownTime decrements by 1
+
     private void Start()
     {
-        timerIsRunning = true;
-        //timeText = gameObject.GetComponent<TextMeshProUGUI>();
+        timerText = gameObject.GetComponent<TextMeshProUGUI>();
+
+        currentCountdownTime = countdownSecond;
+        GameManager.playerIsDead = true;
     }
+
     private void Update()
     {
+        DisplayTime(timeElapsed);
+        
+        if (countingDown)
+        {
+            DisplayCountdownTime(countdownTime);
+
+            currentCountdownTime -= Time.deltaTime;
+            if (currentCountdownTime <= 0)
+            {
+                countdownTime--;
+                currentCountdownTime = countdownSecond;
+            }
+
+            if (countdownTime <= 0)
+            {
+                // Countdown is over
+                StartCoroutine(DisplayGo());
+
+                countingDown = false;
+                timerIsRunning = true;
+                GameManager.playerIsDead = false;
+            }
+        }
+
         if (timerIsRunning)
         {
-                timeRemaining += Time.deltaTime;
-                DisplayTime(timeRemaining);
+            timeElapsed += Time.deltaTime;
         }
         else
         {
-            Debug.Log("Time has run out!");
-            timeRemaining = 0;
-            timerIsRunning = false;
+            timeElapsed = 0;
         }
     }
 
     void DisplayTime(float timeToDisplay)
     {
-        timeToDisplay += 1;
         float minutes = Mathf.FloorToInt(timeToDisplay / 60);
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
-        float milliSeconds = (timeToDisplay % 1) * 100;
+        float milliSeconds = Mathf.FloorToInt((timeToDisplay * 100) % 100);
 
-        timeText.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, milliSeconds);
+        timerText.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, milliSeconds);
     }
 
+    private void DisplayCountdownTime(int time)
+    {
+        // Have the countdown get smaller and more transparent over time
+        float interpolationValue = Mathf.InverseLerp(0, countdownSecond, currentCountdownTime);
+        
+        countdownText.fontSize = Mathf.Lerp(minFontSize, maxFontSize, interpolationValue);
+
+        Color color = countdownText.color;
+        color.a = interpolationValue;
+        countdownText.color = color;
+
+        countdownText.text = string.Format("{0}", time);
+    }
+
+    private IEnumerator DisplayGo()
+    {
+        countdownText.fontSize = maxFontSize;
+
+        Color color = countdownText.color;
+        color.a = 1;
+        countdownText.color = color;
+
+        countdownText.text = "GO";
+
+        yield return new WaitForSeconds(countdownSecond);
+
+        countdownText.enabled = false;
+    }
 }
