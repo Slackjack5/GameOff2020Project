@@ -9,30 +9,14 @@ public class Ghost : MonoBehaviour
     private List<Vector2> playerPositions;
     private List<Vector2> ghostPositions;
     private int ghostPositionIndex = 0;
-    private bool reset = false;
-    private bool showGhost = false;
 
     // Start is called before the first frame update
     void Start()
     {
         playerPositions = new List<Vector2>();
         ghostPositions = new List<Vector2>();
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        transform.GetComponent<SpriteRenderer>().enabled = showGhost;
-
-        // On reset, let the ghost know the path it should follow, 
-        // and start recording a new list of the player's positions
-        if (reset)
-        {
-            ghostPositions = playerPositions;
-            ghostPositionIndex = 0;
-            playerPositions = new List<Vector2>();
-            reset = false;
-        }
+        transform.GetComponent<SpriteRenderer>().enabled = false;
     }
 
     private void FixedUpdate()
@@ -46,5 +30,14 @@ public class Ghost : MonoBehaviour
         
         // Snapshot the player's position
         playerPositions.Add(player.transform.position);
+    }
+
+    public void SaveRecording()
+    {
+        // On reset, let the ghost know the path it should follow, 
+        // and start recording a new list of the player's positions
+        ghostPositions = playerPositions;
+        ghostPositionIndex = 0;
+        playerPositions = new List<Vector2>();
     }
 }
