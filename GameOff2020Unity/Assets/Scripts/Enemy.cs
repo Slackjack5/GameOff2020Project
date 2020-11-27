@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private EnemyLaser laser;
+    [SerializeField] private Laser laser;
     [SerializeField] private GameObject chargeCircle;
     [SerializeField] private float chargeTime = 0.7f;
     [SerializeField] private float shootTime = 0.5f;
@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float hoverSpeed = 3.5f;                       // Specifies how fast to move up and down
     [SerializeField] private float deathTime = 1.5f;                        // Specifies how long the enemy stays in existence after being killed before disappearing
 
+    private Rigidbody2D rb;
     private float cooldownTime;
     private float rotationTime;
     private GameObject newChargeCircle;
@@ -30,6 +31,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         cooldownTime = cooldown;
     }
 
@@ -84,6 +86,14 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Weapon")
+        {
+            Die();
+        }
+    }
+
     private void Hover()
     {
         float newPositionY = Mathf.Sin(Time.timeSinceLevelLoad * hoverSpeed) * hoverDistance;
@@ -110,8 +120,8 @@ public class Enemy : MonoBehaviour
     {
         // Spawn a projectile at a position near the enemy based on the shootOffset
         Vector3 spawnPosition = transform.position + transform.rotation * Vector3.right * shootOffset;
-        EnemyLaser shotLaser = Instantiate(laser, spawnPosition, transform.rotation);
-        shotLaser.SetShootTime(shootTime);
+        Laser shotLaser = Instantiate(laser, spawnPosition, transform.rotation);
+        shotLaser.shootTime = shootTime;
 
         currentShootTime = shootTime;
         shooting = true;
@@ -130,7 +140,7 @@ public class Enemy : MonoBehaviour
         dead = true;
 
         // Drop to the ground
-        Rigidbody2D rb = gameObject.AddComponent<Rigidbody2D>();
+        rb.bodyType = RigidbodyType2D.Dynamic;
         rb.gravityScale = 4;
 
         Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), player.GetComponent<BoxCollider2D>());

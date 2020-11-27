@@ -31,7 +31,6 @@ public class PlayerController : MonoBehaviour
 
     //Evasion Variables
     private bool evading = false;
-    public float slideSpeed = 2000f;
     private float storedDirection = 0;
     private bool dashed = false;
     private bool cooldown = false;
@@ -64,7 +63,7 @@ public class PlayerController : MonoBehaviour
             }
 
             //Evading
-            if (Input.GetMouseButtonDown(1) && horizontalInput != 0 && !dashed && !cooldown)
+            if (Input.GetKeyDown(KeyCode.LeftShift) && horizontalInput != 0 && !dashed && !cooldown)
             {
                 evading = true;
                 storedDirection = horizontalInput;
@@ -183,6 +182,10 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(0, rb.velocity.y);
 
             GameManager.playerIsDead = true;
+
+            Weapon weapon = GetComponent<Weapon>();
+            weapon.Reset();
+
             yield return new WaitForSeconds(respawnTime);
 
             Respawn();
