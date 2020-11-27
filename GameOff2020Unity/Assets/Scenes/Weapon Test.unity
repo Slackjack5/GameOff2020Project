@@ -1803,11 +1803,12 @@ MonoBehaviour:
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 512
-  playerTransform: {fileID: 2055480289}
+  player: {fileID: 2055480287}
   detectionRadius: 12
   rotationSpeed: 0.2
   hoverDistance: 0.2
   hoverSpeed: 3.5
+  deathTime: 1
 --- !u!61 &1403552176
 BoxCollider2D:
   m_ObjectHideFlags: 0

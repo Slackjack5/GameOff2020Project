@@ -20,8 +20,10 @@ public class Moonball : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             // Kill enemy on hit
+            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+            enemy.Die();
+
             Destroy(gameObject);
-            Destroy(collision.gameObject);
         }
         else if (collision.gameObject.tag == "Player")
         {
