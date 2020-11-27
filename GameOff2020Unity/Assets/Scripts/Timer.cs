@@ -7,6 +7,8 @@ public class Timer : MonoBehaviour
 {
     [SerializeField, Range(0f, 1f)] private float countdownSecond = 1.0f;  // Specifies how long it takes to decrement the countdown by 1
     [SerializeField] private TextMeshProUGUI countdownText;
+    [SerializeField] private float maxFontSize = 60f;
+    [SerializeField] private float minFontSize = 24f;
     
     private TextMeshProUGUI timerText;
 
@@ -21,6 +23,7 @@ public class Timer : MonoBehaviour
         timerText = gameObject.GetComponent<TextMeshProUGUI>();
 
         currentCountdownTime = countdownSecond;
+        GameManager.playerIsDead = true;
     }
 
     private void Update()
@@ -31,8 +34,10 @@ public class Timer : MonoBehaviour
         {
             // Countdown is over
             StartCoroutine(DisplayGo());
+
             countingDown = false;
             timerIsRunning = true;
+            GameManager.playerIsDead = false;
         }
         else if (countingDown)
         {
@@ -67,13 +72,29 @@ public class Timer : MonoBehaviour
 
     private void DisplayCountdownTime(int time)
     {
+        float interpolationValue = Mathf.InverseLerp(0, countdownSecond, currentCountdownTime);
+
+        countdownText.fontSize = Mathf.Lerp(minFontSize, maxFontSize, interpolationValue);
+
+        Color color = countdownText.color;
+        color.a = interpolationValue;
+        countdownText.color = color;
+
         countdownText.text = string.Format("{0}", time);
     }
 
     private IEnumerator DisplayGo()
     {
+        countdownText.fontSize = maxFontSize;
+
+        Color color = countdownText.color;
+        color.a = 1;
+        countdownText.color = color;
+
         countdownText.text = "GO";
+
         yield return new WaitForSeconds(countdownSecond);
+
         countdownText.enabled = false;
     }
 }
