@@ -29,17 +29,8 @@ public class Timer : MonoBehaviour
     private void Update()
     {
         DisplayTime(timeElapsed);
-
-        if (countdownTime <= 0)
-        {
-            // Countdown is over
-            StartCoroutine(DisplayGo());
-
-            countingDown = false;
-            timerIsRunning = true;
-            GameManager.playerIsDead = false;
-        }
-        else if (countingDown)
+        
+        if (countingDown)
         {
             DisplayCountdownTime(countdownTime);
 
@@ -48,6 +39,16 @@ public class Timer : MonoBehaviour
             {
                 countdownTime--;
                 currentCountdownTime = countdownSecond;
+            }
+
+            if (countdownTime <= 0)
+            {
+                // Countdown is over
+                StartCoroutine(DisplayGo());
+
+                countingDown = false;
+                timerIsRunning = true;
+                GameManager.playerIsDead = false;
             }
         }
 
