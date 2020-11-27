@@ -14,4 +14,19 @@ public class Moonball : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = transform.right * shootSpeed;
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            // Kill enemy on hit
+            Destroy(gameObject);
+            Destroy(collision.gameObject);
+        }
+        else if (collision.gameObject.tag == "Player")
+        {
+            // Recharge the player
+            Destroy(gameObject);
+        }
+    }
 }

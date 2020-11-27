@@ -8,10 +8,12 @@ public class Weapon : MonoBehaviour
     [SerializeField] private float shootOffset = 1f;  // Specifies how far from the player the projectile spawns
     [SerializeField] private Moonball moonball;
 
+    private Moonball newMoonball;
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1") && !GameManager.playerIsDead)
+        if (Input.GetButtonDown("Fire1") && !GameManager.playerIsDead && newMoonball == null)
         {
             ShootBall();
         }
@@ -27,7 +29,7 @@ public class Weapon : MonoBehaviour
         Vector2 transformPosition = transform.position;
         Vector2 spawnPosition = transformPosition + playerToMouse.direction * shootOffset;
         float shootAngle = Vector2.SignedAngle(Vector2.right, playerToMouse.direction);
-        Moonball newMoonball = Instantiate(moonball, spawnPosition, Quaternion.AngleAxis(shootAngle, Vector3.forward));
+        newMoonball = Instantiate(moonball, spawnPosition, Quaternion.AngleAxis(shootAngle, Vector3.forward));
 
         newMoonball.shootSpeed = shootSpeed;
     }
