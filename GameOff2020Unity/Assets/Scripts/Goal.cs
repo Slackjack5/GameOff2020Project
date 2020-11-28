@@ -16,4 +16,9 @@ public class Goal : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
+
+    public void Reset()
+    {
+        gameObject.SetActive(true);
+    }
 }
