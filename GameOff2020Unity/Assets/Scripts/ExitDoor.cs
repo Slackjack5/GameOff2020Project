@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Door : MonoBehaviour
+public class ExitDoor : MonoBehaviour
 {
     [SerializeField] private List<Enemy> enemies;
 
     private SpriteRenderer spriteRenderer;
     private BoxCollider2D boxCollider;
     private bool quipPlayed=true;
+
+    private bool locked = false;
 
     private void Start()
     {
@@ -20,7 +22,7 @@ public class Door : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (AllEnemiesDead())
+        if (!locked && AllEnemiesDead())
         {
             spriteRenderer.enabled = false;
             boxCollider.enabled = false;
@@ -44,5 +46,15 @@ public class Door : MonoBehaviour
         }
 
         return true;
+    }
+
+    public void Lock()
+    {
+        locked = true;
+    }
+
+    public void Unlock()
+    {
+        locked = false;
     }
 }

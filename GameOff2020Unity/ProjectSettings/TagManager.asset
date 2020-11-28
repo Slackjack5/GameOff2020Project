@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - Weapon
   - Goal
+  - Entrance
+  - Exit
   layers:
   - Default
   - TransparentFX

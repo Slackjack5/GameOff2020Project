@@ -12,7 +12,7 @@ public class AudioManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        if (instance==null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -25,7 +25,7 @@ public class AudioManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         foreach (Sound s in sounds)
         {
-            s.source=gameObject.AddComponent<AudioSource>();
+            s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
 
             s.source.volume = s.volume;
@@ -34,20 +34,16 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
-    {
-
-    }
     private void Start()
     {
         //Play Sound
-        FindObjectOfType<AudioManager>().Play("Music-Tutorial");
+        instance.Play("Music-Tutorial");
     }
 
     // Update is called once per frame
     public void Play(string name)
     {
-       Sound s = Array.Find(sounds, sound => sound.name == name);
+        Sound s = Array.Find(sounds, sound => sound.name == name);
         s.source.Play();
     }
 
@@ -59,10 +55,10 @@ public class AudioManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void PlaySound(string name,float pitch)
+    public void PlaySound(string name, float pitch)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
-        s.source.pitch=pitch;
+        s.source.pitch = pitch;
         s.source.Play();
     }
 
@@ -72,15 +68,10 @@ public class AudioManager : MonoBehaviour
         if (s.source.volume > 0)
         {
             s.source.volume -= .003f;
-
-            
         }
         else
         {
             s.source.Pause();
         }
-            
-
-        
     }
 }

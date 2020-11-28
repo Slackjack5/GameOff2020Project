@@ -176,7 +176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootSpeed: 25
   shootOffset: 1
-  moonball: {fileID: -8825979064138598642, guid: 411dc9046cde8cf48bdb30d3530878d3,
+  moonball: {fileID: 4297097662504134204, guid: 411dc9046cde8cf48bdb30d3530878d3,
     type: 3}
   chargeCircle: {fileID: 2365284558089738764, guid: 29455cdd5555dc54f9e15f0ce3c7b8f5,
     type: 3}
@@ -184,6 +184,7 @@ MonoBehaviour:
   chargeTime: 1.3
   shootTime: 0.5
   laserCooldown: 0.7
+  reloadTime: 0.5
 --- !u!1 &8696127212045899377
 GameObject:
   m_ObjectHideFlags: 0

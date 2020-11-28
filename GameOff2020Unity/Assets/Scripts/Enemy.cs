@@ -99,7 +99,7 @@ public class Enemy : MonoBehaviour
     private void Hover()
     {
         float newPositionY = Mathf.Sin(Time.timeSinceLevelLoad * hoverSpeed) * hoverDistance;
-        transform.position = new Vector2(transform.position.x, newPositionY);
+        transform.position = new Vector2(transform.position.x, startPosition.y + newPositionY);
     }
 
     private void FacePlayer()
