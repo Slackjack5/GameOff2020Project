@@ -22,6 +22,7 @@ public class Weapon : MonoBehaviour
     private float currentShootTime;
     private float laserCooldownTime;
 
+
     // Update is called once per frame
     void Update()
     {
@@ -125,6 +126,8 @@ public class Weapon : MonoBehaviour
 
         //Play Audio
         FindObjectOfType<AudioManager>().PlaySound("LaserChargeFire", Random.Range(.95f, 1f));
+        //Stop Sound
+        FindObjectOfType<AudioManager>().Stop("LaserChargeShort");
     }
 
     public void Reset()
