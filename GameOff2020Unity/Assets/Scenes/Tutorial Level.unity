@@ -202,131 +202,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6083235471135088207, guid: 867f1c2b3a877ea45aa591b725b64d27,
-        type: 3}
-      propertyPath: sounds.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6083235471135088207, guid: 867f1c2b3a877ea45aa591b725b64d27,
-        type: 3}
-      propertyPath: sounds.Array.data[0].name
-      value: TimerTick
-      objectReference: {fileID: 0}
-    - target: {fileID: 6083235471135088207, guid: 867f1c2b3a877ea45aa591b725b64d27,
-        type: 3}
-      propertyPath: sounds.Array.data[1].name
-      value: TimerTock
-      objectReference: {fileID: 0}
-    - target: {fileID: 6083235471135088207, guid: 867f1c2b3a877ea45aa591b725b64d27,
-        type: 3}
-      propertyPath: sounds.Array.data[0].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 3a557e710f84e2244b70d11ce66a55e9, type: 3}
-    - target: {fileID: 6083235471135088207, guid: 867f1c2b3a877ea45aa591b725b64d27,
-        type: 3}
-      propertyPath: sounds.Array.data[1].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: dc6981b9408552a4fba10fa079a4892d, type: 3}
-    - target: {fileID: 6083235471135088207, guid: 867f1c2b3a877ea45aa591b725b64d27,
-        type: 3}
-      propertyPath: sounds.Array.data[0].volume
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6083235471135088207, guid: 867f1c2b3a877ea45aa591b725b64d27,
-        type: 3}
-      propertyPath: sounds.Array.data[0].pitch
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6083235471135088207, guid: 867f1c2b3a877ea45aa591b725b64d27,
-        type: 3}
-      propertyPath: sounds.Array.data[1].volume
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6083235471135088207, guid: 867f1c2b3a877ea45aa591b725b64d27,
-        type: 3}
-      propertyPath: sounds.Array.data[1].pitch
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6083235471135088207, guid: 867f1c2b3a877ea45aa591b725b64d27,
-        type: 3}
-      propertyPath: sounds.Array.data[2].name
-      value: TimerLost
-      objectReference: {fileID: 0}
-    - target: {fileID: 6083235471135088207, guid: 867f1c2b3a877ea45aa591b725b64d27,
-        type: 3}
-      propertyPath: sounds.Array.data[2].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: ed03994c396420949a2352965db8bef5, type: 3}
-    - target: {fileID: 6083235471135088207, guid: 867f1c2b3a877ea45aa591b725b64d27,
-        type: 3}
-      propertyPath: sounds.Array.data[2].volume
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6083235471135088207, guid: 867f1c2b3a877ea45aa591b725b64d27,
-        type: 3}
-      propertyPath: sounds.Array.data[2].pitch
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6083235471135088207, guid: 867f1c2b3a877ea45aa591b725b64d27,
-        type: 3}
-      propertyPath: sounds.Array.data[3].name
-      value: LaserShoot
-      objectReference: {fileID: 0}
-    - target: {fileID: 6083235471135088207, guid: 867f1c2b3a877ea45aa591b725b64d27,
-        type: 3}
-      propertyPath: sounds.Array.data[3].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: dee41495671287a4bbc1d281f27d1395, type: 3}
-    - target: {fileID: 6083235471135088207, guid: 867f1c2b3a877ea45aa591b725b64d27,
-        type: 3}
-      propertyPath: sounds.Array.data[3].volume
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6083235471135088207, guid: 867f1c2b3a877ea45aa591b725b64d27,
-        type: 3}
-      propertyPath: sounds.Array.data[3].pitch
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6083235471135088207, guid: 867f1c2b3a877ea45aa591b725b64d27,
-        type: 3}
-      propertyPath: sounds.Array.data[4].name
-      value: LaserCharge
-      objectReference: {fileID: 0}
-    - target: {fileID: 6083235471135088207, guid: 867f1c2b3a877ea45aa591b725b64d27,
-        type: 3}
-      propertyPath: sounds.Array.data[4].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 042e3d54e36417e46864112c4f1d321a, type: 3}
-    - target: {fileID: 6083235471135088207, guid: 867f1c2b3a877ea45aa591b725b64d27,
-        type: 3}
-      propertyPath: sounds.Array.data[4].volume
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6083235471135088207, guid: 867f1c2b3a877ea45aa591b725b64d27,
-        type: 3}
-      propertyPath: sounds.Array.data[4].pitch
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6083235471135088207, guid: 867f1c2b3a877ea45aa591b725b64d27,
-        type: 3}
-      propertyPath: sounds.Array.data[5].name
-      value: TimerRankUp
-      objectReference: {fileID: 0}
-    - target: {fileID: 6083235471135088207, guid: 867f1c2b3a877ea45aa591b725b64d27,
-        type: 3}
-      propertyPath: sounds.Array.data[5].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 5f89ee43dbcae854d994cadd65c77f42, type: 3}
-    - target: {fileID: 6083235471135088207, guid: 867f1c2b3a877ea45aa591b725b64d27,
-        type: 3}
-      propertyPath: sounds.Array.data[5].volume
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6083235471135088207, guid: 867f1c2b3a877ea45aa591b725b64d27,
-        type: 3}
-      propertyPath: sounds.Array.data[5].pitch
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 867f1c2b3a877ea45aa591b725b64d27, type: 3}
 --- !u!114 &72610264 stripped
@@ -9520,6 +9395,11 @@ PrefabInstance:
       propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 7912044686744074982, guid: 72af842b02b0d0f4fbf76f14da9e2e10,
+        type: 3}
+      propertyPath: exit
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7912044686744075546, guid: 72af842b02b0d0f4fbf76f14da9e2e10,
         type: 3}
       propertyPath: m_Name
@@ -10374,6 +10254,11 @@ PrefabInstance:
       propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 7912044686744074982, guid: 72af842b02b0d0f4fbf76f14da9e2e10,
+        type: 3}
+      propertyPath: exit
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7912044686744075546, guid: 72af842b02b0d0f4fbf76f14da9e2e10,
         type: 3}
       propertyPath: m_Name
@@ -10567,6 +10452,11 @@ PrefabInstance:
       propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 7912044686744074982, guid: 72af842b02b0d0f4fbf76f14da9e2e10,
+        type: 3}
+      propertyPath: exit
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7912044686744075546, guid: 72af842b02b0d0f4fbf76f14da9e2e10,
         type: 3}
       propertyPath: m_Name
@@ -10686,6 +10576,11 @@ PrefabInstance:
       propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 7912044686744074982, guid: 72af842b02b0d0f4fbf76f14da9e2e10,
+        type: 3}
+      propertyPath: exit
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7912044686744075546, guid: 72af842b02b0d0f4fbf76f14da9e2e10,
         type: 3}
       propertyPath: m_Name
@@ -10804,6 +10699,11 @@ PrefabInstance:
         type: 3}
       propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7912044686744074982, guid: 72af842b02b0d0f4fbf76f14da9e2e10,
+        type: 3}
+      propertyPath: exit
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7912044686744075546, guid: 72af842b02b0d0f4fbf76f14da9e2e10,
         type: 3}

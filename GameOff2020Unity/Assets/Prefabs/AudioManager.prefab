@@ -43,4 +43,226 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ff22ecb098e66a42aee0a81975c58ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds: []
+  sounds:
+  - name: TimerTick
+    clip: {fileID: 8300000, guid: 3a557e710f84e2244b70d11ce66a55e9, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: TimerTock
+    clip: {fileID: 8300000, guid: dc6981b9408552a4fba10fa079a4892d, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: TimerLost
+    clip: {fileID: 8300000, guid: ed03994c396420949a2352965db8bef5, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: LaserShoot
+    clip: {fileID: 8300000, guid: dee41495671287a4bbc1d281f27d1395, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: LaserCharge
+    clip: {fileID: 8300000, guid: 042e3d54e36417e46864112c4f1d321a, type: 3}
+    volume: 0.455
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: TimerRankUp
+    clip: {fileID: 8300000, guid: 5f89ee43dbcae854d994cadd65c77f42, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: LaserChargeShort
+    clip: {fileID: 8300000, guid: c08cba55331ee3843998cbf969da2c5e, type: 3}
+    volume: 0.395
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: LaserChargeFire
+    clip: {fileID: 8300000, guid: 6be5d3f898a34ab40a245259eeae7777, type: 3}
+    volume: 0.512
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CharacterVoice-Charging
+    clip: {fileID: 8300000, guid: 942e9b92c05f4c747876afa73332616e, type: 3}
+    volume: 0.641
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: LaserDeflect
+    clip: {fileID: 8300000, guid: 32056f8859e2da44d9db2e18a7a1321d, type: 3}
+    volume: 0.301
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: LaserShot
+    clip: {fileID: 8300000, guid: cd8ec71435219f24380bc109d26b5789, type: 3}
+    volume: 0.32
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: EnemyDeath
+    clip: {fileID: 8300000, guid: eedd4c292831ba649a8fbb4772a610d4, type: 3}
+    volume: 0.405
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CharacterVoice-CartClear1
+    clip: {fileID: 8300000, guid: 0e12df2277ceba345b30b3ae8603f5da, type: 3}
+    volume: 0.506
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CharacterVoice-CartClear2
+    clip: {fileID: 8300000, guid: 5ef8ffe9ba59c544b8cad149cf34aa8e, type: 3}
+    volume: 0.506
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CharacterVoice-CartClear3
+    clip: {fileID: 8300000, guid: 750da96721fc1ef47b0a6e315c57e6df, type: 3}
+    volume: 0.506
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CharacterVoice-CartClear4
+    clip: {fileID: 8300000, guid: 8257eeb4eed06db41a121a8788c7fee5, type: 3}
+    volume: 0.506
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CharacterVoice-CartClear5
+    clip: {fileID: 8300000, guid: e74ea11c910f9fc45a99da2a26ad2238, type: 3}
+    volume: 0.506
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CharacterVoice-CartClear6
+    clip: {fileID: 8300000, guid: 29bb976e85c9a3a46ab44df7d2610a52, type: 3}
+    volume: 0.506
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CharacterVoice-CartClear7
+    clip: {fileID: 8300000, guid: 32178331739b4034eb2e4e7af35cf2b8, type: 3}
+    volume: 0.506
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CharacterVoice-EnemyKilled1
+    clip: {fileID: 8300000, guid: 77f20cb4176a71747a4cde1be1be474a, type: 3}
+    volume: 0.506
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CharacterVoice-EnemyKilled2
+    clip: {fileID: 8300000, guid: db6f97c5c20f7c34582a32ad41eaca44, type: 3}
+    volume: 0.506
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CharacterVoice-EnemyKilled3
+    clip: {fileID: 8300000, guid: 7f5abd85e35ba2345807fe1d2942a25d, type: 3}
+    volume: 0.506
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CharacterVoice-EnemyKilled4
+    clip: {fileID: 8300000, guid: 3c34511bf9d22b1478a8ccf701f72ef5, type: 3}
+    volume: 0.506
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CharacterVoice-EnemyKilled5
+    clip: {fileID: 8300000, guid: d308c72184bd7b748b88ebb42fe209c1, type: 3}
+    volume: 0.506
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CharacterVoice-EnemyKilled6
+    clip: {fileID: 8300000, guid: 896649ede702c2f41b6d5a5efcfd8a5c, type: 3}
+    volume: 0.506
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CharacterVoice-EnemyKilled7
+    clip: {fileID: 8300000, guid: d74107be824a88b45aada49bb57c00bc, type: 3}
+    volume: 0.506
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CharacterVoice-RankDown1
+    clip: {fileID: 8300000, guid: 79e5680c1b23c824981f3b027977b326, type: 3}
+    volume: 0.506
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CharacterVoice-RankDown2
+    clip: {fileID: 8300000, guid: 07e32e38547e6934886c3f9a9d780651, type: 3}
+    volume: 0.506
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CharacterVoice-RankDown3
+    clip: {fileID: 8300000, guid: 9156e5176b74cdb4085b7f37ec2fd2d2, type: 3}
+    volume: 0.506
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CharacterVoice-RankUp1
+    clip: {fileID: 8300000, guid: ec23ba0b166866f459510e54bd1dade9, type: 3}
+    volume: 0.506
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CharacterVoice-RankUp2
+    clip: {fileID: 8300000, guid: 8cc3f5c4caabfbe47a80dbcb8028967b, type: 3}
+    volume: 0.506
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CharacterVoice-RankUp3
+    clip: {fileID: 8300000, guid: 8ba92e51082e0de4d93205b5e48b28e3, type: 3}
+    volume: 0.506
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CharacterVoice-RankUp4
+    clip: {fileID: 8300000, guid: e00b164f1ec7a20468bd6c51de4cfc15, type: 3}
+    volume: 0.506
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CharacterVoice-RankUp5
+    clip: {fileID: 8300000, guid: 84df1910ab28b3a40ac1314b01f4a6cd, type: 3}
+    volume: 0.506
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CharacterVoice-RankUp6
+    clip: {fileID: 8300000, guid: 3a1853e1144cf9b43912ef9631a83aae, type: 3}
+    volume: 0.506
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Music-Tutorial
+    clip: {fileID: 8300000, guid: 364222aea3c6218498777d3a6dc4872c, type: 3}
+    volume: 0.247
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Music-Game1
+    clip: {fileID: 8300000, guid: e8a0194475b9dc646b141e9d7446afc1, type: 3}
+    volume: 0.377
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
