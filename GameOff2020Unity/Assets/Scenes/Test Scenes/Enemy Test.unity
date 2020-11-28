@@ -1246,8 +1246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bee687f68217484c9c4190e501fa112, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies:
-  - {fileID: 7862793728197906676}
+  enemies: []
 --- !u!1 &1331480468 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 886614480703355523, guid: 867f1c2b3a877ea45aa591b725b64d27,
