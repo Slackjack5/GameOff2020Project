@@ -14,8 +14,7 @@ public class Goal : MonoBehaviour
         if (collision.gameObject == player)
         {
             onEnter.Invoke();
-            gameObject.SetActive(false);
-
+            gameObject.SetActive(false);
             //Play Random Cart Clear Voice Line
             int rand = Random.Range(0, 7);
             if (exit)
@@ -56,7 +55,7 @@ public class Goal : MonoBehaviour
                     FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-CartClear7", Random.Range(.95f, 1f));
                 }
             }
-            
+
         }
     }
 
