@@ -181,7 +181,7 @@ MonoBehaviour:
   chargeCircle: {fileID: 2365284558089738764, guid: 29455cdd5555dc54f9e15f0ce3c7b8f5,
     type: 3}
   laser: {fileID: 3869782584838812734, guid: 6421aaf9fc4aa4b41b61c0c696c64a68, type: 3}
-  chargeTime: 0.7
+  chargeTime: 1.3
   shootTime: 0.5
   laserCooldown: 0.7
 --- !u!1 &8696127212045899377

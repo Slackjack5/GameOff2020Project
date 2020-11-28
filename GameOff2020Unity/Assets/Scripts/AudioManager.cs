@@ -40,7 +40,8 @@ public class AudioManager : MonoBehaviour
     }
     private void Start()
     {
-  
+        //Play Sound
+        FindObjectOfType<AudioManager>().Play("Music-Tutorial");
     }
 
     // Update is called once per frame

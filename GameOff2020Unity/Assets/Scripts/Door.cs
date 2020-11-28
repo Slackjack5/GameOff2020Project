@@ -8,11 +8,13 @@ public class Door : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
     private BoxCollider2D boxCollider;
+    private bool quipPlayed=true;
 
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         boxCollider = GetComponent<BoxCollider2D>();
+        quipPlayed = true;
     }
 
     // Update is called once per frame
@@ -22,6 +24,7 @@ public class Door : MonoBehaviour
         {
             spriteRenderer.enabled = false;
             boxCollider.enabled = false;
+
         }
         else
         {
