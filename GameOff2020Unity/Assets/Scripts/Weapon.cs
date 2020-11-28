@@ -15,7 +15,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] private float reloadTime = 0.5f;
 
     private GameObject newMoonball;
-    private bool moonballReady = true;
+    private bool reloading = false;
 
     public GameObject newChargeCircle { get; private set; }
     public bool chargingLaser { get; private set; }
@@ -31,7 +31,7 @@ public class Weapon : MonoBehaviour
         {
             if (Input.GetButtonDown("Fire1"))
             {
-                if (newMoonball == null && moonballReady)
+                if (newMoonball == null && !reloading)
                 {
                     ShootBall();
                 }
@@ -101,8 +101,6 @@ public class Weapon : MonoBehaviour
 
         newMoonball.GetComponent<Moonball>().shootSpeed = shootSpeed;
 
-        moonballReady = false;
-
         //Play Sound
         FindObjectOfType<AudioManager>().PlaySound("LaserShot", Random.Range(.95f, 1f));
     }
@@ -155,12 +153,13 @@ public class Weapon : MonoBehaviour
     private void Reload()
     {
         Destroy(newMoonball);
+        reloading = true;
         StartCoroutine(ReloadDelay());
     }
 
     private IEnumerator ReloadDelay()
     {
         yield return new WaitForSeconds(reloadTime);
-        moonballReady = true;
+        reloading = false;
     }
 }
