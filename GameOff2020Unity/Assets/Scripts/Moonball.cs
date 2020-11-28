@@ -15,6 +15,14 @@ public class Moonball : MonoBehaviour
         rb.velocity = transform.right * shootSpeed;
     }
 
+    private void Update()
+    {
+        if (GameManager.playerIsDead)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Enemy")

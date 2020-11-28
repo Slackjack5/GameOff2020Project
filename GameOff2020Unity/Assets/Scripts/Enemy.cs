@@ -27,7 +27,7 @@ public class Enemy : MonoBehaviour
     private bool charging;
     private float currentShootTime;
     private bool shooting;
-    private bool dead;
+    public bool dead { get; private set; }
 
     // Start is called before the first frame update
     void Start()
