@@ -9,18 +9,27 @@ public class Timer : MonoBehaviour
     [SerializeField] private TextMeshProUGUI countdownText;
     [SerializeField] private float maxFontSize = 60f;
     [SerializeField] private float minFontSize = 24f;
-    
+    [SerializeField] private float travelTime = 0.4f;
+    [SerializeField] private RectTransform targetPositionTransform;
+
     private TextMeshProUGUI timerText;
+    private RectTransform rectTransform;
 
     private float timeElapsed = 0;
     private bool timerIsRunning = false;
     private bool countingDown = true;
     private int countdownTime = 3;       // What is displayed
     private float currentCountdownTime;  // Represents how long before countdownTime decrements by 1
+    private bool levelFinished = false;
+    private Vector2 anchorVelocity = Vector2.zero;
+    private Vector2 anchoredPositionVelocity = Vector2.zero;
+
+    private readonly Vector2 centerAnchor = new Vector2(0.5f, 0.5f);
 
     private void Start()
     {
-        timerText = gameObject.GetComponent<TextMeshProUGUI>();
+        timerText = GetComponent<TextMeshProUGUI>();
+        rectTransform = GetComponent<RectTransform>();
 
         currentCountdownTime = countdownSecond;
         GameManager.playerIsDead = true;
@@ -56,9 +65,10 @@ public class Timer : MonoBehaviour
         {
             timeElapsed += Time.deltaTime;
         }
-        else
+
+        if (levelFinished)
         {
-            timeElapsed = 0;
+            MoveTimer();
         }
     }
 
@@ -73,6 +83,8 @@ public class Timer : MonoBehaviour
 
     private void DisplayCountdownTime(int time)
     {
+        countdownText.enabled = true;
+
         // Have the countdown get smaller and more transparent over time
         float interpolationValue = Mathf.InverseLerp(0, countdownSecond, currentCountdownTime);
         
@@ -98,5 +110,25 @@ public class Timer : MonoBehaviour
         yield return new WaitForSeconds(countdownSecond);
 
         countdownText.enabled = false;
+    }
+
+    public void FinishTime()
+    {
+        timerIsRunning = false;
+        GameManager.playerIsDead = true;
+        levelFinished = true;
+    }
+
+    private void MoveTimer()
+    {
+        // Move the anchor to the center over time
+        Vector2 currentAnchor = rectTransform.anchorMin;
+        Vector2 newAnchor = Vector2.SmoothDamp(currentAnchor, centerAnchor, ref anchorVelocity, travelTime);
+        rectTransform.anchorMin = newAnchor;
+        rectTransform.anchorMax = newAnchor;
+
+        // Move the anchored position to the side over time
+        Vector2 currentAnchoredPosition = rectTransform.anchoredPosition;
+        rectTransform.anchoredPosition = Vector2.SmoothDamp(currentAnchoredPosition, targetPositionTransform.anchoredPosition, ref anchoredPositionVelocity, travelTime);
     }
 }
