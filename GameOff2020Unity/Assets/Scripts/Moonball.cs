@@ -38,5 +38,10 @@ public class Moonball : MonoBehaviour
             // Recharge the player
             Destroy(gameObject);
         }
+        else
+        {
+            //Play Sound
+            FindObjectOfType<AudioManager>().PlaySound("LaserDeflect", Random.Range(.95f, 1f));
+        }
     }
 }

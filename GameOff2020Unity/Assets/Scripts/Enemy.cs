@@ -153,6 +153,52 @@ public class Enemy : MonoBehaviour
             Destroy(newChargeCircle);
         }
 
+        //Play Sound
+        FindObjectOfType<AudioManager>().PlaySound("EnemyDeath", Random.Range(.95f, 1f));
+
+        //Play Random Cart Clear Voice Line
+        int rand = Random.Range(0, 7);
+        //Chance of Voice Line on Death 
+        int rand2 = Random.Range(0, 4);
+        //Play Voice Line
+        if (rand2==1)
+        {
+            if (rand == 0)
+            {
+                //Play Sound
+                FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-EnemyKilled1", Random.Range(.95f, 1f));
+            }
+            else if (rand == 1)
+            {
+                //Play Sound
+                FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-EnemyKilled2", Random.Range(.95f, 1f));
+            }
+            else if (rand == 2)
+            {
+                //Play Sound
+                FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-EnemyKilled3", Random.Range(.95f, 1f));
+            }
+            else if (rand == 3)
+            {
+                //Play Sound
+                FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-EnemyKilled4", Random.Range(.95f, 1f));
+            }
+            else if (rand == 4)
+            {
+                //Play Sound
+                FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-EnemyKilled5", Random.Range(.95f, 1f));
+            }
+            else if (rand == 5)
+            {
+                //Play Sound
+                FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-EnemyKilled6", Random.Range(.95f, 1f));
+            }
+            else if (rand == 6)
+            {
+                //Play Sound
+                FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-EnemyKilled7", Random.Range(.95f, 1f));
+            }
+        }
         StartCoroutine(Drop());
     }
 
