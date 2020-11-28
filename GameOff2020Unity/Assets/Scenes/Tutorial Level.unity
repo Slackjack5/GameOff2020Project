@@ -10273,6 +10273,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8696127211863119745, guid: 262b40164235a6e44aac3dd94ec46d20,
+        type: 3}
+      propertyPath: moonball
+      value: 
+      objectReference: {fileID: 4297097662504134204, guid: 411dc9046cde8cf48bdb30d3530878d3,
+        type: 3}
+    - target: {fileID: 8696127211863119745, guid: 262b40164235a6e44aac3dd94ec46d20,
+        type: 3}
+      propertyPath: reloadTime
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8696127211863119749, guid: 262b40164235a6e44aac3dd94ec46d20,
         type: 3}
       propertyPath: m_LocalPosition.x

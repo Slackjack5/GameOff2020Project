@@ -6,14 +6,16 @@ public class Weapon : MonoBehaviour
 {
     [SerializeField] private float shootSpeed = 25f;
     [SerializeField] private float shootOffset = 1f;  // Specifies how far from the player the projectile spawns
-    [SerializeField] private Moonball moonball;
+    [SerializeField] private GameObject moonball;
     [SerializeField] private GameObject chargeCircle;
     [SerializeField] private Laser laser;
     [SerializeField] private float chargeTime = 0.7f;
     [SerializeField] private float shootTime = 0.5f;
     [SerializeField] private float laserCooldown = 0.7f;
+    [SerializeField] private float reloadTime = 0.5f;
 
-    private Moonball newMoonball;
+    private GameObject newMoonball;
+    private bool moonballReady = true;
 
     public GameObject newChargeCircle { get; private set; }
     public bool chargingLaser { get; private set; }
@@ -22,25 +24,26 @@ public class Weapon : MonoBehaviour
     private float currentShootTime;
     private float laserCooldownTime;
 
-
     // Update is called once per frame
     void Update()
     {
         if (!GameManager.playerIsDead)
         {
-            if (Input.GetButtonDown("Fire1") && newMoonball == null)
+            if (Input.GetButtonDown("Fire1"))
             {
-                ShootBall();
-                //Play Sound
-                FindObjectOfType<AudioManager>().PlaySound("LaserShot", Random.Range(.95f, 1f));
+                if (newMoonball == null && moonballReady)
+                {
+                    ShootBall();
+                }
+                else if (newMoonball != null)
+                {
+                    Reload();
+                }
             }
 
             if (Input.GetButtonDown("Fire2") && !chargingLaser && laserCooldownTime <= 0)
             {
                 ChargeLaser();
-                //Play Sound
-                FindObjectOfType<AudioManager>().PlaySound("LaserChargeShort", Random.Range(.90f, 1f));
-                FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-Charging", Random.Range(.95f, 1f));
             }
         }
     }
@@ -96,7 +99,12 @@ public class Weapon : MonoBehaviour
         float shootAngle = Vector2.SignedAngle(Vector2.right, playerToMouseDirection);
         newMoonball = Instantiate(moonball, spawnPosition, Quaternion.AngleAxis(shootAngle, Vector3.forward));
 
-        newMoonball.shootSpeed = shootSpeed;
+        newMoonball.GetComponent<Moonball>().shootSpeed = shootSpeed;
+
+        moonballReady = false;
+
+        //Play Sound
+        FindObjectOfType<AudioManager>().PlaySound("LaserShot", Random.Range(.95f, 1f));
     }
 
     private void ChargeLaser()
@@ -105,6 +113,10 @@ public class Weapon : MonoBehaviour
         currentChargeTime = chargeTime;
 
         newChargeCircle = Instantiate(chargeCircle, transform.position, Quaternion.identity, transform);
+
+        //Play Sound
+        FindObjectOfType<AudioManager>().PlaySound("LaserChargeShort", Random.Range(.90f, 1f));
+        FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-Charging", Random.Range(.95f, 1f));
     }
 
     private void ShootLaser()
@@ -138,5 +150,17 @@ public class Weapon : MonoBehaviour
         shootingLaser = false;
         currentShootTime = 0;
         laserCooldownTime = 0;
+    }
+
+    private void Reload()
+    {
+        Destroy(newMoonball);
+        StartCoroutine(ReloadDelay());
+    }
+
+    private IEnumerator ReloadDelay()
+    {
+        yield return new WaitForSeconds(reloadTime);
+        moonballReady = true;
     }
 }
