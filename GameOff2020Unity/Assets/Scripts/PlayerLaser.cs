@@ -17,5 +17,7 @@ public class PlayerLaser : Laser
 
         edgeColliderPoints.Add(edgeCollider.transform.InverseTransformPoint(secondLaserHit.point));
         edgeCollider.points = edgeColliderPoints.ToArray();
+
+
     }
 }

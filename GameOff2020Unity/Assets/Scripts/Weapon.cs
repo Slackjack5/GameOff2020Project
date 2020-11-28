@@ -30,11 +30,16 @@ public class Weapon : MonoBehaviour
             if (Input.GetButtonDown("Fire1") && newMoonball == null)
             {
                 ShootBall();
+                //Play Sound
+                FindObjectOfType<AudioManager>().PlaySound("LaserShot", Random.Range(.95f, 1f));
             }
 
             if (Input.GetButtonDown("Fire2") && !chargingLaser && laserCooldownTime <= 0)
             {
                 ChargeLaser();
+                //Play Sound
+                FindObjectOfType<AudioManager>().PlaySound("LaserChargeShort", Random.Range(.90f, 1f));
+                FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-Charging", Random.Range(.95f, 1f));
             }
         }
     }
@@ -58,6 +63,7 @@ public class Weapon : MonoBehaviour
                 {
                     ShootLaser();
                 }
+
             }
 
             // Track laser shoot time
@@ -116,6 +122,9 @@ public class Weapon : MonoBehaviour
         Destroy(newChargeCircle);
         chargingLaser = false;
         laserCooldownTime = laserCooldown;
+
+        //Play Audio
+        FindObjectOfType<AudioManager>().PlaySound("LaserChargeFire", Random.Range(.95f, 1f));
     }
 
     public void Reset()

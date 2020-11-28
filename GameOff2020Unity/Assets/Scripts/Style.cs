@@ -100,7 +100,26 @@ public class Style : MonoBehaviour
                 if (decayNumber2 == styleDecay)
                 {
                     ResetStyle();
+                    //Play Sound
                     FindObjectOfType<AudioManager>().PlaySound("TimerLost", 1f);
+                    //Play Random Quip
+                    int rand = Random.Range(0, 2);
+                        if (rand == 0)
+                        {
+                            //Play Sound
+                            FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-RankDown1", Random.Range(.95f, 1f));
+                        }
+                        else if (rand == 1)
+                        {
+                            //Play Sound
+                            FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-RankDown2", Random.Range(.95f, 1f));
+                        }
+                        else if (rand == 2)
+                        {
+                        //Play Sound
+                            FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-RankDown3", Random.Range(.95f, 1f));
+                        }
+                    
                 }
             }
 
@@ -140,6 +159,39 @@ public class Style : MonoBehaviour
             {
                 FindObjectOfType<AudioManager>().PlaySound("TimerRankUp", 1.15f);
             }
+
+            //Play Random Quip
+            int rand = Random.Range(0, 6);
+            if (rand == 0)
+            {
+                //Play Sound
+                FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-RankUp1", Random.Range(.95f, 1f));
+            }
+            else if (rand == 1)
+            {
+                //Play Sound
+                FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-RankUp2", Random.Range(.95f, 1f));
+            }
+            else if (rand == 2)
+            {
+                //Play Sound
+                FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-RankUp3", Random.Range(.95f, 1f));
+            }
+            else if (rand == 3)
+            {
+                //Play Sound
+                FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-RankUp4", Random.Range(.95f, 1f));
+            }
+            else if (rand == 4)
+            {
+                //Play Sound
+                FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-RankUp5", Random.Range(.95f, 1f));
+            }
+            else if (rand == 5)
+            {
+                //Play Sound
+                FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-RankUp6", Random.Range(.95f, 1f));
+            }
         }
         else if (styleTotal <= 0 && tier > 1)
         {
@@ -177,6 +229,7 @@ public class Style : MonoBehaviour
         {
             textMesh.text = "S-Rank";
         }
+
 
         if (GameManager.playerIsDead)
         {
