@@ -188,13 +188,13 @@ public class PlayerController : MonoBehaviour
 
             yield return new WaitForSeconds(respawnTime);
 
+            GameManager.playerIsDead = false;
             Respawn();
         }
     }
 
-    private void Respawn()
+    public void Respawn()
     {
-        GameManager.playerIsDead = false;
         transform.position = respawnPosition;
     }
 }

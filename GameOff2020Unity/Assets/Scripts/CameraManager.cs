@@ -71,4 +71,11 @@ public class CameraManager : MonoBehaviour
             targetRoomIndex++;
         }
     }
+
+    public void Restart()
+    {
+        dolly.m_PathPosition = 0;
+        targetRoomIndex = 0;
+        isExiting = false;
+    }
 }

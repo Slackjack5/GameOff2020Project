@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class RoomGoal : MonoBehaviour
+public class Goal : MonoBehaviour
 {
     [SerializeField] private GameObject player;
     [SerializeField] private UnityEvent onExit = new UnityEvent();
@@ -15,5 +15,10 @@ public class RoomGoal : MonoBehaviour
             onExit.Invoke();
             gameObject.SetActive(false);
         }
+    }
+
+    public void Reset()
+    {
+        gameObject.SetActive(true);
     }
 }

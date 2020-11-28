@@ -9,26 +9,49 @@ public class Timer : MonoBehaviour
     [SerializeField] private TextMeshProUGUI countdownText;
     [SerializeField] private float maxFontSize = 60f;
     [SerializeField] private float minFontSize = 24f;
-    
+    [SerializeField] private float travelTime = 0.4f;                      // Specifies how long it takes for the current time to travel to its position in the finish level menu
+    [SerializeField] private RectTransform targetPositionTransform;
+    [SerializeField] private TextMeshProUGUI previousTimeText;
+    [SerializeField] private TextMeshProUGUI differenceText;
+    [SerializeField] private Color fasterTimeColor;
+    [SerializeField] private Color slowerTimeColor;
+
     private TextMeshProUGUI timerText;
+    private RectTransform rectTransform;
 
     private float timeElapsed = 0;
     private bool timerIsRunning = false;
     private bool countingDown = true;
     private int countdownTime = 3;       // What is displayed
     private float currentCountdownTime;  // Represents how long before countdownTime decrements by 1
+    private bool levelFinished = false;
+    private Vector2 anchorVelocity = Vector2.zero;
+    private Vector2 anchoredPositionVelocity = Vector2.zero;
+    private float previousTimeElapsed = 0;
+    private float difference = 0;        // Difference between the current time elapsed and the previous time elapsed
+    private Vector2 originalAnchoredPosition;
+
+    private readonly Vector2 centerAnchor = new Vector2(0.5f, 0.5f);
+    private readonly Vector2 topAnchor = new Vector2(0.5f, 1.0f);
 
     private void Start()
     {
-        timerText = gameObject.GetComponent<TextMeshProUGUI>();
+        timerText = GetComponent<TextMeshProUGUI>();
+        rectTransform = GetComponent<RectTransform>();
 
         currentCountdownTime = countdownSecond;
+
+        previousTimeText.text = "--";
+        differenceText.text = "--";
+
+        originalAnchoredPosition = rectTransform.anchoredPosition;
+
         GameManager.playerIsDead = true;
     }
 
     private void Update()
     {
-        DisplayTime(timeElapsed);
+        timerText.text = FormatTime(timeElapsed);
         
         if (countingDown)
         {
@@ -56,23 +79,26 @@ public class Timer : MonoBehaviour
         {
             timeElapsed += Time.deltaTime;
         }
-        else
+
+        if (levelFinished)
         {
-            timeElapsed = 0;
+            MoveTimer();
         }
     }
 
-    void DisplayTime(float timeToDisplay)
+    private string FormatTime(float timeToDisplay)
     {
         float minutes = Mathf.FloorToInt(timeToDisplay / 60);
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
         float milliSeconds = Mathf.FloorToInt((timeToDisplay * 100) % 100);
 
-        timerText.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, milliSeconds);
+        return string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, milliSeconds);
     }
 
     private void DisplayCountdownTime(int time)
     {
+        countdownText.enabled = true;
+
         // Have the countdown get smaller and more transparent over time
         float interpolationValue = Mathf.InverseLerp(0, countdownSecond, currentCountdownTime);
         
@@ -98,5 +124,63 @@ public class Timer : MonoBehaviour
         yield return new WaitForSeconds(countdownSecond);
 
         countdownText.enabled = false;
+    }
+
+    public void FinishTime()
+    {
+        timerIsRunning = false;
+        GameManager.playerIsDead = true;
+        levelFinished = true;
+        
+        if (previousTimeElapsed > 0)
+        {
+            // Display previous time and difference
+            previousTimeText.text = FormatTime(previousTimeElapsed);
+
+            difference = timeElapsed - previousTimeElapsed;
+            string prefix;
+            if (difference < 0)
+            {
+                differenceText.color = fasterTimeColor;
+                difference = -difference;
+                prefix = "-";
+            }
+            else
+            {
+                differenceText.color = slowerTimeColor;
+                prefix = "+";
+            }
+
+            differenceText.text = prefix + FormatTime(difference);
+        }
+    }
+
+    private void MoveTimer()
+    {
+        // Move the anchor to the center over time
+        Vector2 currentAnchor = rectTransform.anchorMin;
+        Vector2 newAnchor = Vector2.SmoothDamp(currentAnchor, centerAnchor, ref anchorVelocity, travelTime);
+        rectTransform.anchorMin = newAnchor;
+        rectTransform.anchorMax = newAnchor;
+
+        // Move the anchored position to the side over time
+        Vector2 currentAnchoredPosition = rectTransform.anchoredPosition;
+        rectTransform.anchoredPosition = Vector2.SmoothDamp(currentAnchoredPosition, targetPositionTransform.anchoredPosition, ref anchoredPositionVelocity, travelTime);
+    }
+
+    public void Restart()
+    {
+        previousTimeElapsed = timeElapsed;
+        timeElapsed = 0;
+        
+        // Reset position
+        rectTransform.anchorMin = topAnchor;
+        rectTransform.anchorMax = topAnchor;
+        rectTransform.anchoredPosition = originalAnchoredPosition;
+
+        countingDown = true;
+        countdownTime = 3;
+
+        levelFinished = false;
     }
 }
