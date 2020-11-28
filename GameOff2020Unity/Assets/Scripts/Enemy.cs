@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float deathTime = 1.5f;                        // Specifies how long the enemy stays in existence after being killed before disappearing
 
     private Rigidbody2D rb;
+    private Vector2 startPosition;
     private float cooldownTime;
     private float rotationTime;
     private GameObject newChargeCircle;
@@ -32,6 +33,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        startPosition = rb.position;
         cooldownTime = cooldown;
     }
 
@@ -157,6 +159,23 @@ public class Enemy : MonoBehaviour
     private IEnumerator Drop()
     {
         yield return new WaitForSeconds(deathTime);
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+    }
+
+    public void Respawn()
+    {
+        transform.position = startPosition;
+        
+        cooldownTime = cooldown;
+        currentChargeTime = 0;
+        charging = false;
+        currentShootTime = 0;
+        shooting = false;
+        dead = false;
+
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        rb.gravityScale = 0;
+
+        gameObject.SetActive(true);
     }
 }

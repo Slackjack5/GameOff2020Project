@@ -6,14 +6,16 @@ public class Ghost : MonoBehaviour
 {
     [SerializeField] private GameObject player;
 
+    private Vector2 startPosition;
     private List<Vector2> playerPositions;
     private List<Vector2> ghostPositions;
     private int ghostPositionIndex = 0;
-    private bool activated = false;
+    private bool activated = true;
 
     // Start is called before the first frame update
     void Start()
     {
+        startPosition = transform.position;
         playerPositions = new List<Vector2>();
         ghostPositions = new List<Vector2>();
 
@@ -22,21 +24,27 @@ public class Ghost : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Move the ghost to its next position
-        if (ghostPositionIndex < ghostPositions.Count && activated)
+        if (activated)
         {
-            transform.position = ghostPositions[ghostPositionIndex];
-            ghostPositionIndex++;
+            // Move the ghost to its next position
+            if (ghostPositionIndex < ghostPositions.Count)
+            {
+                transform.position = ghostPositions[ghostPositionIndex];
+                ghostPositionIndex++;
+            }
+
+            // Snapshot the player's position
+            playerPositions.Add(player.transform.position);
         }
-        
-        // Snapshot the player's position
-        playerPositions.Add(player.transform.position);
     }
 
     public void SaveRecording()
     {
-        transform.GetComponent<SpriteRenderer>().enabled = false;
+        // Stop recording
         activated = false;
+
+        transform.GetComponent<SpriteRenderer>().enabled = false;
+        transform.position = startPosition;
 
         // On reset, let the ghost know the path it should follow, 
         // and start recording a new list of the player's positions
