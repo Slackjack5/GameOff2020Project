@@ -38,6 +38,9 @@ public class PlayerController : MonoBehaviour
 
     const float groundCheckDistance = .1f;
 
+    //Animation
+    public Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -136,6 +139,24 @@ public class PlayerController : MonoBehaviour
         float targetVelocityX = baseSpeed * speedMultiplier * horizontalMovement;
         Vector2 targetVelocity = new Vector2(targetVelocityX, rb.velocity.y);
         rb.velocity = Vector2.SmoothDamp(rb.velocity, targetVelocity, ref velocity, currentMovementSmoothTime);
+
+        //Animation
+        if (horizontalMovement>0)
+        {
+            animator.SetFloat("Speed", 10);
+            animator.SetBool("MovingRight", true);
+        }
+        else if(horizontalMovement < 0)
+        {
+            animator.SetFloat("Speed", 10);
+            animator.SetBool("MovingRight", false);
+        }
+        else
+        {
+            animator.SetFloat("Speed", 0);
+            animator.SetBool("MovingRight", false);
+        }
+        
     }
 
     private void SlideMove(float horizontalMovement)
