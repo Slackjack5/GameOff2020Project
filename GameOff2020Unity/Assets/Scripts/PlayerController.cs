@@ -127,7 +127,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Death"))
         {
-            StartCoroutine(Die());
+            Die();
         }
     }
 
@@ -175,7 +175,7 @@ public class PlayerController : MonoBehaviour
         cooldown = false;
     }
 
-    private IEnumerator Die()
+    public void Die()
     {
         if (!GameManager.playerIsDead)
         {
@@ -187,11 +187,16 @@ public class PlayerController : MonoBehaviour
             Weapon weapon = GetComponent<Weapon>();
             weapon.Reset();
 
-            yield return new WaitForSeconds(respawnTime);
-
-            GameManager.playerIsDead = false;
-            Respawn();
+            StartCoroutine(DieDelay());
         }
+    }
+
+    private IEnumerator DieDelay()
+    {
+        yield return new WaitForSeconds(respawnTime);
+
+        GameManager.playerIsDead = false;
+        Respawn();
     }
 
     private void Respawn()

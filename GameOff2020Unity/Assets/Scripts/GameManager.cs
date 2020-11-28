@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
 
         foreach (GameObject enemy in enemies)
         {
-            enemy.GetComponent<Enemy>().Respawn();
+            enemy.GetComponent<Turret>().Respawn();
         }
 
         foreach (GameObject entrance in entrances)

@@ -25,17 +25,8 @@ public class Moonball : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Player")
         {
-            // Kill enemy on hit
-            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-            enemy.Die();
-
-            Destroy(gameObject);
-        }
-        else if (collision.gameObject.tag == "Player")
-        {
-            // Recharge the player
             Destroy(gameObject);
         }
         else

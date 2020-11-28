@@ -8,7 +8,6 @@ public class ExitDoor : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
     private BoxCollider2D boxCollider;
-    private bool quipPlayed=true;
 
     private bool locked = false;
 
@@ -16,7 +15,6 @@ public class ExitDoor : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         boxCollider = GetComponent<BoxCollider2D>();
-        quipPlayed = true;
     }
 
     // Update is called once per frame
