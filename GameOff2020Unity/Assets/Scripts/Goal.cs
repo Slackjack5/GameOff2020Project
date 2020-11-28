@@ -6,13 +6,13 @@ using UnityEngine.Events;
 public class Goal : MonoBehaviour
 {
     [SerializeField] private GameObject player;
-    [SerializeField] private UnityEvent onExit = new UnityEvent();
+    [SerializeField] private UnityEvent onEnter = new UnityEvent();
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject == player)
         {
-            onExit.Invoke();
+            onEnter.Invoke();
             gameObject.SetActive(false);
         }
     }
