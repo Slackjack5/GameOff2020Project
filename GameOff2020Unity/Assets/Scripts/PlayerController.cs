@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     private float jumpTimeCounter;
     private bool isGrounded = false;
     private float currentMovementSmoothTime = 0.1f;
+    private Vector2 startPosition;
     private Vector2 respawnPosition;
 
     //Evasion Variables
@@ -41,7 +42,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        respawnPosition = transform.position;
+        startPosition = transform.position;
     }
 
     // Update is called once per frame
@@ -193,8 +194,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Respawn()
+    private void Respawn()
     {
         transform.position = respawnPosition;
+    }
+
+    public void Reset()
+    {
+        transform.position = startPosition;
+    }
+
+    public void Checkpoint(Transform checkpointTransform)
+    {
+        respawnPosition = checkpointTransform.position;
     }
 }

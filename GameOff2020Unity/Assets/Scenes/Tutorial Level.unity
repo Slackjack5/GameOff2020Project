@@ -494,6 +494,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7450329856407884315, guid: cd9504ccde719614f970de321a6357d0,
         type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7450329856407884315, guid: cd9504ccde719614f970de321a6357d0,
+        type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 2055480287}
@@ -512,6 +517,41 @@ PrefabInstance:
       propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: EntranceDoor, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 7450329856407884315, guid: cd9504ccde719614f970de321a6357d0,
+        type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: PlayerController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7450329856407884315, guid: cd9504ccde719614f970de321a6357d0,
+        type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7450329856407884315, guid: cd9504ccde719614f970de321a6357d0,
+        type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7450329856407884315, guid: cd9504ccde719614f970de321a6357d0,
+        type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 2055480290}
+    - target: {fileID: 7450329856407884315, guid: cd9504ccde719614f970de321a6357d0,
+        type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Checkpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 7450329856407884315, guid: cd9504ccde719614f970de321a6357d0,
+        type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Transform, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7450329856407884315, guid: cd9504ccde719614f970de321a6357d0,
+        type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 201483661}
     - target: {fileID: 7450329856407885287, guid: cd9504ccde719614f970de321a6357d0,
         type: 3}
       propertyPath: m_Name
@@ -1006,8 +1046,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 398087716}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.406, y: 1, z: 0}
-  m_LocalScale: {x: 0.1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.3808, y: 1, z: 0}
+  m_LocalScale: {x: 0.05, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1913957190767983452}
   m_RootOrder: 4
@@ -2020,6 +2060,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7450329856407884315, guid: cd9504ccde719614f970de321a6357d0,
         type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7450329856407884315, guid: cd9504ccde719614f970de321a6357d0,
+        type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 2055480287}
@@ -2038,6 +2083,41 @@ PrefabInstance:
       propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: EntranceDoor, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 7450329856407884315, guid: cd9504ccde719614f970de321a6357d0,
+        type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: PlayerController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7450329856407884315, guid: cd9504ccde719614f970de321a6357d0,
+        type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7450329856407884315, guid: cd9504ccde719614f970de321a6357d0,
+        type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7450329856407884315, guid: cd9504ccde719614f970de321a6357d0,
+        type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 2055480290}
+    - target: {fileID: 7450329856407884315, guid: cd9504ccde719614f970de321a6357d0,
+        type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Checkpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 7450329856407884315, guid: cd9504ccde719614f970de321a6357d0,
+        type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Transform, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7450329856407884315, guid: cd9504ccde719614f970de321a6357d0,
+        type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 691737470}
     - target: {fileID: 7450329856407885287, guid: cd9504ccde719614f970de321a6357d0,
         type: 3}
       propertyPath: m_Name
@@ -4151,6 +4231,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7450329856407884315, guid: cd9504ccde719614f970de321a6357d0,
         type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7450329856407884315, guid: cd9504ccde719614f970de321a6357d0,
+        type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 2055480287}
@@ -4169,6 +4254,41 @@ PrefabInstance:
       propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: EntranceDoor, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 7450329856407884315, guid: cd9504ccde719614f970de321a6357d0,
+        type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: PlayerController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7450329856407884315, guid: cd9504ccde719614f970de321a6357d0,
+        type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7450329856407884315, guid: cd9504ccde719614f970de321a6357d0,
+        type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7450329856407884315, guid: cd9504ccde719614f970de321a6357d0,
+        type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 2055480290}
+    - target: {fileID: 7450329856407884315, guid: cd9504ccde719614f970de321a6357d0,
+        type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Checkpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 7450329856407884315, guid: cd9504ccde719614f970de321a6357d0,
+        type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Transform, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7450329856407884315, guid: cd9504ccde719614f970de321a6357d0,
+        type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1592556463}
     - target: {fileID: 7450329856407885287, guid: cd9504ccde719614f970de321a6357d0,
         type: 3}
       propertyPath: m_Name
@@ -4384,6 +4504,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7450329856407884315, guid: cd9504ccde719614f970de321a6357d0,
         type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7450329856407884315, guid: cd9504ccde719614f970de321a6357d0,
+        type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 2055480287}
@@ -4401,6 +4526,21 @@ PrefabInstance:
         type: 3}
       propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: EntranceDoor, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7450329856407884315, guid: cd9504ccde719614f970de321a6357d0,
+        type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: EntranceDoor, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7450329856407884315, guid: cd9504ccde719614f970de321a6357d0,
+        type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7450329856407884315, guid: cd9504ccde719614f970de321a6357d0,
+        type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7450329856407885287, guid: cd9504ccde719614f970de321a6357d0,
         type: 3}
@@ -8240,8 +8380,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5745236469013931872}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.39000002, y: 1, z: 0}
-  m_LocalScale: {x: 0.1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.3651, y: 1, z: 0}
+  m_LocalScale: {x: 0.05, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1913957190767983452}
   m_RootOrder: 2
@@ -9082,6 +9222,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[6].m_Target
       value: 
       objectReference: {fileID: 2006368602}
+    - target: {fileID: 6544330077290845476, guid: 4bc68b09575b10042831b656bf3f04ec,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Reset
+      objectReference: {fileID: 0}
     - target: {fileID: 6544330078075235590, guid: 4bc68b09575b10042831b656bf3f04ec,
         type: 3}
       propertyPath: m_LocalPosition.x
