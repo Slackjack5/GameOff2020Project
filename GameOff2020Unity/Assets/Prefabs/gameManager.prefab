@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ada419b691a46384d85e930cb567cdf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crosshair: {fileID: 2800000, guid: 4cdef095579f2ff43b5619be12f15d5b, type: 3}
+  crosshair: {fileID: 2800000, guid: c16b5cf1b62a1574fbc94e33f2bd8eb8, type: 3}
 --- !u!114 &7134259676343769736
 MonoBehaviour:
   m_ObjectHideFlags: 0
