@@ -12,6 +12,8 @@ public class Style : MonoBehaviour
     public TextMeshProUGUI textMesh;
     public int tier = 1;
 
+    //Animation
+    public Animator animator;
     //Private
     public int timerinitiator = 0;
     private int decayNumber = 0;
@@ -206,22 +208,27 @@ public class Style : MonoBehaviour
         if (tier == 1)
         {
             textMesh.text = "D-Rank";
+            animator.speed = 1;
         }
         else if (tier == 2)
         {
             textMesh.text = "C-Rank";
+            animator.speed = 1.25f;
         }
         else if (tier == 3)
         {
             textMesh.text = "B-Rank";
+            animator.speed = 1.50f;
         }
         else if (tier == 4)
         {
             textMesh.text = "A-Rank";
+            animator.speed = 1.75f;
         }
         else if (tier == 5)
         {
             textMesh.text = "S-Rank";
+            animator.speed = 2;
         }
 
 

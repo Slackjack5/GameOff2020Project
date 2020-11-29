@@ -21,11 +21,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int dashStyleReward = 75;
     [SerializeField] private Style style;
     [SerializeField] private ArmPivot armPivot;
-    [SerializeField] private float dashColliderSize = 1f;
-    [SerializeField] private float dashColliderOffset = -0.6f;
+    [SerializeField] private float dashColliderSizeY = 1f;      
+    [SerializeField] private float dashColliderOffsetY = -0.6f;
 
     private Rigidbody2D rb;
     private BoxCollider2D boxCollider;
+    private Vector2 initialColliderSize;
+    private Vector2 initialColliderOffset;
 
     private Vector2 velocity = Vector2.zero;
     private float horizontalInput = 0f;
@@ -47,11 +49,18 @@ public class PlayerController : MonoBehaviour
     //Animation
     public Animator animator;
 
+    //Audio
+    private bool deathnoise = false;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
         boxCollider = GetComponent<BoxCollider2D>();
+        initialColliderSize = boxCollider.size;
+        initialColliderOffset = boxCollider.offset;
+
         startPosition = transform.position;
     }
 
@@ -63,6 +72,18 @@ public class PlayerController : MonoBehaviour
 
         if (!GameManager.playerIsDead)
         {
+            
+
+            if (!isGrounded)
+            {
+                //Set Animation
+                animator.SetBool("isGrounded", false);
+            }
+            else
+            {
+                //Set Animation
+                animator.SetBool("isGrounded", true);
+            }
             if (Input.GetButtonDown("Jump") && isGrounded)
             {
                 jumpTimeCounter = maxJumpTime;
@@ -81,6 +102,7 @@ public class PlayerController : MonoBehaviour
                 if (!isGrounded)
                 {
                     slideMovementSmoothTime = airmovementSmoothTime;
+                    
                 }
             }
         }
@@ -207,11 +229,11 @@ public class PlayerController : MonoBehaviour
 
                 // Shrink the collider
                 Vector2 offset = boxCollider.offset;
-                offset.y = dashColliderOffset;
+                offset.y = dashColliderOffsetY;
                 boxCollider.offset = offset;
 
                 Vector2 size = boxCollider.size;
-                size.y = dashColliderSize;
+                size.y = dashColliderSizeY;
                 boxCollider.size = size;
 
                 dashed = true;
@@ -230,6 +252,11 @@ public class PlayerController : MonoBehaviour
         slideMovementSmoothTime = .4f;
         cooldown = true;
         dashed = false;
+
+        // Reset the collider
+        boxCollider.offset = initialColliderOffset;
+        boxCollider.size = initialColliderSize;
+
         animator.SetBool("Sliding", false);
         StartCoroutine(SlideCooldown());
     }
@@ -254,6 +281,40 @@ public class PlayerController : MonoBehaviour
 
             StartCoroutine(DieDelay());
         }
+
+        
+        if (deathnoise==false)
+        {
+            int rand = Random.Range(0, 5);
+            if (rand == 0)
+            {
+                //Play Sound
+                FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-Death1", Random.Range(.95f, 1f));
+            }
+            else if (rand == 1)
+            {
+                //Play Sound
+                FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-Death2", Random.Range(.95f, 1f));
+            }
+            else if (rand == 2)
+            {
+                //Play Sound
+                FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-Death3", Random.Range(.95f, 1f));
+            }
+            else if (rand == 3)
+            {
+                //Play Sound
+                FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-Death4", Random.Range(.95f, 1f));
+            }
+            else if (rand == 4)
+            {
+                //Play Sound
+                FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-Death5", Random.Range(.95f, 1f));
+            }
+            deathnoise = true;
+        }
+       
+
     }
 
     private IEnumerator DieDelay()
@@ -261,6 +322,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(respawnTime);
 
         GameManager.playerIsDead = false;
+        deathnoise = false;
         Respawn();
     }
 
@@ -277,5 +339,20 @@ public class PlayerController : MonoBehaviour
     public void Checkpoint(Transform checkpointTransform)
     {
         respawnPosition = checkpointTransform.position;
+    }
+
+    public void footstep()
+    {
+        if (!GameManager.playerIsDead)
+        {
+            //Play Sound
+            FindObjectOfType<AudioManager>().PlaySound("Footstep", Random.Range(1.8f, 2f));
+        }
+    }
+
+    public void slide()
+    {
+        //Play Sound
+        FindObjectOfType<AudioManager>().PlaySound("CharacterSlide", Random.Range(.90f, 1f));
     }
 }
