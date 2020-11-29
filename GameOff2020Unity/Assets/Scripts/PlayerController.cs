@@ -44,6 +44,9 @@ public class PlayerController : MonoBehaviour
     //Animation
     public Animator animator;
 
+    //Audio
+    private bool deathnoise = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -252,6 +255,40 @@ public class PlayerController : MonoBehaviour
 
             StartCoroutine(DieDelay());
         }
+
+        
+        if (deathnoise==false)
+        {
+            int rand = Random.Range(0, 5);
+            if (rand == 0)
+            {
+                //Play Sound
+                FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-Death1", Random.Range(.95f, 1f));
+            }
+            else if (rand == 1)
+            {
+                //Play Sound
+                FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-Death2", Random.Range(.95f, 1f));
+            }
+            else if (rand == 2)
+            {
+                //Play Sound
+                FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-Death3", Random.Range(.95f, 1f));
+            }
+            else if (rand == 3)
+            {
+                //Play Sound
+                FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-Death4", Random.Range(.95f, 1f));
+            }
+            else if (rand == 4)
+            {
+                //Play Sound
+                FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-Death5", Random.Range(.95f, 1f));
+            }
+            deathnoise = true;
+        }
+       
+
     }
 
     private IEnumerator DieDelay()
@@ -259,6 +296,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(respawnTime);
 
         GameManager.playerIsDead = false;
+        deathnoise = false;
         Respawn();
     }
 
