@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform groundCheckPosition;
     [SerializeField] private GameObject styleTier;
     [SerializeField] private float respawnTime = 1.5f;
+    [SerializeField] private int dashStyleReward = 75;
+    [SerializeField] private Style style;
 
     private Rigidbody2D rb;
 
@@ -127,7 +129,29 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Death"))
         {
-            Die();
+            if (dashed)
+            {
+                style.AddStyle(dashStyleReward);
+            }
+            else
+            {
+                Die();
+            }
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Death"))
+        {
+            if (dashed && collision.gameObject.tag != "Pit")
+            {
+                style.AddStyle(dashStyleReward);
+            }
+            else
+            {
+                Die();
+            }
         }
     }
 

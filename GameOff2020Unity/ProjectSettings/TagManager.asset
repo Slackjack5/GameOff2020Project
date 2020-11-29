@@ -9,6 +9,7 @@ TagManager:
   - Goal
   - Entrance
   - Exit
+  - Pit
   layers:
   - Default
   - TransparentFX
