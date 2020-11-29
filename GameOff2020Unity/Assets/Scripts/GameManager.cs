@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 
     public static bool playerIsDead = false;
 
+    public static bool levelComplete { get; set; }
     public static float previousTimeElapsed { get; set; }
     public static List<Vector2> ghostPositions { get; set; }
 
@@ -34,8 +35,15 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    public void NextLevel()
+    {
+        Clear();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
     public void Clear()
     {
+        levelComplete = false;
         previousTimeElapsed = 0;
         ghostPositions = new List<Vector2>();
     }

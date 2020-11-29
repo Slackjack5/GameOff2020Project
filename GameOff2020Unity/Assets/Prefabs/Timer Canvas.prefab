@@ -405,6 +405,13 @@ MonoBehaviour:
   differenceText: {fileID: 0}
   fasterTimeColor: {r: 0.50377357, g: 0.65532345, b: 1, a: 1}
   slowerTimeColor: {r: 1, g: 0.5226415, b: 0.5226415, a: 1}
+  targetTime: 30
+  targetTimeText: {fileID: 0}
+  resultText: {fileID: 0}
+  continueButton: {fileID: 0}
+  successMessage: Level Complete
+  failureMessage: Try Again
+  successGlow: {fileID: 0}
 --- !u!1 &2834722192868739206
 GameObject:
   m_ObjectHideFlags: 0
