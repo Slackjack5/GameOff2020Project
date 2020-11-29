@@ -27,7 +27,7 @@ public class Timer : MonoBehaviour
     private bool levelFinished = false;
     private Vector2 anchorVelocity = Vector2.zero;
     private Vector2 anchoredPositionVelocity = Vector2.zero;
-    private float previousTimeElapsed = 0;
+    private float previousTimeElapsed;
     private float difference = 0;        // Difference between the current time elapsed and the previous time elapsed
     private Vector2 originalAnchoredPosition;
 
@@ -41,6 +41,7 @@ public class Timer : MonoBehaviour
 
         currentCountdownTime = countdownSecond;
 
+        previousTimeElapsed = GameManager.previousTimeElapsed;
         previousTimeText.text = "--";
         differenceText.text = "--";
 
@@ -153,6 +154,8 @@ public class Timer : MonoBehaviour
 
             differenceText.text = prefix + FormatTime(difference);
         }
+
+        GameManager.previousTimeElapsed = timeElapsed;
     }
 
     private void MoveTimer()
@@ -166,21 +169,5 @@ public class Timer : MonoBehaviour
         // Move the anchored position to the side over time
         Vector2 currentAnchoredPosition = rectTransform.anchoredPosition;
         rectTransform.anchoredPosition = Vector2.SmoothDamp(currentAnchoredPosition, targetPositionTransform.anchoredPosition, ref anchoredPositionVelocity, travelTime);
-    }
-
-    public void Restart()
-    {
-        previousTimeElapsed = timeElapsed;
-        timeElapsed = 0;
-        
-        // Reset position
-        rectTransform.anchorMin = topAnchor;
-        rectTransform.anchorMax = topAnchor;
-        rectTransform.anchoredPosition = originalAnchoredPosition;
-
-        countingDown = true;
-        countdownTime = 3;
-
-        levelFinished = false;
     }
 }

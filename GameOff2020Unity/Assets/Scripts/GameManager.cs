@@ -5,41 +5,38 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
+
     public static bool playerIsDead = false;
 
-    private GameObject[] goals;
-    private GameObject[] enemies;
-    private GameObject[] entrances;
-    private GameObject[] exits;
+    public static float previousTimeElapsed { get; set; }
+    public static List<Vector2> ghostPositions { get; set; }
 
-    private void Start()
+    private void Awake()
     {
-        goals = GameObject.FindGameObjectsWithTag("Goal");
-        enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        entrances = GameObject.FindGameObjectsWithTag("Entrance");
-        exits = GameObject.FindGameObjectsWithTag("Exit");
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        DontDestroyOnLoad(gameObject);
+
+        Clear();
     }
 
     public void RestartLevel()
     {
-        foreach (GameObject goal in goals)
-        {
-            goal.GetComponent<Goal>().Reset();
-        }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 
-        foreach (GameObject enemy in enemies)
-        {
-            enemy.GetComponent<Turret>().Respawn();
-        }
-
-        foreach (GameObject entrance in entrances)
-        {
-            entrance.GetComponent<EntranceDoor>().Open();
-        }
-
-        foreach (GameObject exit in exits)
-        {
-            exit.GetComponent<ExitDoor>().Unlock();
-        }
+    public void Clear()
+    {
+        previousTimeElapsed = 0;
+        ghostPositions = new List<Vector2>();
     }
 }

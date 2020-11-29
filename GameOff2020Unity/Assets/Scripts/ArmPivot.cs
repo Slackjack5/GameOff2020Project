@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ArmPivot : MonoBehaviour
 {
-    public void Pivot(bool facingRight)
+    public void Pivot()
     {
         // Compute the direction from the player to the mouse
         float distanceFromCameraToWorld = transform.position.z - Camera.main.transform.position.z;
@@ -13,18 +13,6 @@ public class ArmPivot : MonoBehaviour
         Vector2 playerToMouseDirection = playerToMouse.direction;
 
         float rotationZ = Mathf.Atan2(playerToMouseDirection.y, playerToMouseDirection.x) * Mathf.Rad2Deg;
-
-        if (!facingRight)
-        {
-            if (rotationZ > 0)
-            {
-                rotationZ = -180 + rotationZ;
-            }
-            else
-            {
-                rotationZ = 180 + rotationZ;
-            }
-        }
 
         // Rotate the arm towards the mouse
         // Turn the arm rightside up when the arm is on the opposite side of the direction the player is facing

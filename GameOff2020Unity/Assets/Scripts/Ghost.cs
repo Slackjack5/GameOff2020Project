@@ -17,9 +17,16 @@ public class Ghost : MonoBehaviour
     {
         startPosition = transform.position;
         playerPositions = new List<Vector2>();
-        ghostPositions = new List<Vector2>();
+        ghostPositions = GameManager.ghostPositions;
 
-        transform.GetComponent<SpriteRenderer>().enabled = false;
+        if (ghostPositions.Count == 0)
+        {
+            transform.GetComponent<SpriteRenderer>().enabled = false;
+        }
+        else
+        {
+            transform.GetComponent<SpriteRenderer>().enabled = true;
+        }
     }
 
     private void FixedUpdate()
@@ -48,14 +55,6 @@ public class Ghost : MonoBehaviour
 
         // On reset, let the ghost know the path it should follow, 
         // and start recording a new list of the player's positions
-        ghostPositions = playerPositions;
-        ghostPositionIndex = 0;
-        playerPositions = new List<Vector2>();
-    }
-
-    public void Activate()
-    {
-        transform.GetComponent<SpriteRenderer>().enabled = true;
-        activated = true;
+        GameManager.ghostPositions = playerPositions;
     }
 }

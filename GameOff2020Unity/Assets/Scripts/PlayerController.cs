@@ -26,7 +26,6 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 velocity = Vector2.zero;
     private float horizontalInput = 0f;
-    private bool facingRight = true;
     private bool jumpKeyHeld = false;
     private float jumpTimeCounter;
     private bool isGrounded = false;
@@ -42,13 +41,14 @@ public class PlayerController : MonoBehaviour
 
     const float groundCheckDistance = .1f;
 
+    //Animation
+    public Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         startPosition = transform.position;
-
-        facingRight = true;
     }
 
     // Update is called once per frame
@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!GameManager.playerIsDead)
         {
-            armPivot.Pivot(facingRight);
+            armPivot.Pivot();
 
             if (dashed && !cooldown)
             {
@@ -167,24 +167,22 @@ public class PlayerController : MonoBehaviour
         Vector2 targetVelocity = new Vector2(targetVelocityX, rb.velocity.y);
         rb.velocity = Vector2.SmoothDamp(rb.velocity, targetVelocity, ref velocity, currentMovementSmoothTime);
 
-        // If the input is moving the player in the opposite direction the player is facing...
-        if (horizontalInput > 0 && !facingRight || horizontalInput < 0 && facingRight)
-        {
-            // ... flip the player.
-            Flip();
+        //Animation
+        if (horizontalInput > 0)
+        {
+            animator.SetFloat("Speed", 10);
+            animator.SetBool("MovingRight", true);
         }
-    }
-
-    private void Flip()
-    {
-        // Switch the way the player is labeled as facing
-        facingRight = !facingRight;
-
-        Vector3 theScale = transform.localScale;
-        theScale.x *= -1;
-        transform.localScale = theScale;
-
-        armPivot.Pivot(facingRight);
+        else if(horizontalInput < 0)
+        {
+            animator.SetFloat("Speed", 10);
+            animator.SetBool("MovingRight", false);
+        }
+        else
+        {
+            animator.SetFloat("Speed", 0);
+            animator.SetBool("MovingRight", false);
+        }
     }
 
     private void SlideMove(float horizontalMovement)
@@ -204,6 +202,8 @@ public class PlayerController : MonoBehaviour
                 }
                 dashed = true;
                 evading = false;
+                //Animation
+                animator.SetBool("Sliding", true);
             }
         }
     }
@@ -215,6 +215,7 @@ public class PlayerController : MonoBehaviour
         slideMovementSmoothTime = .4f;
         cooldown = true;
         dashed = false;
+        animator.SetBool("Sliding", false);
         StartCoroutine(SlideCooldown());
     }
 

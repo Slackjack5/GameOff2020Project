@@ -53,10 +53,18 @@ public class Goal : MonoBehaviour
                     FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-CartClear6", Random.Range(.95f, 1f));
                 }
                 else if (rand == 6)
-                {
-                    //Play Sound
+                {
+
+
                     FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-CartClear7", Random.Range(.95f, 1f));
-                }
+                }
+                //Enable Lowpass
+                FindObjectOfType<AudioManager>().lowPassEnable();
+            }
+            else
+            {
+                //Disable Lowpass
+                FindObjectOfType<AudioManager>().lowPassDisable();
             }
 
         }
