@@ -21,11 +21,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int dashStyleReward = 75;
     [SerializeField] private Style style;
     [SerializeField] private ArmPivot armPivot;
-    [SerializeField] private float dashColliderSize = 1f;
-    [SerializeField] private float dashColliderOffset = -0.6f;
+    [SerializeField] private float dashColliderSizeY = 1f;      
+    [SerializeField] private float dashColliderOffsetY = -0.6f;
 
     private Rigidbody2D rb;
     private BoxCollider2D boxCollider;
+    private Vector2 initialColliderSize;
+    private Vector2 initialColliderOffset;
 
     private Vector2 velocity = Vector2.zero;
     private float horizontalInput = 0f;
@@ -54,7 +56,11 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
         boxCollider = GetComponent<BoxCollider2D>();
+        initialColliderSize = boxCollider.size;
+        initialColliderOffset = boxCollider.offset;
+
         startPosition = transform.position;
     }
 
@@ -223,11 +229,11 @@ public class PlayerController : MonoBehaviour
 
                 // Shrink the collider
                 Vector2 offset = boxCollider.offset;
-                offset.y = dashColliderOffset;
+                offset.y = dashColliderOffsetY;
                 boxCollider.offset = offset;
 
                 Vector2 size = boxCollider.size;
-                size.y = dashColliderSize;
+                size.y = dashColliderSizeY;
                 boxCollider.size = size;
 
                 dashed = true;
@@ -246,6 +252,11 @@ public class PlayerController : MonoBehaviour
         slideMovementSmoothTime = .4f;
         cooldown = true;
         dashed = false;
+
+        // Reset the collider
+        boxCollider.offset = initialColliderOffset;
+        boxCollider.size = initialColliderSize;
+
         animator.SetBool("Sliding", false);
         StartCoroutine(SlideCooldown());
     }

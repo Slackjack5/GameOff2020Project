@@ -32,19 +32,17 @@ public class Enemy : MonoBehaviour
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Weapon")
+        if (collision.gameObject.tag == "Weapon" && !dead)
         {
             Die();
-            style.AddStyle(styleReward);
         }
     }
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Weapon")
+        if (collision.gameObject.tag == "Weapon" && !dead)
         {
             Die();
-            style.AddStyle(styleReward);
         }
     }
 
@@ -58,11 +56,13 @@ public class Enemy : MonoBehaviour
     {
         dead = true;
 
+        style.AddStyle(styleReward);
+
         // Drop to the ground
         rb.bodyType = RigidbodyType2D.Dynamic;
         rb.gravityScale = 4;
 
-        Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), player.GetComponent<BoxCollider2D>());
+        Physics2D.IgnoreCollision(GetComponent<CircleCollider2D>(), player.GetComponent<BoxCollider2D>());
 
         //Play Sound
         FindObjectOfType<AudioManager>().PlaySound("EnemyDeath", Random.Range(.95f, 1f));
