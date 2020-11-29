@@ -8753,11 +8753,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4269668692748116708, guid: dda2a9020f4b6cf43b1f27988722c071,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4269668692748116710, guid: dda2a9020f4b6cf43b1f27988722c071,
         type: 3}
       propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.size
@@ -8821,7 +8816,7 @@ PrefabInstance:
     - target: {fileID: 4269668692748116710, guid: dda2a9020f4b6cf43b1f27988722c071,
         type: 3}
       propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: FinishLevelMenu, Assembly-CSharp
+      value: Timer, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4269668692748116710, guid: dda2a9020f4b6cf43b1f27988722c071,
         type: 3}
@@ -8837,11 +8832,11 @@ PrefabInstance:
         type: 3}
       propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 784605641}
+      objectReference: {fileID: 1271160078}
     - target: {fileID: 4269668692748116710, guid: dda2a9020f4b6cf43b1f27988722c071,
         type: 3}
       propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: Show
+      value: FinishTime
       objectReference: {fileID: 0}
     - target: {fileID: 4269668692748116710, guid: dda2a9020f4b6cf43b1f27988722c071,
         type: 3}
@@ -8851,7 +8846,7 @@ PrefabInstance:
     - target: {fileID: 4269668692748116710, guid: dda2a9020f4b6cf43b1f27988722c071,
         type: 3}
       propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: Timer, Assembly-CSharp
+      value: FinishLevelMenu, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4269668692748116710, guid: dda2a9020f4b6cf43b1f27988722c071,
         type: 3}
@@ -8867,11 +8862,11 @@ PrefabInstance:
         type: 3}
       propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 1271160078}
+      objectReference: {fileID: 784605641}
     - target: {fileID: 4269668692748116710, guid: dda2a9020f4b6cf43b1f27988722c071,
         type: 3}
       propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: FinishTime
+      value: Show
       objectReference: {fileID: 0}
     - target: {fileID: 4269668692748116710, guid: dda2a9020f4b6cf43b1f27988722c071,
         type: 3}
