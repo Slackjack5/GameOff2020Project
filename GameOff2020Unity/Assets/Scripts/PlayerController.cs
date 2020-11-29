@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 velocity = Vector2.zero;
     private float horizontalInput = 0f;
+    private bool facingRight = true;
     private bool jumpKeyHeld = false;
     private float jumpTimeCounter;
     private bool isGrounded = false;
@@ -40,8 +41,6 @@ public class PlayerController : MonoBehaviour
     private bool cooldown = false;
 
     const float groundCheckDistance = .1f;
-
-    private bool facingRight = true;
 
     // Start is called before the first frame update
     void Start()
