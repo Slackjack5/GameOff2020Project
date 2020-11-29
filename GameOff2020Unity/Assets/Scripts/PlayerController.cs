@@ -18,11 +18,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform groundCheckPosition;
     [SerializeField] private GameObject styleTier;
     [SerializeField] private float respawnTime = 1.5f;
+    [SerializeField] private int dashStyleReward = 75;
+    [SerializeField] private Style style;
+    [SerializeField] private ArmPivot armPivot;
 
     private Rigidbody2D rb;
 
     private Vector2 velocity = Vector2.zero;
     private float horizontalInput = 0f;
+    private bool facingRight = true;
     private bool jumpKeyHeld = false;
     private float jumpTimeCounter;
     private bool isGrounded = false;
@@ -46,6 +50,8 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         startPosition = transform.position;
+
+        facingRight = true;
     }
 
     // Update is called once per frame
@@ -102,6 +108,8 @@ public class PlayerController : MonoBehaviour
     {
         if (!GameManager.playerIsDead)
         {
+            armPivot.Pivot(facingRight);
+
             if (dashed && !cooldown)
             {
                 rb.velocity = new Vector2(rb.velocity.x, 0);
@@ -110,7 +118,7 @@ public class PlayerController : MonoBehaviour
             //If Player Is sliding
             if (!evading)
             {
-                Move(horizontalInput * Time.fixedDeltaTime);
+                Move(horizontalInput);
             }
             else
             {
@@ -130,33 +138,74 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Death"))
         {
-            StartCoroutine(Die());
+            if (dashed)
+            {
+                style.AddStyle(dashStyleReward);
+            }
+            else
+            {
+                Die();
+            }
         }
     }
 
-    private void Move(float horizontalMovement)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        float targetVelocityX = baseSpeed * speedMultiplier * horizontalMovement;
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Death"))
+        {
+            if (dashed && collision.gameObject.tag != "Pit")
+            {
+                style.AddStyle(dashStyleReward);
+            }
+            else
+            {
+                Die();
+            }
+        }
+    }
+
+    private void Move(float horizontalInput)
+    {
+        float targetVelocityX = baseSpeed * speedMultiplier * horizontalInput * Time.fixedDeltaTime;
         Vector2 targetVelocity = new Vector2(targetVelocityX, rb.velocity.y);
         rb.velocity = Vector2.SmoothDamp(rb.velocity, targetVelocity, ref velocity, currentMovementSmoothTime);
 
         //Animation
-        if (horizontalMovement>0)
-        {
-            animator.SetFloat("Speed", 10);
-            animator.SetBool("MovingRight", true);
+        if (horizontalMovement>0)
+        {
+            animator.SetFloat("Speed", 10);
+            animator.SetBool("MovingRight", true);
         }
-        else if(horizontalMovement < 0)
-        {
-            animator.SetFloat("Speed", 10);
-            animator.SetBool("MovingRight", false);
+        else if(horizontalMovement < 0)
+        {
+            animator.SetFloat("Speed", 10);
+            animator.SetBool("MovingRight", false);
         }
-        else
-        {
-            animator.SetFloat("Speed", 0);
-            animator.SetBool("MovingRight", false);
+        else
+        {
+            animator.SetFloat("Speed", 0);
+            animator.SetBool("MovingRight", false);
         }
         
+
+        // If the input is moving the player in the opposite direction the player is facing...
+        if (horizontalInput > 0 && !facingRight || horizontalInput < 0 && facingRight)
+        {
+            // ... flip the player.
+            Flip();
+        }
+    }
+
+    private void Flip()
+    {
+        // Switch the way the player is labeled as facing
+        facingRight = !facingRight;
+
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
+
+        armPivot.Pivot(facingRight);
     }
 
     private void SlideMove(float horizontalMovement)
@@ -199,7 +248,7 @@ public class PlayerController : MonoBehaviour
         cooldown = false;
     }
 
-    private IEnumerator Die()
+    public void Die()
     {
         if (!GameManager.playerIsDead)
         {
@@ -211,11 +260,16 @@ public class PlayerController : MonoBehaviour
             Weapon weapon = GetComponent<Weapon>();
             weapon.Reset();
 
-            yield return new WaitForSeconds(respawnTime);
-
-            GameManager.playerIsDead = false;
-            Respawn();
+            StartCoroutine(DieDelay());
         }
+    }
+
+    private IEnumerator DieDelay()
+    {
+        yield return new WaitForSeconds(respawnTime);
+
+        GameManager.playerIsDead = false;
+        Respawn();
     }
 
     private void Respawn()

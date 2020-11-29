@@ -202,12 +202,6 @@ public class Style : MonoBehaviour
             styleTotal = 100;
         }
 
-        if (Input.GetKeyDown("space") && tier <= 5)
-        {
-            styleTotal += 10;
-            TimerRestart();
-        }
-
         //Set Text for Rank
         if (tier == 1)
         {
@@ -245,5 +239,14 @@ public class Style : MonoBehaviour
         timerinitiator = 0;
 
         SetStyle(styleTotal);
+    }
+
+    public void AddStyle(int style)
+    {
+        if (tier <= 5)
+        {
+            styleTotal += style;
+            TimerRestart();
+        }
     }
 }
