@@ -18,12 +18,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform groundCheckPosition;
     [SerializeField] private GameObject styleTier;
     [SerializeField] private float respawnTime = 1.5f;
+    [SerializeField] private int dashStyleReward = 75;
+    [SerializeField] private Style style;
     [SerializeField] private ArmPivot armPivot;
 
     private Rigidbody2D rb;
 
     private Vector2 velocity = Vector2.zero;
     private float horizontalInput = 0f;
+    private bool facingRight = true;
     private bool jumpKeyHeld = false;
     private float jumpTimeCounter;
     private bool isGrounded = false;
@@ -38,8 +41,6 @@ public class PlayerController : MonoBehaviour
     private bool cooldown = false;
 
     const float groundCheckDistance = .1f;
-
-    public bool facingRight { get; private set; }
 
     // Start is called before the first frame update
     void Start()
@@ -134,7 +135,29 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Death"))
         {
-            StartCoroutine(Die());
+            if (dashed)
+            {
+                style.AddStyle(dashStyleReward);
+            }
+            else
+            {
+                Die();
+            }
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Death"))
+        {
+            if (dashed && collision.gameObject.tag != "Pit")
+            {
+                style.AddStyle(dashStyleReward);
+            }
+            else
+            {
+                Die();
+            }
         }
     }
 
@@ -201,7 +224,7 @@ public class PlayerController : MonoBehaviour
         cooldown = false;
     }
 
-    private IEnumerator Die()
+    public void Die()
     {
         if (!GameManager.playerIsDead)
         {
@@ -213,11 +236,16 @@ public class PlayerController : MonoBehaviour
             Weapon weapon = GetComponent<Weapon>();
             weapon.Reset();
 
-            yield return new WaitForSeconds(respawnTime);
-
-            GameManager.playerIsDead = false;
-            Respawn();
+            StartCoroutine(DieDelay());
         }
+    }
+
+    private IEnumerator DieDelay()
+    {
+        yield return new WaitForSeconds(respawnTime);
+
+        GameManager.playerIsDead = false;
+        Respawn();
     }
 
     private void Respawn()
