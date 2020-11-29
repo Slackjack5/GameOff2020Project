@@ -161,11 +161,13 @@ public class Timer : MonoBehaviour
         }
 
         // Show whether the player beat the target time
-        continueButton.interactable = timeElapsed < targetTime;
-        if (timeElapsed < targetTime)
+        bool levelComplete = timeElapsed < targetTime || GameManager.levelComplete;
+        continueButton.interactable = levelComplete;
+        if (levelComplete)
         {
             resultText.text = successMessage;
             successGlow.SetActive(true);
+            GameManager.levelComplete = true;
         }
         else
         {
