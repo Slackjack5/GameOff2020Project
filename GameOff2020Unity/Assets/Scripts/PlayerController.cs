@@ -38,11 +38,15 @@ public class PlayerController : MonoBehaviour
 
     const float groundCheckDistance = .1f;
 
+    public bool facingRight { get; private set; }
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         startPosition = transform.position;
+
+        facingRight = true;
     }
 
     // Update is called once per frame
@@ -107,7 +111,7 @@ public class PlayerController : MonoBehaviour
             //If Player Is sliding
             if (!evading)
             {
-                Move(horizontalInput * Time.fixedDeltaTime);
+                Move(horizontalInput);
             }
             else
             {
@@ -131,11 +135,28 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Move(float horizontalMovement)
+    private void Move(float horizontalInput)
     {
-        float targetVelocityX = baseSpeed * speedMultiplier * horizontalMovement;
+        float targetVelocityX = baseSpeed * speedMultiplier * horizontalInput * Time.fixedDeltaTime;
         Vector2 targetVelocity = new Vector2(targetVelocityX, rb.velocity.y);
         rb.velocity = Vector2.SmoothDamp(rb.velocity, targetVelocity, ref velocity, currentMovementSmoothTime);
+
+        // If the input is moving the player in the opposite direction the player is facing...
+        if (horizontalInput > 0 && !facingRight || horizontalInput < 0 && facingRight)
+        {
+            // ... flip the player.
+            Flip();
+        }
+    }
+
+    private void Flip()
+    {
+        // Switch the way the player is labeled as facing
+        facingRight = !facingRight;
+
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
     }
 
     private void SlideMove(float horizontalMovement)
