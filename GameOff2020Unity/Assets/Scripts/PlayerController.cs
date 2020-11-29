@@ -59,6 +59,18 @@ public class PlayerController : MonoBehaviour
 
         if (!GameManager.playerIsDead)
         {
+            
+
+            if (!isGrounded)
+            {
+                //Set Animation
+                animator.SetBool("isGrounded", false);
+            }
+            else
+            {
+                //Set Animation
+                animator.SetBool("isGrounded", true);
+            }
             if (Input.GetButtonDown("Jump") && isGrounded)
             {
                 jumpTimeCounter = maxJumpTime;
@@ -77,6 +89,7 @@ public class PlayerController : MonoBehaviour
                 if (!isGrounded)
                 {
                     slideMovementSmoothTime = airmovementSmoothTime;
+                    
                 }
             }
         }
