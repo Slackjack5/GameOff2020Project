@@ -66,12 +66,4 @@ public class AggressiveEnemy : Enemy
         FindObjectOfType<AudioManager>().PlaySound("LaserShoot", Random.Range(.95f, 1f));
         FindObjectOfType<AudioManager>().Stop("LaserCharge");
     }
-
-    public override void Respawn()
-    {
-        currentShootTime = 0;
-        shooting = false;
-
-        base.Respawn();
-    }
 }

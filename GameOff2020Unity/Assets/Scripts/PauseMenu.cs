@@ -40,6 +40,8 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         gameIsPaused = true;
+
+        FindObjectOfType<AudioManager>().Stop("LaserCharge");
     }
 
     public void Disable()

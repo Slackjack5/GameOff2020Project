@@ -83,13 +83,4 @@ public class Turret : AggressiveEnemy
 
         base.Die();
     }
-
-    public override void Respawn()
-    {
-        cooldownTime = cooldown;
-        currentChargeTime = 0;
-        charging = false;
-
-        base.Respawn();
-    }
 }

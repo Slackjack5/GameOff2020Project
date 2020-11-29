@@ -21,8 +21,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int dashStyleReward = 75;
     [SerializeField] private Style style;
     [SerializeField] private ArmPivot armPivot;
+    [SerializeField] private float dashColliderSize = 1f;
+    [SerializeField] private float dashColliderOffset = -0.6f;
 
     private Rigidbody2D rb;
+    private BoxCollider2D boxCollider;
 
     private Vector2 velocity = Vector2.zero;
     private float horizontalInput = 0f;
@@ -51,6 +54,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        boxCollider = GetComponent<BoxCollider2D>();
         startPosition = transform.position;
     }
 
@@ -216,8 +220,19 @@ public class PlayerController : MonoBehaviour
                 {
                     rb.AddForce(Vector2.left * slideForce);
                 }
+
+                // Shrink the collider
+                Vector2 offset = boxCollider.offset;
+                offset.y = dashColliderOffset;
+                boxCollider.offset = offset;
+
+                Vector2 size = boxCollider.size;
+                size.y = dashColliderSize;
+                boxCollider.size = size;
+
                 dashed = true;
                 evading = false;
+
                 //Animation
                 animator.SetBool("Sliding", true);
             }
