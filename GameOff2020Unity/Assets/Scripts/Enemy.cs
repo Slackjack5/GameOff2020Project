@@ -8,6 +8,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float hoverDistance = 0.2f;  // Specifies how far up or down from the center to hover
     [SerializeField] private float hoverSpeed = 3.5f;     // Specifies how fast to move up and down
     [SerializeField] private float deathTime = 1.5f;      // Specifies how long the enemy stays in existence after being killed before disappearing
+    [SerializeField] private int styleReward = 25;
+    [SerializeField] private Style style;
 
     private Rigidbody2D rb;
     private Vector2 startPosition; 
@@ -33,6 +35,7 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.tag == "Weapon")
         {
             Die();
+            style.AddStyle(styleReward);
         }
     }
 
@@ -41,6 +44,7 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.tag == "Weapon")
         {
             Die();
+            style.AddStyle(styleReward);
         }
     }
 

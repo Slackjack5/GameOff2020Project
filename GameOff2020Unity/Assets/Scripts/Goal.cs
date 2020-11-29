@@ -6,6 +6,8 @@ using UnityEngine.Events;
 public class Goal : MonoBehaviour
 {
     [SerializeField] private GameObject player;
+    [SerializeField] private int styleReward = 50;
+    [SerializeField] private Style style;
     [SerializeField] private UnityEvent onEnter = new UnityEvent();
     public bool exit = false;
 
@@ -18,7 +20,8 @@ public class Goal : MonoBehaviour
             //Play Random Cart Clear Voice Line
             int rand = Random.Range(0, 7);
             if (exit)
-            {
+            {                style.AddStyle(styleReward);
+
                 if (rand == 0)
                 {
                     //Play Sound
