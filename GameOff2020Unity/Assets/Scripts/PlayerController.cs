@@ -176,6 +176,8 @@ public class PlayerController : MonoBehaviour
                 }
                 dashed = true;
                 evading = false;
+                //Animation
+                animator.SetBool("Sliding", true);
             }
         }
     }
@@ -187,6 +189,7 @@ public class PlayerController : MonoBehaviour
         slideMovementSmoothTime = .4f;
         cooldown = true;
         dashed = false;
+        animator.SetBool("Sliding", false);
         StartCoroutine(SlideCooldown());
     }
 
