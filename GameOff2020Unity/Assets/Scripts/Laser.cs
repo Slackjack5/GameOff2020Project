@@ -17,7 +17,7 @@ public class Laser : MonoBehaviour
         currentShootTime = shootTime;
         lineRenderer = GetComponent<LineRenderer>();
 
-        firstLaserHit = LaserHit(transform.position, transform.right);
+        firstLaserHit = LaserHit(transform.position, transform.right, false);
         lineRenderer.SetPosition(0, transform.position);
         lineRenderer.SetPosition(1, firstLaserHit.point);
 
@@ -45,16 +45,20 @@ public class Laser : MonoBehaviour
         }
     }
 
-    protected RaycastHit2D LaserHit(Vector2 from, Vector2 direction)
+    protected RaycastHit2D LaserHit(Vector2 from, Vector2 direction, bool bounce)
     {
         // Find the point where the laser will collide
         RaycastHit2D hit = new RaycastHit2D();
         RaycastHit2D[] results = Physics2D.RaycastAll(from, direction);
         for (int i = 0; i < results.Length; i++)
         {
-            if (results[i].collider.gameObject != gameObject)
+            if (results[i].collider.gameObject.tag != "Weapon" && results[i].collider.gameObject.tag != "Enemy" && results[i].collider.gameObject.tag != "Player")
             {
-                hit = results[i];
+                // Ignore the raycast result if the laser is bouncing and the first laser hit point is the same as the result
+                if (!bounce || bounce && results[i].point != firstLaserHit.point)
+                {
+                    return results[i];
+                }
             }
         }
 
