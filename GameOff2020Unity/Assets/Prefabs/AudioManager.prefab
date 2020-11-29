@@ -266,3 +266,24 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: Train-Ambience
+    clip: {fileID: 8300000, guid: 08c57bf6eb866f8438a785139b3a3c80, type: 3}
+    volume: 0.377
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Footstep
+    clip: {fileID: 8300000, guid: 8a22c59bcf18ce54abbffc1636f781af, type: 3}
+    volume: 0.26
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CharacterSlide
+    clip: {fileID: 8300000, guid: 5fdbc4cd44d640848a67a73492e02522, type: 3}
+    volume: 0.576
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  mixerGroupEffects: {fileID: 0}
+  mixerGroupMusic: {fileID: 0}
+  musicMixer: {fileID: 0}

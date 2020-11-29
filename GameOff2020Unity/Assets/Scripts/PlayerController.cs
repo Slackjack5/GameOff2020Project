@@ -276,4 +276,19 @@ public class PlayerController : MonoBehaviour
     {
         respawnPosition = checkpointTransform.position;
     }
+
+    public void footstep()
+    {
+        if (!GameManager.playerIsDead)
+        {
+            //Play Sound
+            FindObjectOfType<AudioManager>().PlaySound("Footstep", Random.Range(1.8f, 2f));
+        }
+    }
+
+    public void slide()
+    {
+        //Play Sound
+        FindObjectOfType<AudioManager>().PlaySound("CharacterSlide", Random.Range(.90f, 1f));
+    }
 }

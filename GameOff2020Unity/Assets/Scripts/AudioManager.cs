@@ -53,7 +53,8 @@ public class AudioManager : MonoBehaviour
     {
         //Play Sound
         instance.Play("Music-Tutorial");
-        
+        instance.Play("Train-Ambience");
+
     }
 
     // Update is called once per frame
