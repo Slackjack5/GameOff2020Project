@@ -19,6 +19,9 @@ public class Timer : MonoBehaviour
     [SerializeField] private TextMeshProUGUI targetTimeText;
     [SerializeField] private TextMeshProUGUI resultText;
     [SerializeField] private Button continueButton;
+    [SerializeField] private string successMessage;                        // The message that is shown to the player when they beat the time
+    [SerializeField] private string failureMessage;                        // The message that is shown to the player when they fail to beat the time
+    [SerializeField] private GameObject successGlow;
 
     private TextMeshProUGUI timerText;
     private RectTransform rectTransform;
@@ -135,9 +138,9 @@ public class Timer : MonoBehaviour
         GameManager.playerIsDead = true;
         levelFinished = true;
         
+        // Compare the previous time to the current time
         if (previousTimeElapsed > 0)
         {
-            // Display previous time and difference
             previousTimeText.text = FormatTime(previousTimeElapsed);
 
             difference = timeElapsed - previousTimeElapsed;
@@ -157,14 +160,17 @@ public class Timer : MonoBehaviour
             differenceText.text = prefix + FormatTime(difference);
         }
 
+        // Show whether the player beat the target time
         continueButton.interactable = timeElapsed < targetTime;
         if (timeElapsed < targetTime)
         {
-            resultText.text = "Finished";
+            resultText.text = successMessage;
+            successGlow.SetActive(true);
         }
         else
         {
-            resultText.text = "Try Again";
+            resultText.text = failureMessage;
+            successGlow.SetActive(false);
         }
 
         GameManager.previousTimeElapsed = timeElapsed;

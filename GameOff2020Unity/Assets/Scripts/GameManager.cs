@@ -34,6 +34,12 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    public void NextLevel()
+    {
+        Clear();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
     public void Clear()
     {
         previousTimeElapsed = 0;
