@@ -12,7 +12,7 @@ public class CameraManager : MonoBehaviour
 
     private Camera camera;
     private CinemachineTrackedDolly dolly;
-    private float initialPositionZ;
+    private Vector3 initialPosition;
 
     private bool isExiting = false;
     private int targetRoomIndex = 0;
@@ -25,7 +25,7 @@ public class CameraManager : MonoBehaviour
         camera.aspect = aspect;
 
         dolly = dollyVcam.GetCinemachineComponent<CinemachineTrackedDolly>();
-        initialPositionZ = dollyVcam.transform.position.z;
+        initialPosition = dollyVcam.transform.position;
         SetWaypoints();
     }
 
@@ -39,7 +39,7 @@ public class CameraManager : MonoBehaviour
             // Every room has a waypoint at its center
             CinemachineSmoothPath.Waypoint centerWaypoint = new CinemachineSmoothPath.Waypoint
             {
-                position = new Vector3(currentRoomPositionX, dollyVcam.transform.position.y, initialPositionZ)
+                position = new Vector3(currentRoomPositionX, dollyVcam.transform.position.y, initialPosition.z)
             };
             waypoints.Add(centerWaypoint);
         }
@@ -74,6 +74,7 @@ public class CameraManager : MonoBehaviour
 
     public void Restart()
     {
+        dollyVcam.transform.position = initialPosition;
         dolly.m_PathPosition = 0;
         targetRoomIndex = 0;
         isExiting = false;

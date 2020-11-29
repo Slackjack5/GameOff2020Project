@@ -26,7 +26,6 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 velocity = Vector2.zero;
     private float horizontalInput = 0f;
-    private bool facingRight = true;
     private bool jumpKeyHeld = false;
     private float jumpTimeCounter;
     private bool isGrounded = false;
@@ -50,8 +49,6 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         startPosition = transform.position;
-
-        facingRight = true;
     }
 
     // Update is called once per frame
@@ -108,7 +105,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!GameManager.playerIsDead)
         {
-            armPivot.Pivot(facingRight);
+            armPivot.Pivot();
 
             if (dashed && !cooldown)
             {
@@ -171,12 +168,12 @@ public class PlayerController : MonoBehaviour
         rb.velocity = Vector2.SmoothDamp(rb.velocity, targetVelocity, ref velocity, currentMovementSmoothTime);
 
         //Animation
-        if (horizontalMovement>0)
+        if (horizontalInput > 0)
         {
             animator.SetFloat("Speed", 10);
             animator.SetBool("MovingRight", true);
         }
-        else if(horizontalMovement < 0)
+        else if(horizontalInput < 0)
         {
             animator.SetFloat("Speed", 10);
             animator.SetBool("MovingRight", false);
@@ -186,26 +183,6 @@ public class PlayerController : MonoBehaviour
             animator.SetFloat("Speed", 0);
             animator.SetBool("MovingRight", false);
         }
-        
-
-        // If the input is moving the player in the opposite direction the player is facing...
-        if (horizontalInput > 0 && !facingRight || horizontalInput < 0 && facingRight)
-        {
-            // ... flip the player.
-            Flip();
-        }
-    }
-
-    private void Flip()
-    {
-        // Switch the way the player is labeled as facing
-        facingRight = !facingRight;
-
-        Vector3 theScale = transform.localScale;
-        theScale.x *= -1;
-        transform.localScale = theScale;
-
-        armPivot.Pivot(facingRight);
     }
 
     private void SlideMove(float horizontalMovement)

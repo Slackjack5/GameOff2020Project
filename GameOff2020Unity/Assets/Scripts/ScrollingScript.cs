@@ -50,9 +50,9 @@ public class ScrollingScript : MonoBehaviour
     {
         // Movement
         Vector3 movement = new Vector3(
-          speed.x * direction.x,
-          speed.y * direction.y,
-          0);
+            speed.x * direction.x,
+            speed.y * direction.y,
+            0);
 
         movement *= Time.deltaTime;
         transform.Translate(movement);

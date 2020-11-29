@@ -35,8 +35,6 @@ public class AudioManager : MonoBehaviour
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
             
-
-            Debug.Log(s.name);
             if (s.name=="Music-Tutorial")
             {
             s.source.outputAudioMixerGroup = mixerGroupMusic;
