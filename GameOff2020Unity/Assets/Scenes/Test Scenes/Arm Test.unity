@@ -173,7 +173,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f651d494ea61e554e824ca6a118e69b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 2055480290}
 --- !u!1 &67323236 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5701942851989383074, guid: 412e72fba6aba8d48a6265613e6c00fb,
@@ -3344,6 +3343,11 @@ PrefabInstance:
       propertyPath: styleTier
       value: 
       objectReference: {fileID: 67323236}
+    - target: {fileID: 8696127211863119750, guid: 262b40164235a6e44aac3dd94ec46d20,
+        type: 3}
+      propertyPath: armPivot
+      value: 
+      objectReference: {fileID: 44023256}
     - target: {fileID: 8696127211863119803, guid: 262b40164235a6e44aac3dd94ec46d20,
         type: 3}
       propertyPath: m_Name

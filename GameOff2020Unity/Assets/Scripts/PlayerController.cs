@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform groundCheckPosition;
     [SerializeField] private GameObject styleTier;
     [SerializeField] private float respawnTime = 1.5f;
+    [SerializeField] private ArmPivot armPivot;
 
     private Rigidbody2D rb;
 
@@ -103,6 +104,8 @@ public class PlayerController : MonoBehaviour
     {
         if (!GameManager.playerIsDead)
         {
+            armPivot.Pivot(facingRight);
+
             if (dashed && !cooldown)
             {
                 rb.velocity = new Vector2(rb.velocity.x, 0);
@@ -157,6 +160,8 @@ public class PlayerController : MonoBehaviour
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
+
+        armPivot.Pivot(facingRight);
     }
 
     private void SlideMove(float horizontalMovement)
