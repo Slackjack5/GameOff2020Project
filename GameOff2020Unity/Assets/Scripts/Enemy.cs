@@ -119,16 +119,4 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(deathTime);
         gameObject.SetActive(false);
     }
-
-    public virtual void Respawn()
-    {
-        transform.position = startPosition;
-
-        dead = false;
-
-        rb.bodyType = RigidbodyType2D.Kinematic;
-        rb.gravityScale = 0;
-
-        gameObject.SetActive(true);
-    }
 }
