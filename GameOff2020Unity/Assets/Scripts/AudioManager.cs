@@ -9,6 +9,9 @@ public class AudioManager : MonoBehaviour
     public Sound[] sounds;
 
     public static AudioManager instance;
+    public AudioMixerGroup mixerGroupEffects;
+    public AudioMixerGroup mixerGroupMusic;
+    public AudioMixer musicMixer;
     // Start is called before the first frame update
     void Awake()
     {
@@ -31,13 +34,28 @@ public class AudioManager : MonoBehaviour
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
+            
+
+            Debug.Log(s.name);
+            if (s.name=="Music-Tutorial")
+            {
+            s.source.outputAudioMixerGroup = mixerGroupMusic;
+            }
+            else
+            {
+                s.source.outputAudioMixerGroup = mixerGroupEffects; 
+            }
         }
+
+       
+        
     }
 
     private void Start()
     {
         //Play Sound
         instance.Play("Music-Tutorial");
+        
     }
 
     // Update is called once per frame
@@ -74,4 +92,16 @@ public class AudioManager : MonoBehaviour
             s.source.Pause();
         }
     }
+
+    public void lowPassEnable()
+    {
+        musicMixer.SetFloat("lowPassLevel", 300);
+        musicMixer.SetFloat("lowPassLevel2", 10000);
+    }
+    public void lowPassDisable()
+    {
+        musicMixer.SetFloat("lowPassLevel", 22000);
+        musicMixer.SetFloat("lowPassLevel2", 22000);
+    }
+
 }
