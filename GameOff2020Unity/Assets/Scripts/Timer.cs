@@ -15,6 +15,10 @@ public class Timer : MonoBehaviour
     [SerializeField] private TextMeshProUGUI differenceText;
     [SerializeField] private Color fasterTimeColor;
     [SerializeField] private Color slowerTimeColor;
+    [SerializeField] private float targetTime = 30f;                       // The time the player should beat to beat this level
+    [SerializeField] private TextMeshProUGUI targetTimeText;
+    [SerializeField] private TextMeshProUGUI resultText;
+    [SerializeField] private Button continueButton;
 
     private TextMeshProUGUI timerText;
     private RectTransform rectTransform;
@@ -29,10 +33,8 @@ public class Timer : MonoBehaviour
     private Vector2 anchoredPositionVelocity = Vector2.zero;
     private float previousTimeElapsed;
     private float difference = 0;        // Difference between the current time elapsed and the previous time elapsed
-    private Vector2 originalAnchoredPosition;
 
     private readonly Vector2 centerAnchor = new Vector2(0.5f, 0.5f);
-    private readonly Vector2 topAnchor = new Vector2(0.5f, 1.0f);
 
     private void Start()
     {
@@ -45,7 +47,7 @@ public class Timer : MonoBehaviour
         previousTimeText.text = "--";
         differenceText.text = "--";
 
-        originalAnchoredPosition = rectTransform.anchoredPosition;
+        targetTimeText.text = FormatTime(targetTime);
 
         GameManager.playerIsDead = true;
     }
@@ -153,6 +155,16 @@ public class Timer : MonoBehaviour
             }
 
             differenceText.text = prefix + FormatTime(difference);
+        }
+
+        continueButton.interactable = timeElapsed < targetTime;
+        if (timeElapsed < targetTime)
+        {
+            resultText.text = "Finished";
+        }
+        else
+        {
+            resultText.text = "Try Again";
         }
 
         GameManager.previousTimeElapsed = timeElapsed;
