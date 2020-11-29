@@ -16,7 +16,7 @@ public class Punisher : AggressiveEnemy
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected override void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Weapon")
         {

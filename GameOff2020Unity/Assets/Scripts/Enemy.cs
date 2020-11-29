@@ -36,6 +36,14 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Weapon")
+        {
+            Die();
+        }
+    }
+
     private void Hover()
     {
         float newPositionY = Mathf.Sin(Time.timeSinceLevelLoad * hoverSpeed) * hoverDistance;
