@@ -249,7 +249,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.04570675, y: -0.3865981}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -260,7 +260,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.7267437, y: 1.4617968}
   m_EdgeRadius: 0
 --- !u!114 &8696127211863119750
 MonoBehaviour:
@@ -293,6 +293,8 @@ MonoBehaviour:
   dashStyleReward: 75
   style: {fileID: 0}
   armPivot: {fileID: 7051304577571223013}
+  dashColliderSizeY: 1
+  dashColliderOffsetY: -0.6
   animator: {fileID: 0}
 --- !u!114 &8696127211863119745
 MonoBehaviour:
@@ -307,7 +309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootSpeed: 25
-  shootOffset: 1
+  shootOffset: 0.8
   moonball: {fileID: 4297097662504134204, guid: 411dc9046cde8cf48bdb30d3530878d3,
     type: 3}
   chargeCircle: {fileID: 2365284558089738764, guid: 29455cdd5555dc54f9e15f0ce3c7b8f5,

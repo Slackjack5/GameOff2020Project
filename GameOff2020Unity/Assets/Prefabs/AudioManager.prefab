@@ -284,6 +284,74 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
-  mixerGroupEffects: {fileID: 0}
-  mixerGroupMusic: {fileID: 0}
-  musicMixer: {fileID: 0}
+  - name: CharacterVoice-Death1
+    clip: {fileID: 8300000, guid: 9b70f369324fc8e4da96b888ced1a408, type: 3}
+    volume: 0.576
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CharacterVoice-Death2
+    clip: {fileID: 8300000, guid: ef82cfe9f1063194d8b3a1215cc61edf, type: 3}
+    volume: 0.576
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CharacterVoice-Death3
+    clip: {fileID: 8300000, guid: aa5924e7d291dda46a709f407b13c4cd, type: 3}
+    volume: 0.576
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CharacterVoice-Death4
+    clip: {fileID: 8300000, guid: 2ddb253e6dea1244694843e3ec86c7d4, type: 3}
+    volume: 0.576
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CharacterVoice-Death5
+    clip: {fileID: 8300000, guid: 3477b4ffa0c389846b5125675996c20b, type: 3}
+    volume: 0.576
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CharacterVoice-Completion1
+    clip: {fileID: 8300000, guid: b5978eb93346fb045ab0c071a8ccaac2, type: 3}
+    volume: 0.576
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CharacterVoice-Completion2
+    clip: {fileID: 8300000, guid: c440a12a36fbf9e4b9eb910d070f672b, type: 3}
+    volume: 0.576
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CharacterVoice-Completion3
+    clip: {fileID: 8300000, guid: 8add36630abd89343943afa05ab9d8e2, type: 3}
+    volume: 0.576
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CharacterVoice-Completion4
+    clip: {fileID: 8300000, guid: b420f08041f5f9a40ac9e2d04de7eab1, type: 3}
+    volume: 0.576
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Music-RunFastShootAliens
+    clip: {fileID: 8300000, guid: e8a0194475b9dc646b141e9d7446afc1, type: 3}
+    volume: 0.247
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CharacterVoice-Completion5
+    clip: {fileID: 8300000, guid: 1a2d8191c05a78e47896034186c2b0ab, type: 3}
+    volume: 0.576
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  mixerGroupEffects: {fileID: 6367940377541566155, guid: 298ec85b1ebce6c419efffc6c600eb1c,
+    type: 2}
+  mixerGroupMusic: {fileID: 6391106711965373525, guid: 298ec85b1ebce6c419efffc6c600eb1c,
+    type: 2}
+  musicMixer: {fileID: 24100000, guid: 298ec85b1ebce6c419efffc6c600eb1c, type: 2}

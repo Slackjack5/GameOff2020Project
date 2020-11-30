@@ -1,7 +1,7 @@
 ﻿using UnityEngine.Audio;
 using System;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -12,6 +12,8 @@ public class AudioManager : MonoBehaviour
     public AudioMixerGroup mixerGroupEffects;
     public AudioMixerGroup mixerGroupMusic;
     public AudioMixer musicMixer;
+
+    private bool tutorialMusicStopped=false;
     // Start is called before the first frame update
     void Awake()
     {
@@ -51,10 +53,25 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
+
         //Play Sound
         instance.Play("Music-Tutorial");
         instance.Play("Train-Ambience");
 
+    }
+
+    private void Update()
+    {
+        Scene currentScene = SceneManager.GetActiveScene();
+
+        string sceneName = currentScene.name;
+
+        if (sceneName == "Level 1-Baby's First Steps" && !tutorialMusicStopped)
+        {
+            Stop("Music-Tutorial");
+            Play("Music-RunFastShootAliens");
+            tutorialMusicStopped = true;
+        }
     }
 
     // Update is called once per frame
