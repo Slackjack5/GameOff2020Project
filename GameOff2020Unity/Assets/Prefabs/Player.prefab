@@ -319,6 +319,8 @@ MonoBehaviour:
   shootTime: 0.5
   laserCooldown: 0.7
   reloadTime: 0.5
+  myParticles: {fileID: 7298272266995511814, guid: e8ccea6ac38ae534e9978c9218479ff5,
+    type: 3}
 --- !u!1 &8696127212045899377
 GameObject:
   m_ObjectHideFlags: 0

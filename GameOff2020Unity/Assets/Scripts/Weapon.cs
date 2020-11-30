@@ -24,6 +24,9 @@ public class Weapon : MonoBehaviour
     private float currentShootTime;
     private float laserCooldownTime;
 
+    //Particle Effect
+    public ParticleSystem myParticles;
+
     // Update is called once per frame
     void Update()
     {
@@ -152,6 +155,7 @@ public class Weapon : MonoBehaviour
 
     private void Reload()
     {
+        Instantiate(myParticles, newMoonball.transform.position, Quaternion.identity);
         Destroy(newMoonball);
         reloading = true;
         StartCoroutine(ReloadDelay());
