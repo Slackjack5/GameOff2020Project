@@ -76,6 +76,12 @@ public class AudioManager : MonoBehaviour
             Play("Music-RunFastShootAliens");
             tutorialMusicStopped = true;
         }
+        else if (sceneName == "Level 2-Tread Carefully" && !tutorialMusicStopped)
+        {
+            Stop("Music-Tutorial");
+            Play("Music-RunFastShootAliens");
+            tutorialMusicStopped = true;
+        }
     }
 
     // Update is called once per frame

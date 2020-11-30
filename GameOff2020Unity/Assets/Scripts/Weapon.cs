@@ -156,6 +156,9 @@ public class Weapon : MonoBehaviour
     private void Reload()
     {
         Instantiate(myParticles, newMoonball.transform.position, Quaternion.identity);
+        //Play Audio
+        FindObjectOfType<AudioManager>().PlaySound("WeaponReload", Random.Range(.95f, 1f));
+
         Destroy(newMoonball);
         reloading = true;
         StartCoroutine(ReloadDelay());
@@ -164,6 +167,10 @@ public class Weapon : MonoBehaviour
     private IEnumerator ReloadDelay()
     {
         yield return new WaitForSeconds(reloadTime);
+        //Play Audio
+        FindObjectOfType<AudioManager>().PlaySound("WeaponReloadEnd", Random.Range(1.15f, 1.25f));
+        //Stop Sound
+        FindObjectOfType<AudioManager>().Stop("WeaponReload");
         reloading = false;
     }
 }

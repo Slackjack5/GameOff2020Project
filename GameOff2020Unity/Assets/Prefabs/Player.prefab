@@ -318,7 +318,7 @@ MonoBehaviour:
   chargeTime: 0
   shootTime: 0.5
   laserCooldown: 0.7
-  reloadTime: 0.5
+  reloadTime: 0.9
   myParticles: {fileID: 7298272266995511814, guid: e8ccea6ac38ae534e9978c9218479ff5,
     type: 3}
 --- !u!1 &8696127212045899377
