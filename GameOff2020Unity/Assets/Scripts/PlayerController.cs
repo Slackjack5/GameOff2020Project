@@ -332,6 +332,11 @@ public class PlayerController : MonoBehaviour
 
     private void Respawn()
     {
+        // Zero out any movement
+        rb.velocity = Vector2.zero;
+        jumpKeyHeld = false;
+        jumpTimeCounter = 0;
+
         transform.position = respawnPosition;
     }
 
