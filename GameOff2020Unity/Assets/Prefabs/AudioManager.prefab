@@ -264,7 +264,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: e8a0194475b9dc646b141e9d7446afc1, type: 3}
     volume: 0.377
     pitch: 1
-    loop: 0
+    loop: 1
     source: {fileID: 0}
   - name: Train-Ambience
     clip: {fileID: 8300000, guid: 08c57bf6eb866f8438a785139b3a3c80, type: 3}
@@ -342,13 +342,13 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: e8a0194475b9dc646b141e9d7446afc1, type: 3}
     volume: 0.247
     pitch: 1
-    loop: 0
+    loop: 1
     source: {fileID: 0}
   - name: CharacterVoice-Completion5
     clip: {fileID: 8300000, guid: 1a2d8191c05a78e47896034186c2b0ab, type: 3}
     volume: 0.576
     pitch: 1
-    loop: 1
+    loop: 0
     source: {fileID: 0}
   mixerGroupEffects: {fileID: 6367940377541566155, guid: 298ec85b1ebce6c419efffc6c600eb1c,
     type: 2}
