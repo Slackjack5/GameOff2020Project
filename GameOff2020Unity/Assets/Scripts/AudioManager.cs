@@ -82,6 +82,12 @@ public class AudioManager : MonoBehaviour
             Play("Music-RunFastShootAliens");
             tutorialMusicStopped = true;
         }
+        else if (sceneName == "Level 3-Not All Robots Kill" && !tutorialMusicStopped)
+        {
+            Stop("Music-Tutorial");
+            Play("Music-RunFastShootAliens");
+            tutorialMusicStopped = true;
+        }
     }
 
     // Update is called once per frame
