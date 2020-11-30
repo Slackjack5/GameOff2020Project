@@ -11343,11 +11343,6 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 1.6922331
       objectReference: {fileID: 0}
-    - target: {fileID: 8696127211863119745, guid: 262b40164235a6e44aac3dd94ec46d20,
-        type: 3}
-      propertyPath: shootOffset
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 8696127211863119748, guid: 262b40164235a6e44aac3dd94ec46d20,
         type: 3}
       propertyPath: m_Color.r

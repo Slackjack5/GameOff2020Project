@@ -41,6 +41,10 @@ public class AudioManager : MonoBehaviour
             {
             s.source.outputAudioMixerGroup = mixerGroupMusic;
             }
+            else if (s.name == "Music-RunFastShootAliens")
+            {
+            s.source.outputAudioMixerGroup = mixerGroupMusic;
+            }
             else
             {
                 s.source.outputAudioMixerGroup = mixerGroupEffects; 
@@ -78,6 +82,11 @@ public class AudioManager : MonoBehaviour
     public void Play(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
+        if (s == null)
+        {
+            Debug.LogWarning("Sound: " + name + " not found!");
+            return;
+        }
         s.source.Play();
     }
 
