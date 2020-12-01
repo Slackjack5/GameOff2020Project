@@ -9,6 +9,8 @@ public class Weapon : MonoBehaviour
     [SerializeField] private GameObject moonball;
     [SerializeField] private GameObject chargeCircle;
     [SerializeField] private Laser laser;
+    [SerializeField] private GameObject laserIndicator;
+    [SerializeField] private float laserCooldownBarVisibleTime = 1.5f;
     [SerializeField] private float chargeTime = 0.7f;
     [SerializeField] private float shootTime = 0.5f;
     [SerializeField] private float laserCooldown = 0.7f;
@@ -23,6 +25,7 @@ public class Weapon : MonoBehaviour
     private bool shootingLaser;
     private float currentShootTime;
     private float laserCooldownTime;
+    private bool hidingLaserCooldownBar = true;
 
     // Update is called once per frame
     void Update()
@@ -57,6 +60,15 @@ public class Weapon : MonoBehaviour
             if (laserCooldownTime <= 0)
             {
                 laserCooldownTime = 0;
+
+                if (!hidingLaserCooldownBar)
+                {
+                    StartCoroutine(HideLaserCooldownBar());
+                }
+            }
+            else
+            {
+                UpdateLaserCooldownBar();
             }
 
             // Track laser charge time
@@ -138,6 +150,36 @@ public class Weapon : MonoBehaviour
         FindObjectOfType<AudioManager>().PlaySound("LaserChargeFire", Random.Range(.95f, 1f));
         //Stop Sound
         FindObjectOfType<AudioManager>().Stop("LaserChargeShort");
+    }
+
+    private void UpdateLaserCooldownBar()
+    {
+        laserIndicator.SetActive(true);
+        hidingLaserCooldownBar = false;
+
+        Transform laserCooldownBarTransform = laserIndicator.transform.GetChild(1).transform;
+        float interpolationValue = Mathf.InverseLerp(0, laserCooldown, laserCooldownTime);
+
+        // Since currentSlideCooldown counts down to zero, Lerp starts from the second value
+        float newPositionX = Mathf.Lerp(0, -0.5f, interpolationValue);
+        float newScaleX = Mathf.Lerp(1, 0, interpolationValue);
+
+        Vector2 position = laserCooldownBarTransform.localPosition;
+        position.x = newPositionX;
+        laserCooldownBarTransform.localPosition = position;
+
+        Vector2 scale = laserCooldownBarTransform.localScale;
+        scale.x = newScaleX;
+        laserCooldownBarTransform.localScale = scale;
+    }
+
+    private IEnumerator HideLaserCooldownBar()
+    {
+        hidingLaserCooldownBar = true;
+
+        yield return new WaitForSeconds(laserCooldownBarVisibleTime);
+
+        laserIndicator.SetActive(false);
     }
 
     public void Reset()
