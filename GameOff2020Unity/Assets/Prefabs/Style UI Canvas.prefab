@@ -719,4 +719,5 @@ MonoBehaviour:
   styleDecay: 20
   textMesh: {fileID: 5701942851203529716}
   tier: 1
+  animator: {fileID: 0}
   timerinitiator: 0

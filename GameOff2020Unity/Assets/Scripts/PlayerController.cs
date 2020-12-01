@@ -11,9 +11,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float slideMovementSmoothTime = 0.3f;
     [SerializeField] private float defaultMovementSmoothTime = 0.4f;
     [SerializeField] private float slideTime = 0.8f;
-    [SerializeField] private float airmovementSmoothTime = 0.2f;
+    [SerializeField] private float airMovementSmoothTime = 0.2f;
     [SerializeField] private float slideForce = 1500;
     [SerializeField] private float slideCooldown = 3;
+    [SerializeField] private float slideCooldownBarVisibleTime = 1.5f;
+    [SerializeField] private GameObject dashIndicator;
     [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private Transform groundCheckPosition;
     [SerializeField] private GameObject styleTier;
@@ -34,7 +36,7 @@ public class PlayerController : MonoBehaviour
     private bool jumpKeyHeld = false;
     private float jumpTimeCounter;
     private bool isGrounded = false;
-    private float currentMovementSmoothTime = 0.1f;
+    private float currentMovementSmoothTime;
     private Vector2 startPosition;
     private Vector2 respawnPosition;
 
@@ -42,7 +44,9 @@ public class PlayerController : MonoBehaviour
     private bool evading = false;
     private float storedDirection = 0;
     private bool dashed = false;
-    private bool cooldown = false;
+    private bool slideInCooldown = false;
+    private float currentSlideCooldown = 0;
+    private bool hidingSlideCooldownBar = false;
 
     const float groundCheckDistance = .1f;
 
@@ -62,6 +66,8 @@ public class PlayerController : MonoBehaviour
         initialColliderOffset = boxCollider.offset;
 
         startPosition = transform.position;
+
+        currentMovementSmoothTime = defaultMovementSmoothTime;
     }
 
     // Update is called once per frame
@@ -72,8 +78,6 @@ public class PlayerController : MonoBehaviour
 
         if (!GameManager.playerIsDead)
         {
-            
-
             if (!isGrounded)
             {
                 //Set Animation
@@ -84,6 +88,7 @@ public class PlayerController : MonoBehaviour
                 //Set Animation
                 animator.SetBool("isGrounded", true);
             }
+
             if (Input.GetButtonDown("Jump") && isGrounded)
             {
                 jumpTimeCounter = maxJumpTime;
@@ -95,15 +100,10 @@ public class PlayerController : MonoBehaviour
             }
 
             //Evading
-            if (Input.GetKeyDown(KeyCode.LeftShift) && horizontalInput != 0 && !dashed && !cooldown)
+            if (Input.GetKeyDown(KeyCode.LeftShift) && horizontalInput != 0 && !dashed && !slideInCooldown)
             {
                 evading = true;
                 storedDirection = horizontalInput;
-                if (!isGrounded)
-                {
-                    slideMovementSmoothTime = airmovementSmoothTime;
-                    
-                }
             }
         }
 
@@ -133,7 +133,7 @@ public class PlayerController : MonoBehaviour
         {
             armPivot.Pivot();
 
-            if (dashed && !cooldown)
+            if (dashed && !slideInCooldown)
             {
                 rb.velocity = new Vector2(rb.velocity.x, 0);
             }
@@ -146,13 +146,27 @@ public class PlayerController : MonoBehaviour
             else
             {
                 SlideMove(storedDirection);
-                StartCoroutine(StopSlide());
             }
 
             if (jumpKeyHeld && jumpTimeCounter > 0)
             {
                 rb.velocity = new Vector2(rb.velocity.x, baseJumpSpeed);
                 jumpTimeCounter -= Time.fixedDeltaTime;
+            }
+
+            // Update slide cooldown bar
+            if (slideInCooldown)
+            {
+                currentSlideCooldown -= Time.fixedDeltaTime;
+                if (currentSlideCooldown <= 0 && !hidingSlideCooldownBar)
+                {
+                    StartCoroutine(HideSlideCooldownBar());
+                    slideInCooldown = false;
+                }
+                else
+                {
+                    UpdateSlideCooldownBar();
+                }
             }
         }
     }
@@ -194,63 +208,73 @@ public class PlayerController : MonoBehaviour
         rb.velocity = Vector2.SmoothDamp(rb.velocity, targetVelocity, ref velocity, currentMovementSmoothTime);
 
         //Animation
-        if (horizontalInput > 0)
-        {
-            animator.SetFloat("Speed", 10);
-            animator.SetBool("MovingRight", true);
+        if (horizontalInput > 0)
+        {
+            animator.SetFloat("Speed", 10);
+            animator.SetBool("MovingRight", true);
         }
-        else if(horizontalInput < 0)
-        {
-            animator.SetFloat("Speed", 10);
-            animator.SetBool("MovingRight", false);
+        else if(horizontalInput < 0)
+        {
+            animator.SetFloat("Speed", 10);
+            animator.SetBool("MovingRight", false);
         }
-        else
-        {
-            animator.SetFloat("Speed", 0);
-            animator.SetBool("MovingRight", false);
+        else
+        {
+            animator.SetFloat("Speed", 0);
+            animator.SetBool("MovingRight", false);
         }
     }
 
     private void SlideMove(float horizontalMovement)
     {
-        if (!cooldown)
+        if (!slideInCooldown && !dashed)
         {
-            currentMovementSmoothTime = slideMovementSmoothTime;
-            if (!dashed)
+            if (isGrounded)
             {
-                if (horizontalMovement == 1)
-                {
-                    rb.AddForce(Vector2.right * slideForce);
-                }
-                else
-                {
-                    rb.AddForce(Vector2.left * slideForce);
-                }
-
-                // Shrink the collider
-                Vector2 offset = boxCollider.offset;
-                offset.y = dashColliderOffsetY;
-                boxCollider.offset = offset;
-
-                Vector2 size = boxCollider.size;
-                size.y = dashColliderSizeY;
-                boxCollider.size = size;
-
-                dashed = true;
-                evading = false;
-
-                //Animation
-                animator.SetBool("Sliding", true);
+                currentMovementSmoothTime = slideMovementSmoothTime;
             }
+            else
+            {
+                currentMovementSmoothTime = airMovementSmoothTime;
+            }
+
+            if (horizontalMovement == 1)
+            {
+                rb.AddForce(Vector2.right * slideForce);
+            }
+            else
+            {
+                rb.AddForce(Vector2.left * slideForce);
+            }
+
+            // Shrink the collider
+            Vector2 offset = boxCollider.offset;
+            offset.y = dashColliderOffsetY;
+            boxCollider.offset = offset;
+
+            Vector2 size = boxCollider.size;
+            size.y = dashColliderSizeY;
+            boxCollider.size = size;
+
+            dashed = true;
+            evading = false;
+
+            //Animation
+            animator.SetBool("Sliding", true);
+
+            StartCoroutine(StopSlide());
         }
     }
 
     IEnumerator StopSlide()
     {
         yield return new WaitForSeconds(slideTime);
+
         currentMovementSmoothTime = defaultMovementSmoothTime;
-        slideMovementSmoothTime = .4f;
-        cooldown = true;
+
+        slideInCooldown = true;
+        currentSlideCooldown = slideCooldown;
+
         dashed = false;
 
         // Reset the collider
@@ -258,13 +282,36 @@ public class PlayerController : MonoBehaviour
         boxCollider.size = initialColliderSize;
 
         animator.SetBool("Sliding", false);
-        StartCoroutine(SlideCooldown());
     }
 
-    IEnumerator SlideCooldown()
+    private void UpdateSlideCooldownBar()
     {
-        yield return new WaitForSeconds(slideCooldown);
-        cooldown = false;
+        dashIndicator.SetActive(true);
+
+        Transform slideCooldownBarTransform = dashIndicator.transform.GetChild(1).transform;
+        float interpolationValue = Mathf.InverseLerp(0, slideCooldown, currentSlideCooldown);
+
+        // Since currentSlideCooldown counts down to zero, Lerp starts from the second value
+        float newPositionX = Mathf.Lerp(0, -0.5f, interpolationValue);
+        float newScaleX = Mathf.Lerp(1, 0, interpolationValue);
+
+        Vector2 position = slideCooldownBarTransform.localPosition;
+        position.x = newPositionX;
+        slideCooldownBarTransform.localPosition = position;
+
+        Vector2 scale = slideCooldownBarTransform.localScale;
+        scale.x = newScaleX;
+        slideCooldownBarTransform.localScale = scale;
+    }
+
+    private IEnumerator HideSlideCooldownBar()
+    {
+        hidingSlideCooldownBar = true;
+
+        yield return new WaitForSeconds(slideCooldownBarVisibleTime);
+
+        dashIndicator.SetActive(false);
+        hidingSlideCooldownBar = false;
     }
 
     public void Die()
@@ -329,11 +376,13 @@ public class PlayerController : MonoBehaviour
     private void Respawn()
     {
         transform.position = respawnPosition;
-    }
 
-    public void Reset()
-    {
-        transform.position = startPosition;
+        evading = false;
+        dashed = false;
+        slideInCooldown = false;
+        currentSlideCooldown = 0;
+        dashIndicator.SetActive(false);
+        hidingSlideCooldownBar = false;
     }
 
     public void Checkpoint(Transform checkpointTransform)
