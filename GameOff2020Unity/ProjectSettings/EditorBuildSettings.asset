@@ -9,9 +9,21 @@ EditorBuildSettings:
     path: Assets/Scenes/Tutorial Level.unity
     guid: 0eba431ff80cbaa4085015bd05a52ad3
   - enabled: 1
-    path: Assets/Scenes/Level 4-Combined Issues.unity
-    guid: 82328c86a564afc4ca18e2d048ba7a3a
+    path: Assets/Scenes/Level 1-Baby's First Steps.unity
+    guid: 2c371973a64a5e647a9178002be1e94c
   - enabled: 1
     path: Assets/Scenes/Level 2-Tread Carefully.unity
     guid: 7e70d01925a34a64793f20b49ce32922
+  - enabled: 1
+    path: Assets/Scenes/Level 3-Not All Robots Kill.unity
+    guid: 460caacb2377dbe48a562b9d231a61d6
+  - enabled: 1
+    path: Assets/Scenes/Level 4-Combined Issues.unity
+    guid: 82328c86a564afc4ca18e2d048ba7a3a
+  - enabled: 1
+    path: Assets/Scenes/Level 5-Charged.unity
+    guid: 603999377b9b4db4b8473bd024d169e2
+  - enabled: 1
+    path: Assets/Scenes/End Screen.unity
+    guid: 6428e2232e6df9d40a45344d27674b91
   m_configObjects: {}

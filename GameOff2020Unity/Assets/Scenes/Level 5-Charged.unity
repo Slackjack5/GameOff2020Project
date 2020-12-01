@@ -292,6 +292,32 @@ PrefabInstance:
       propertyPath: m_Name
       value: TurretHarmless (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 5790667071604414527, guid: 0f4553eadfd220343829f46410a9bf8a,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8ffc8c09120c7034083264d1e4d28974,
+        type: 3}
+    - target: {fileID: 5790667071604414527, guid: 0f4553eadfd220343829f46410a9bf8a,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5790667071604414527, guid: 0f4553eadfd220343829f46410a9bf8a,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5790667071604414527, guid: 0f4553eadfd220343829f46410a9bf8a,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6165051201085788552, guid: 0f4553eadfd220343829f46410a9bf8a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f4553eadfd220343829f46410a9bf8a, type: 3}
 --- !u!114 &90463899 stripped
@@ -745,6 +771,32 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TurretHarmless (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5790667071604414527, guid: 0f4553eadfd220343829f46410a9bf8a,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8ffc8c09120c7034083264d1e4d28974,
+        type: 3}
+    - target: {fileID: 5790667071604414527, guid: 0f4553eadfd220343829f46410a9bf8a,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5790667071604414527, guid: 0f4553eadfd220343829f46410a9bf8a,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5790667071604414527, guid: 0f4553eadfd220343829f46410a9bf8a,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6165051201085788552, guid: 0f4553eadfd220343829f46410a9bf8a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f4553eadfd220343829f46410a9bf8a, type: 3}
