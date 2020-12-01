@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public static bool playerIsDead = false;
+    public static bool gameIsPaused { get; set; }
 
     // These values represent the state of the current level
     public static bool levelComplete { get; set; }

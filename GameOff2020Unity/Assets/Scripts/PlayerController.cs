@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         isGrounded = Physics2D.Raycast(groundCheckPosition.position, Vector2.down, groundCheckDistance, whatIsGround);
 
-        if (!GameManager.playerIsDead)
+        if (!GameManager.playerIsDead && !GameManager.gameIsPaused)
         {
             if (!isGrounded)
             {
