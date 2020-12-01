@@ -15,6 +15,10 @@ public class Timer : MonoBehaviour
     [SerializeField] private TextMeshProUGUI differenceText;
     [SerializeField] private Color fasterTimeColor;
     [SerializeField] private Color slowerTimeColor;
+    [SerializeField] private Image medalRewarded;
+    [SerializeField] private Sprite goldMedal;
+    [SerializeField] private Sprite silverMedal;
+    [SerializeField] private Sprite bronzeMedal;
     [SerializeField] private float goldTime = 30f;
     [SerializeField] private TextMeshProUGUI goldTimeText;
     [SerializeField] private float silverTime = 40f;
@@ -220,21 +224,40 @@ public class Timer : MonoBehaviour
         }
 
         // Determine medal
-        if (timeElapsed <= bronzeTime)
-        {
-            GameManager.timeMedal = TimeMedal.Bronze;
-        }
-        else if (timeElapsed <= silverTime)
-        {
-            GameManager.timeMedal = TimeMedal.Silver;
-        }
-        else if (timeElapsed <= goldTime)
+        if (timeElapsed <= goldTime && GameManager.timeMedal < TimeMedal.Gold)
         {
             GameManager.timeMedal = TimeMedal.Gold;
         }
-        else
+        else if (timeElapsed <= silverTime && GameManager.timeMedal < TimeMedal.Silver)
+        {
+            GameManager.timeMedal = TimeMedal.Silver;
+        }
+        else if (timeElapsed <= bronzeTime && GameManager.timeMedal < TimeMedal.Bronze)
+        {
+            GameManager.timeMedal = TimeMedal.Bronze;
+        }
+        else if (GameManager.timeMedal < TimeMedal.None)
         {
             GameManager.timeMedal = TimeMedal.None;
+        }
+
+        // Show medal
+        medalRewarded.enabled = true;
+        if (GameManager.timeMedal == TimeMedal.Bronze)
+        {
+            medalRewarded.sprite = bronzeMedal;
+        }
+        else if (GameManager.timeMedal == TimeMedal.Silver)
+        {
+            medalRewarded.sprite = silverMedal;
+        }
+        else if (GameManager.timeMedal == TimeMedal.Gold)
+        {
+            medalRewarded.sprite = goldMedal;
+        }
+        else
+        {
+            medalRewarded.enabled = false;
         }
     }
 

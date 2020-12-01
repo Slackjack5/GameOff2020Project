@@ -401,12 +401,20 @@ MonoBehaviour:
   minFontSize: 24
   travelTime: 0.4
   targetPositionTransform: {fileID: 0}
-  previousTimeText: {fileID: 0}
+  bestTimeText: {fileID: 0}
   differenceText: {fileID: 0}
   fasterTimeColor: {r: 0.50377357, g: 0.65532345, b: 1, a: 1}
   slowerTimeColor: {r: 1, g: 0.5226415, b: 0.5226415, a: 1}
-  targetTime: 30
-  targetTimeText: {fileID: 0}
+  medalRewarded: {fileID: 0}
+  goldMedal: {fileID: 21300000, guid: c5684da889fb5914380e5fac85a176e2, type: 3}
+  silverMedal: {fileID: 21300000, guid: 97755b7229545704082eb89abd88c99c, type: 3}
+  bronzeMedal: {fileID: 21300000, guid: 1318a63add2076043b8d475e7bb20383, type: 3}
+  goldTime: 30
+  goldTimeText: {fileID: 0}
+  silverTime: 40
+  silverTimeText: {fileID: 0}
+  bronzeTime: 50
+  bronzeTimeText: {fileID: 0}
   resultText: {fileID: 0}
   continueButton: {fileID: 0}
   successMessage: Level Complete
