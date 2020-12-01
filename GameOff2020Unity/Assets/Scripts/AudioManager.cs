@@ -141,4 +141,8 @@ public class AudioManager : MonoBehaviour
         musicMixer.SetFloat("lowPassLevel2", 22000);
     }
 
+    public void SetVolume(float volume)
+    {
+        musicMixer.SetFloat("volume", volume);
+    }
 }

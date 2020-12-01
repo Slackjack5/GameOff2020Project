@@ -33,7 +33,7 @@ public class Weapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.playerIsDead)
+        if (!GameManager.playerIsDead && !GameManager.gameIsPaused)
         {
             if (Input.GetButtonDown("Fire1"))
             {
@@ -197,11 +197,15 @@ public class Weapon : MonoBehaviour
     public void Reset()
     {
         Destroy(newChargeCircle);
+
         chargingLaser = false;
         currentChargeTime = 0;
         shootingLaser = false;
         currentShootTime = 0;
         laserCooldownTime = 0;
+
+        laserIndicator.SetActive(false);
+        hidingLaserCooldownBar = false;
     }
 
     private void Reload()

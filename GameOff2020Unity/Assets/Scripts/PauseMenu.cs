@@ -6,7 +6,10 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenuUI;
 
-    private bool gameIsPaused = false;
+    private void Start()
+    {
+        Resume();
+    }
 
     // Update is called once per frame
     void Update()
@@ -19,7 +22,7 @@ public class PauseMenu : MonoBehaviour
 
     private void TogglePause()
     {
-        if (gameIsPaused)
+        if (GameManager.gameIsPaused)
         {
             Resume();
         } else
@@ -32,14 +35,14 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
-        gameIsPaused = false;
+        GameManager.gameIsPaused = false;
     }
 
     private void Pause()
     {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
-        gameIsPaused = true;
+        GameManager.gameIsPaused = true;
 
         FindObjectOfType<AudioManager>().Stop("LaserCharge");
     }
