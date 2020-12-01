@@ -5,6 +5,7 @@ using UnityEngine;
 public class Ghost : MonoBehaviour
 {
     [SerializeField] private GameObject player;
+    [SerializeField] private Timer timer;
 
     private Vector2 startPosition;
     private List<Vector2> playerPositions;
@@ -55,6 +56,9 @@ public class Ghost : MonoBehaviour
 
         // On reset, let the ghost know the path it should follow, 
         // and start recording a new list of the player's positions
-        GameManager.ghostPositions = playerPositions;
+        if (GameManager.bestTime == 0 || timer.timeElapsed < GameManager.bestTime)
+        {
+            GameManager.ghostPositions = playerPositions;
+        }
     }
 }

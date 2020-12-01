@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public static bool playerIsDead = false;
 
     public static bool levelComplete { get; set; }
-    public static float previousTimeElapsed { get; set; }
+    public static float bestTime { get; set; }
     public static List<Vector2> ghostPositions { get; set; }
 
     private void Awake()
@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     public void Clear()
     {
         levelComplete = false;
-        previousTimeElapsed = 0;
+        bestTime = 0;
         ghostPositions = new List<Vector2>();
     }
 }

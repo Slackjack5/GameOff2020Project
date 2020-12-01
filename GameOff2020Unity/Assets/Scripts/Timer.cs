@@ -11,7 +11,7 @@ public class Timer : MonoBehaviour
     [SerializeField] private float minFontSize = 24f;
     [SerializeField] private float travelTime = 0.4f;                      // Specifies how long it takes for the current time to travel to its position in the finish level menu
     [SerializeField] private RectTransform targetPositionTransform;
-    [SerializeField] private TextMeshProUGUI previousTimeText;
+    [SerializeField] private TextMeshProUGUI bestTimeText;
     [SerializeField] private TextMeshProUGUI differenceText;
     [SerializeField] private Color fasterTimeColor;
     [SerializeField] private Color slowerTimeColor;
@@ -26,7 +26,7 @@ public class Timer : MonoBehaviour
     private TextMeshProUGUI timerText;
     private RectTransform rectTransform;
 
-    private float timeElapsed = 0;
+    public float timeElapsed { get; set; }
     private bool timerIsRunning = false;
     private bool countingDown = true;
     private int countdownTime = 3;       // What is displayed
@@ -34,7 +34,6 @@ public class Timer : MonoBehaviour
     private bool levelFinished = false;
     private Vector2 anchorVelocity = Vector2.zero;
     private Vector2 anchoredPositionVelocity = Vector2.zero;
-    private float previousTimeElapsed;
     private float difference = 0;        // Difference between the current time elapsed and the previous time elapsed
 
     private readonly Vector2 centerAnchor = new Vector2(0.5f, 0.5f);
@@ -46,13 +45,14 @@ public class Timer : MonoBehaviour
 
         currentCountdownTime = countdownSecond;
 
-        previousTimeElapsed = GameManager.previousTimeElapsed;
-        previousTimeText.text = "--";
+        bestTimeText.text = "--";
         differenceText.text = "--";
 
         targetTimeText.text = FormatTime(targetTime);
 
         GameManager.playerIsDead = true;
+
+        timeElapsed = 0;
     }
 
     private void Update()
@@ -138,12 +138,12 @@ public class Timer : MonoBehaviour
         GameManager.playerIsDead = true;
         levelFinished = true;
         
-        // Compare the previous time to the current time
-        if (previousTimeElapsed > 0)
+        // Compare the best time to the current time
+        if (GameManager.bestTime > 0)
         {
-            previousTimeText.text = FormatTime(previousTimeElapsed);
+            bestTimeText.text = FormatTime(GameManager.bestTime);
 
-            difference = timeElapsed - previousTimeElapsed;
+            difference = timeElapsed - GameManager.bestTime;
             string prefix;
             if (difference < 0)
             {
@@ -207,7 +207,10 @@ public class Timer : MonoBehaviour
             successGlow.SetActive(false);
         }
 
-        GameManager.previousTimeElapsed = timeElapsed;
+        if (GameManager.bestTime == 0 || timeElapsed < GameManager.bestTime)
+        {
+            GameManager.bestTime = timeElapsed;
+        }
     }
 
     private void MoveTimer()
