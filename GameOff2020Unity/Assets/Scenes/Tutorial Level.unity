@@ -399,7 +399,7 @@ PrefabInstance:
     - target: {fileID: 7450329856407884315, guid: cd9504ccde719614f970de321a6357d0,
         type: 3}
       propertyPath: particles.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7450329856407884315, guid: cd9504ccde719614f970de321a6357d0,
         type: 3}
@@ -2751,6 +2751,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7450329856407884315, guid: cd9504ccde719614f970de321a6357d0,
         type: 3}
+      propertyPath: particles.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7450329856407884315, guid: cd9504ccde719614f970de321a6357d0,
+        type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 2055480287}
@@ -2804,6 +2809,16 @@ PrefabInstance:
       propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 691737470}
+    - target: {fileID: 7450329856407884315, guid: cd9504ccde719614f970de321a6357d0,
+        type: 3}
+      propertyPath: particles.Array.data[0]
+      value: 
+      objectReference: {fileID: 1280660643509690638}
+    - target: {fileID: 7450329856407884315, guid: cd9504ccde719614f970de321a6357d0,
+        type: 3}
+      propertyPath: particles.Array.data[1]
+      value: 
+      objectReference: {fileID: 191330326}
     - target: {fileID: 7450329856407885287, guid: cd9504ccde719614f970de321a6357d0,
         type: 3}
       propertyPath: m_Name

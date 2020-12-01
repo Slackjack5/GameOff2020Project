@@ -1980,12 +1980,12 @@ PrefabInstance:
     - target: {fileID: 489979649023764496, guid: 58f722e5ec10ab240869833b43a9136e,
         type: 3}
       propertyPath: m_Offset.x
-      value: -0.4959166
+      value: -0.4559188
       objectReference: {fileID: 0}
     - target: {fileID: 489979649023764496, guid: 58f722e5ec10ab240869833b43a9136e,
         type: 3}
       propertyPath: m_Size.x
-      value: 0.00816679
+      value: 0.08816245
       objectReference: {fileID: 0}
     - target: {fileID: 489979649023764497, guid: 58f722e5ec10ab240869833b43a9136e,
         type: 3}
