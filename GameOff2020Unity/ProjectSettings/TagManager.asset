@@ -12,6 +12,7 @@ TagManager:
   - Pit
   - Background
   - DeathParticles
+  - EnemyWeapon
   layers:
   - Default
   - TransparentFX
