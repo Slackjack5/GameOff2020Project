@@ -4823,7 +4823,8 @@ GameObject:
   - component: {fileID: 9179251644965546876}
   - component: {fileID: 9179251644965546879}
   - component: {fileID: 9179251644965546877}
-  m_Layer: 8
+  - component: {fileID: 4698775258756767195}
+  m_Layer: 10
   m_Name: LaserProp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4915,3 +4916,29 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!61 &4698775258756767195
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9179251644965546878}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.2477417, y: 0.20352826}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 14, y: 4}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 10.939636, y: 0.54001325}
+  m_EdgeRadius: 0

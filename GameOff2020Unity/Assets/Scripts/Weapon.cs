@@ -33,7 +33,7 @@ public class Weapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.playerIsDead)
+        if (!GameManager.playerIsDead && !GameManager.gameIsPaused)
         {
             if (Input.GetButtonDown("Fire1"))
             {

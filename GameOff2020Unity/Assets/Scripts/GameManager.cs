@@ -46,6 +46,14 @@ public class GameManager : MonoBehaviour
         Clear();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown("r") && !gameIsPaused)
+        {
+            RestartLevel();
+        }
+    }
+
     public void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

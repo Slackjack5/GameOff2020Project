@@ -794,7 +794,7 @@ MonoBehaviour:
   dashStyleReward: 75
   style: {fileID: 0}
   armPivot: {fileID: 7051304577571223013}
-  dashColliderSizeY: 1
+  dashColliderSizeY: 0.7
   dashColliderOffsetY: -0.6
   animator: {fileID: 0}
 --- !u!114 &8696127211863119745
