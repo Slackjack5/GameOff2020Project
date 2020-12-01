@@ -161,13 +161,45 @@ public class Timer : MonoBehaviour
         }
 
         // Show whether the player beat the target time
-        bool levelComplete = timeElapsed < targetTime || GameManager.levelComplete;
+        bool levelComplete = timeElapsed <= targetTime || GameManager.levelComplete;
         continueButton.interactable = levelComplete;
         if (levelComplete)
         {
             resultText.text = successMessage;
             successGlow.SetActive(true);
             GameManager.levelComplete = true;
+
+            //Audio 
+            if (timeElapsed<=targetTime)
+            {
+                //Audio for Completion
+                int rand = Random.Range(0, 5);
+                if (rand == 0)
+                {
+                    //Play Sound
+                    FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-Completion1", Random.Range(.95f, 1f));
+                }
+                else if (rand == 1)
+                {
+                    //Play Sound
+                    FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-Completion2", Random.Range(.95f, 1f));
+                }
+                else if (rand == 2)
+                {
+                    //Play Sound
+                    FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-Completion3", Random.Range(.95f, 1f));
+                }
+                else if (rand == 3)
+                {
+                    //Play Sound
+                    FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-Completion4", Random.Range(.95f, 1f));
+                }
+                else if (rand == 4)
+                {
+                    //Play Sound
+                    FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-Completion5", Random.Range(.95f, 1f));
+                }
+            }
         }
         else
         {

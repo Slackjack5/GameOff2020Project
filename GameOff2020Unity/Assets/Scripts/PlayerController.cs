@@ -218,10 +218,10 @@ public class PlayerController : MonoBehaviour
             animator.SetFloat("Speed", 10);
             animator.SetBool("MovingRight", false);
         }
-        else
-        {
-            animator.SetFloat("Speed", 0);
-            animator.SetBool("MovingRight", false);
+        else
+        {
+            animator.SetFloat("Speed", 0);
+            animator.SetBool("MovingRight", true);
         }
     }
 
@@ -359,6 +359,8 @@ public class PlayerController : MonoBehaviour
                 FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-Death5", Random.Range(.95f, 1f));
             }
             deathnoise = true;
+            animator.SetBool("Death", true);
+            armPivot.deactivate();
         }
        
 
@@ -370,11 +372,18 @@ public class PlayerController : MonoBehaviour
 
         GameManager.playerIsDead = false;
         deathnoise = false;
+        animator.SetBool("Death", false);
+        armPivot.activate();
         Respawn();
     }
 
     private void Respawn()
     {
+        // Zero out any movement
+        rb.velocity = Vector2.zero;
+        jumpKeyHeld = false;
+        jumpTimeCounter = 0;
+
         transform.position = respawnPosition;
 
         evading = false;

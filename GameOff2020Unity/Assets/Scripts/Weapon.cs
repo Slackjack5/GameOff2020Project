@@ -26,6 +26,9 @@ public class Weapon : MonoBehaviour
     private float currentShootTime;
     private float laserCooldownTime;
     private bool hidingLaserCooldownBar = true;
+
+    //Particle Effect
+    public ParticleSystem myParticles;
 
     // Update is called once per frame
     void Update()
@@ -34,14 +37,14 @@ public class Weapon : MonoBehaviour
         {
             if (Input.GetButtonDown("Fire1"))
             {
-                if (newMoonball == null && !reloading)
-                {
-                    ShootBall();
+                if (newMoonball == null && !reloading)
+                {
+                    ShootBall();
                 }
-                else if (newMoonball != null)
-                {
-                    Reload();
-                }
+                else if (newMoonball != null)
+                {
+                    Reload();
+                }
             }
 
             if (Input.GetButtonDown("Fire2") && !chargingLaser && laserCooldownTime <= 0)
@@ -61,14 +64,14 @@ public class Weapon : MonoBehaviour
             {
                 laserCooldownTime = 0;
 
-                if (!hidingLaserCooldownBar)
-                {
-                    StartCoroutine(HideLaserCooldownBar());
+                if (!hidingLaserCooldownBar)
+                {
+                    StartCoroutine(HideLaserCooldownBar());
                 }
             }
-            else
-            {
-                UpdateLaserCooldownBar();
+            else
+            {
+                UpdateLaserCooldownBar();
             }
 
             // Track laser charge time
@@ -78,7 +81,7 @@ public class Weapon : MonoBehaviour
                 if (currentChargeTime <= 0)
                 {
                     ShootLaser();
-                }
+                }
 
             }
 
@@ -111,9 +114,9 @@ public class Weapon : MonoBehaviour
         float shootAngle = Vector2.SignedAngle(Vector2.right, playerToMouseDirection);
         newMoonball = Instantiate(moonball, spawnPosition, Quaternion.AngleAxis(shootAngle, Vector3.forward));
 
-        newMoonball.GetComponent<Moonball>().shootSpeed = shootSpeed;
-
-        //Play Sound
+        newMoonball.GetComponent<Moonball>().shootSpeed = shootSpeed;
+
+        //Play Sound
         FindObjectOfType<AudioManager>().PlaySound("LaserShot", Random.Range(.95f, 1f));
     }
 
@@ -122,11 +125,20 @@ public class Weapon : MonoBehaviour
         chargingLaser = true;
         currentChargeTime = chargeTime;
 
-        newChargeCircle = Instantiate(chargeCircle, transform.position, Quaternion.identity, transform);
-
-        //Play Sound
-        FindObjectOfType<AudioManager>().PlaySound("LaserChargeShort", Random.Range(.90f, 1f));
-        FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-Charging", Random.Range(.95f, 1f));
+        newChargeCircle = Instantiate(chargeCircle, transform.position, Quaternion.identity, transform);
+
+        //Play Sound
+        //FindObjectOfType<AudioManager>().PlaySound("LaserChargeShort", Random.Range(.90f, 1f));
+        int rand = Random.Range(0, 2);
+        if(rand==0)
+        {
+            FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-ChargeShot1", Random.Range(.95f, 1f));
+        }
+        else
+        {
+            FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-ChargeShot2", Random.Range(.95f, 1f));
+        }
+;       
     }
 
     private void ShootLaser()
@@ -147,39 +159,39 @@ public class Weapon : MonoBehaviour
         laserCooldownTime = laserCooldown;
 
         //Play Audio
-        FindObjectOfType<AudioManager>().PlaySound("LaserChargeFire", Random.Range(.95f, 1f));
-        //Stop Sound
-        FindObjectOfType<AudioManager>().Stop("LaserChargeShort");
+        FindObjectOfType<AudioManager>().PlaySound("LaserChargeFire", Random.Range(.95f, 1f));
+        //Stop Sound
+        //FindObjectOfType<AudioManager>().Stop("LaserChargeShort");
     }
 
-    private void UpdateLaserCooldownBar()
-    {
-        laserIndicator.SetActive(true);
-        hidingLaserCooldownBar = false;
-
-        Transform laserCooldownBarTransform = laserIndicator.transform.GetChild(1).transform;
-        float interpolationValue = Mathf.InverseLerp(0, laserCooldown, laserCooldownTime);
-
-        // Since currentSlideCooldown counts down to zero, Lerp starts from the second value
-        float newPositionX = Mathf.Lerp(0, -0.5f, interpolationValue);
-        float newScaleX = Mathf.Lerp(1, 0, interpolationValue);
-
-        Vector2 position = laserCooldownBarTransform.localPosition;
-        position.x = newPositionX;
-        laserCooldownBarTransform.localPosition = position;
-
-        Vector2 scale = laserCooldownBarTransform.localScale;
-        scale.x = newScaleX;
-        laserCooldownBarTransform.localScale = scale;
+    private void UpdateLaserCooldownBar()
+    {
+        laserIndicator.SetActive(true);
+        hidingLaserCooldownBar = false;
+
+        Transform laserCooldownBarTransform = laserIndicator.transform.GetChild(1).transform;
+        float interpolationValue = Mathf.InverseLerp(0, laserCooldown, laserCooldownTime);
+
+        // Since currentSlideCooldown counts down to zero, Lerp starts from the second value
+        float newPositionX = Mathf.Lerp(0, -0.5f, interpolationValue);
+        float newScaleX = Mathf.Lerp(1, 0, interpolationValue);
+
+        Vector2 position = laserCooldownBarTransform.localPosition;
+        position.x = newPositionX;
+        laserCooldownBarTransform.localPosition = position;
+
+        Vector2 scale = laserCooldownBarTransform.localScale;
+        scale.x = newScaleX;
+        laserCooldownBarTransform.localScale = scale;
     }
 
-    private IEnumerator HideLaserCooldownBar()
-    {
-        hidingLaserCooldownBar = true;
-
-        yield return new WaitForSeconds(laserCooldownBarVisibleTime);
-
-        laserIndicator.SetActive(false);
+    private IEnumerator HideLaserCooldownBar()
+    {
+        hidingLaserCooldownBar = true;
+
+        yield return new WaitForSeconds(laserCooldownBarVisibleTime);
+
+        laserIndicator.SetActive(false);
     }
 
     public void Reset()
@@ -192,16 +204,24 @@ public class Weapon : MonoBehaviour
         laserCooldownTime = 0;
     }
 
-    private void Reload()
-    {
-        Destroy(newMoonball);
-        reloading = true;
-        StartCoroutine(ReloadDelay());
+    private void Reload()
+    {
+        Instantiate(myParticles, newMoonball.transform.position, Quaternion.identity);
+        //Play Audio
+        FindObjectOfType<AudioManager>().PlaySound("WeaponReload", Random.Range(.95f, 1f));
+
+        Destroy(newMoonball);
+        reloading = true;
+        StartCoroutine(ReloadDelay());
     }
 
-    private IEnumerator ReloadDelay()
-    {
-        yield return new WaitForSeconds(reloadTime);
-        reloading = false;
+    private IEnumerator ReloadDelay()
+    {
+        yield return new WaitForSeconds(reloadTime);
+        //Play Audio
+        FindObjectOfType<AudioManager>().PlaySound("WeaponReloadEnd", Random.Range(1.15f, 1.25f));
+        //Stop Sound
+        FindObjectOfType<AudioManager>().Stop("WeaponReload");
+        reloading = false;
     }
 }

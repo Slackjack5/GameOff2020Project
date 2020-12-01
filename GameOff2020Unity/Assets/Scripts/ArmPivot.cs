@@ -25,4 +25,14 @@ public class ArmPivot : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 0, rotationZ);
         }
     }
+
+    public void deactivate()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void activate()
+    {
+        gameObject.SetActive(true);
+    }
 }

@@ -21,6 +21,8 @@ public class Style : MonoBehaviour
     private bool timerActive = false;
     private bool tickAlternate = false;
 
+    //Particles
+    private TrailRenderer trailRenderer;
     //Sets the Maximum Value of the Slider
     public void SetMaxHealth(int health)
     {
@@ -209,26 +211,44 @@ public class Style : MonoBehaviour
         {
             textMesh.text = "D-Rank";
             animator.speed = 1;
+
+            trailRenderer = GameObject.Find("Player").GetComponent<TrailRenderer>();
+            trailRenderer.enabled = false;
+            
         }
         else if (tier == 2)
         {
             textMesh.text = "C-Rank";
             animator.speed = 1.25f;
+
+            trailRenderer = GameObject.Find("Player").GetComponent<TrailRenderer>();
+            trailRenderer.enabled = false;
         }
         else if (tier == 3)
         {
             textMesh.text = "B-Rank";
             animator.speed = 1.50f;
+
+            trailRenderer = GameObject.Find("Player").GetComponent<TrailRenderer>();
+            trailRenderer.enabled = true;
+            //White
+            trailRenderer.endColor = new Color(1f, 1f, 1f, 0f);
         }
         else if (tier == 4)
         {
             textMesh.text = "A-Rank";
             animator.speed = 1.75f;
+            trailRenderer = GameObject.Find("Player").GetComponent<TrailRenderer>();
+            //Orange
+            trailRenderer.endColor = new Color(1f, .64f, 0f, 0f);
+
         }
         else if (tier == 5)
         {
             textMesh.text = "S-Rank";
             animator.speed = 2;
+            //Red
+            trailRenderer.endColor = new Color(1f, 0f, 0f, 0f);
         }
 
 
