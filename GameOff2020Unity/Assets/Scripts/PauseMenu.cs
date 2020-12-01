@@ -8,6 +8,11 @@ public class PauseMenu : MonoBehaviour
 
     private bool gameIsPaused = false;
 
+    private void Start()
+    {
+        Resume();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -33,6 +38,7 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         gameIsPaused = false;
+        GameManager.playerIsDead = false;
     }
 
     private void Pause()
@@ -40,6 +46,7 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         gameIsPaused = true;
+        GameManager.playerIsDead = true;
 
         FindObjectOfType<AudioManager>().Stop("LaserCharge");
     }
