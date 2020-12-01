@@ -15301,16 +15301,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0.068
       objectReference: {fileID: 0}
-    - target: {fileID: 8696127211863119744, guid: 262b40164235a6e44aac3dd94ec46d20,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: -0.26842737
-      objectReference: {fileID: 0}
-    - target: {fileID: 8696127211863119744, guid: 262b40164235a6e44aac3dd94ec46d20,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 1.6981382
-      objectReference: {fileID: 0}
     - target: {fileID: 8696127211863119748, guid: 262b40164235a6e44aac3dd94ec46d20,
         type: 3}
       propertyPath: m_Color.r
