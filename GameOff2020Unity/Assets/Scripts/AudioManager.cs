@@ -88,6 +88,18 @@ public class AudioManager : MonoBehaviour
             Play("Music-RunFastShootAliens");
             tutorialMusicStopped = true;
         }
+        else if (sceneName == "Level 4-Combined Issues" && !tutorialMusicStopped)
+        {
+            Stop("Music-Tutorial");
+            Play("Music-RunFastShootAliens");
+            tutorialMusicStopped = true;
+        }
+        else if (sceneName == "Level 5-Charged" && !tutorialMusicStopped)
+        {
+            Stop("Music-Tutorial");
+            Play("Music-RunFastShootAliens");
+            tutorialMusicStopped = true;
+        }
     }
 
     // Update is called once per frame
