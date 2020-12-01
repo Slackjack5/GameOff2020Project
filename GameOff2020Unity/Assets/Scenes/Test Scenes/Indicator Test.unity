@@ -8097,6 +8097,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 2055480287}
+    - target: {fileID: 976420919376560523, guid: bf4135a718c7e9a48aa86ebcb2ef846b,
+        type: 3}
+      propertyPath: timer
+      value: 
+      objectReference: {fileID: 1271160078}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf4135a718c7e9a48aa86ebcb2ef846b, type: 3}
 --- !u!1 &1600876795941560420
@@ -9788,6 +9793,11 @@ PrefabInstance:
       propertyPath: successGlow
       value: 
       objectReference: {fileID: 383215145}
+    - target: {fileID: 2834722192736813790, guid: 240449a299cfd3042b52e3206e95b1f9,
+        type: 3}
+      propertyPath: bestTimeText
+      value: 
+      objectReference: {fileID: 181058824}
     - target: {fileID: 2834722192736813791, guid: 240449a299cfd3042b52e3206e95b1f9,
         type: 3}
       propertyPath: m_fontColor.r
