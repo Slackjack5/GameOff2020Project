@@ -52,7 +52,10 @@ public class Laser : MonoBehaviour
         RaycastHit2D[] results = Physics2D.RaycastAll(from, direction);
         for (int i = 0; i < results.Length; i++)
         {
-            if (results[i].collider.gameObject.tag != "Weapon" && results[i].collider.gameObject.tag != "Enemy" && results[i].collider.gameObject.tag != "Player")
+            if (results[i].collider.gameObject.tag != "Weapon" &&
+                results[i].collider.gameObject.tag != "EnemyWeapon" &&
+                results[i].collider.gameObject.tag != "Enemy" && 
+                results[i].collider.gameObject.tag != "Player")
             {
                 // Ignore the raycast result if the laser is bouncing and the first laser hit point is the same as the result
                 if (!bounce || bounce && results[i].point != firstLaserHit.point)

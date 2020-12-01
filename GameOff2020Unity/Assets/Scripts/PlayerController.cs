@@ -370,7 +370,6 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(respawnTime);
 
-        GameManager.playerIsDead = false;
         deathnoise = false;
         animator.SetBool("Death", false);
         armPivot.activate();
@@ -392,6 +391,8 @@ public class PlayerController : MonoBehaviour
         currentSlideCooldown = 0;
         dashIndicator.SetActive(false);
         hidingSlideCooldownBar = false;
+
+        GameManager.playerIsDead = false;
     }
 
     public void Checkpoint(Transform checkpointTransform)
