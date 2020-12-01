@@ -8,6 +8,9 @@ public class Moonball : MonoBehaviour
 
     private Rigidbody2D rb;
 
+    //Particles
+    public ParticleSystem myParticles;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,12 +30,18 @@ public class Moonball : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Player")
         {
-            Destroy(gameObject);
+            playParticles();
+            Destroy(this.gameObject);
         }
         else
         {
             //Play Sound
             FindObjectOfType<AudioManager>().PlaySound("LaserDeflect", Random.Range(.95f, 1f));
         }
+    }
+
+    public void playParticles()
+    {
+        Instantiate(myParticles, transform.position, Quaternion.identity);
     }
 }

@@ -11,6 +11,9 @@ public class Goal : MonoBehaviour
     [SerializeField] private UnityEvent onEnter = new UnityEvent();
     public bool exit = false;
 
+    //Particle destroyer
+    public GameObject[] particles;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject == player)
@@ -67,11 +70,21 @@ public class Goal : MonoBehaviour
                 FindObjectOfType<AudioManager>().lowPassDisable();
             }
 
+            destroyParticles();
         }
     }
 
     public void Reset()
     {
         gameObject.SetActive(true);
+    }
+
+
+    public void destroyParticles()
+    {
+        foreach (GameObject particle in particles)
+        {
+            Destroy(particle);
+        }
     }
 }

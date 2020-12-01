@@ -24,6 +24,9 @@ public class Weapon : MonoBehaviour
     private float currentShootTime;
     private float laserCooldownTime;
 
+    //Particle Effect
+    public ParticleSystem myParticles;
+
     // Update is called once per frame
     void Update()
     {
@@ -113,8 +116,17 @@ public class Weapon : MonoBehaviour
         newChargeCircle = Instantiate(chargeCircle, transform.position, Quaternion.identity, transform);
 
         //Play Sound
-        FindObjectOfType<AudioManager>().PlaySound("LaserChargeShort", Random.Range(.90f, 1f));
-        FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-Charging", Random.Range(.95f, 1f));
+        //FindObjectOfType<AudioManager>().PlaySound("LaserChargeShort", Random.Range(.90f, 1f));
+        int rand = Random.Range(0, 2);
+        if(rand==0)
+        {
+            FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-ChargeShot1", Random.Range(.95f, 1f));
+        }
+        else
+        {
+            FindObjectOfType<AudioManager>().PlaySound("CharacterVoice-ChargeShot2", Random.Range(.95f, 1f));
+        }
+;       
     }
 
     private void ShootLaser()
@@ -137,7 +149,7 @@ public class Weapon : MonoBehaviour
         //Play Audio
         FindObjectOfType<AudioManager>().PlaySound("LaserChargeFire", Random.Range(.95f, 1f));
         //Stop Sound
-        FindObjectOfType<AudioManager>().Stop("LaserChargeShort");
+        //FindObjectOfType<AudioManager>().Stop("LaserChargeShort");
     }
 
     public void Reset()
@@ -152,6 +164,10 @@ public class Weapon : MonoBehaviour
 
     private void Reload()
     {
+        Instantiate(myParticles, newMoonball.transform.position, Quaternion.identity);
+        //Play Audio
+        FindObjectOfType<AudioManager>().PlaySound("WeaponReload", Random.Range(.95f, 1f));
+
         Destroy(newMoonball);
         reloading = true;
         StartCoroutine(ReloadDelay());
@@ -160,6 +176,10 @@ public class Weapon : MonoBehaviour
     private IEnumerator ReloadDelay()
     {
         yield return new WaitForSeconds(reloadTime);
+        //Play Audio
+        FindObjectOfType<AudioManager>().PlaySound("WeaponReloadEnd", Random.Range(1.15f, 1.25f));
+        //Stop Sound
+        FindObjectOfType<AudioManager>().Stop("WeaponReload");
         reloading = false;
     }
 }
