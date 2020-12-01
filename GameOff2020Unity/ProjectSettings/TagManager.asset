@@ -11,6 +11,7 @@ TagManager:
   - Exit
   - Pit
   - Background
+  - DeathParticles
   layers:
   - Default
   - TransparentFX

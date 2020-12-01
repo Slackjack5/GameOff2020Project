@@ -10,6 +10,7 @@ public class ExitDoor : MonoBehaviour
     private BoxCollider2D boxCollider;
 
     private bool locked = false;
+    
 
     private void Start()
     {
@@ -55,4 +56,5 @@ public class ExitDoor : MonoBehaviour
     {
         locked = false;
     }
+
 }

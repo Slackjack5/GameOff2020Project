@@ -362,6 +362,18 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: CharacterVoice-ChargeShot1
+    clip: {fileID: 8300000, guid: 7b9e913cdae422d44b595158e43634a0, type: 3}
+    volume: 0.576
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CharacterVoice-ChargeShot2
+    clip: {fileID: 8300000, guid: 2361cc528cee18b42938a89d3a8d8976, type: 3}
+    volume: 0.576
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   mixerGroupEffects: {fileID: 6367940377541566155, guid: 298ec85b1ebce6c419efffc6c600eb1c,
     type: 2}
   mixerGroupMusic: {fileID: 6391106711965373525, guid: 298ec85b1ebce6c419efffc6c600eb1c,
