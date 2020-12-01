@@ -318,13 +318,16 @@ public class PlayerController : MonoBehaviour
     {
         if (!GameManager.playerIsDead)
         {
+            GameManager.playerIsDead = true;
+
             // Drop to the ground
             rb.velocity = new Vector2(0, rb.velocity.y);
 
-            GameManager.playerIsDead = true;
-
             Weapon weapon = GetComponent<Weapon>();
             weapon.Reset();
+
+            dashIndicator.SetActive(false);
+            hidingSlideCooldownBar = false;
 
             StartCoroutine(DieDelay());
         }
@@ -389,8 +392,6 @@ public class PlayerController : MonoBehaviour
         dashed = false;
         slideInCooldown = false;
         currentSlideCooldown = 0;
-        dashIndicator.SetActive(false);
-        hidingSlideCooldownBar = false;
 
         GameManager.playerIsDead = false;
     }
