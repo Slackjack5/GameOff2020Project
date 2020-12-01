@@ -15,8 +15,12 @@ public class Timer : MonoBehaviour
     [SerializeField] private TextMeshProUGUI differenceText;
     [SerializeField] private Color fasterTimeColor;
     [SerializeField] private Color slowerTimeColor;
-    [SerializeField] private float targetTime = 30f;                       // The time the player should beat to beat this level
-    [SerializeField] private TextMeshProUGUI targetTimeText;
+    [SerializeField] private float goldTime = 30f;
+    [SerializeField] private TextMeshProUGUI goldTimeText;
+    [SerializeField] private float silverTime = 40f;
+    [SerializeField] private TextMeshProUGUI silverTimeText;
+    [SerializeField] private float bronzeTime = 50f;
+    [SerializeField] private TextMeshProUGUI bronzeTimeText;
     [SerializeField] private TextMeshProUGUI resultText;
     [SerializeField] private Button continueButton;
     [SerializeField] private string successMessage;                        // The message that is shown to the player when they beat the time
@@ -48,7 +52,9 @@ public class Timer : MonoBehaviour
         bestTimeText.text = "--";
         differenceText.text = "--";
 
-        targetTimeText.text = FormatTime(targetTime);
+        goldTimeText.text = FormatTime(goldTime);
+        silverTimeText.text = FormatTime(silverTime);
+        bronzeTimeText.text = FormatTime(bronzeTime);
 
         GameManager.playerIsDead = true;
 
@@ -161,7 +167,7 @@ public class Timer : MonoBehaviour
         }
 
         // Show whether the player beat the target time
-        bool levelComplete = timeElapsed <= targetTime || GameManager.levelComplete;
+        bool levelComplete = timeElapsed <= bronzeTime || GameManager.levelComplete;
         continueButton.interactable = levelComplete;
         if (levelComplete)
         {
@@ -170,7 +176,7 @@ public class Timer : MonoBehaviour
             GameManager.levelComplete = true;
 
             //Audio 
-            if (timeElapsed<=targetTime)
+            if (timeElapsed <= silverTime)
             {
                 //Audio for Completion
                 int rand = Random.Range(0, 5);
@@ -207,9 +213,28 @@ public class Timer : MonoBehaviour
             successGlow.SetActive(false);
         }
 
+        // Update best time
         if (GameManager.bestTime == 0 || timeElapsed < GameManager.bestTime)
         {
             GameManager.bestTime = timeElapsed;
+        }
+
+        // Determine medal
+        if (timeElapsed <= bronzeTime)
+        {
+            GameManager.timeMedal = TimeMedal.Bronze;
+        }
+        else if (timeElapsed <= silverTime)
+        {
+            GameManager.timeMedal = TimeMedal.Silver;
+        }
+        else if (timeElapsed <= goldTime)
+        {
+            GameManager.timeMedal = TimeMedal.Gold;
+        }
+        else
+        {
+            GameManager.timeMedal = TimeMedal.None;
         }
     }
 

@@ -3824,6 +3824,18 @@ Transform:
   m_Father: {fileID: 1913957190767983452}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &916586475 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1562546352568637951, guid: 4bc68b09575b10042831b656bf3f04ec,
+    type: 3}
+  m_PrefabInstance: {fileID: 6544330078439869646}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &944377751 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7300521828906197028, guid: 4bc68b09575b10042831b656bf3f04ec,
@@ -6954,6 +6966,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff760b76952911f45b9b5be698db7396, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1938606718 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4713361451215518601, guid: 4bc68b09575b10042831b656bf3f04ec,
+    type: 3}
+  m_PrefabInstance: {fileID: 6544330078439869646}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1944156234
 GameObject:
   m_ObjectHideFlags: 0
@@ -9840,6 +9864,21 @@ PrefabInstance:
       propertyPath: bestTimeText
       value: 
       objectReference: {fileID: 181058824}
+    - target: {fileID: 2834722192736813790, guid: 240449a299cfd3042b52e3206e95b1f9,
+        type: 3}
+      propertyPath: goldTimeText
+      value: 
+      objectReference: {fileID: 1938606718}
+    - target: {fileID: 2834722192736813790, guid: 240449a299cfd3042b52e3206e95b1f9,
+        type: 3}
+      propertyPath: silverTimeText
+      value: 
+      objectReference: {fileID: 916586475}
+    - target: {fileID: 2834722192736813790, guid: 240449a299cfd3042b52e3206e95b1f9,
+        type: 3}
+      propertyPath: bronzeTimeText
+      value: 
+      objectReference: {fileID: 944377751}
     - target: {fileID: 2834722192736813791, guid: 240449a299cfd3042b52e3206e95b1f9,
         type: 3}
       propertyPath: m_fontColor.r
