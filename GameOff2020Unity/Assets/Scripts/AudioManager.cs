@@ -14,6 +14,7 @@ public class AudioManager : MonoBehaviour
     public AudioMixer musicMixer;
 
     private bool tutorialMusicStopped=false;
+    private bool endReached = false;
     // Start is called before the first frame update
     void Awake()
     {
@@ -99,6 +100,12 @@ public class AudioManager : MonoBehaviour
             Stop("Music-Tutorial");
             Play("Music-RunFastShootAliens");
             tutorialMusicStopped = true;
+        }
+        else if (sceneName == "End Screen" && endReached==false)
+        {
+            Stop("Music-RunFastShootAliens");
+            Play("Music-Tutorial");
+            endReached = true;
         }
     }
 
