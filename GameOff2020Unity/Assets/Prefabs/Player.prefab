@@ -782,8 +782,8 @@ MonoBehaviour:
   slideTime: 0.4
   airMovementSmoothTime: 0.2
   slideForce: 1500
-  slideCooldown: 3
-  slideCooldownBarVisibleTime: 1.5
+  slideCooldown: 0.7
+  slideCooldownBarVisibleTime: 0.5
   dashIndicator: {fileID: 6960230163362992930}
   whatIsGround:
     serializedVersion: 2
@@ -817,7 +817,7 @@ MonoBehaviour:
     type: 3}
   laser: {fileID: 3869782584838812734, guid: 6421aaf9fc4aa4b41b61c0c696c64a68, type: 3}
   laserIndicator: {fileID: 485983541677826642}
-  laserCooldownBarVisibleTime: 1.5
+  laserCooldownBarVisibleTime: 0.5
   chargeTime: 0
   shootTime: 0.5
   laserCooldown: 0.7
